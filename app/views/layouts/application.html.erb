@@ -6,11 +6,29 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="bg-gray-300" id="app">
     <%= yield %>
+
+    <div class="container mx-auto text-gray-500">
+      This is some text, let's style it!
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>1</div>
+      <div>9</div>
+    </div>
+
+    <ul class="list-disc list-inside space-y-4">
+      <li>
+        <div class="w-64 h-3 bg-gradient-to-br from-fuchsia-500 to-purple-600">first</div>
+      </li>
+      <li>
+        <div class="w-56 h-3 bg-gradient-to-br from-fuchsia-500 to-purple-600">second</div>
+      </li>
+    </ul>
   </body>
 </html>
