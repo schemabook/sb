@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+
+// polar night
+$nord0: #2E3440 !default;
+$nord1: #3B4252 !default;
+$nord2: #434C5E !default;
+$nord3: #4C566A !default;
+
+// snow storm
+$nord4: #D8DEE9 !default;
+$nord5: #E5E9F0 !default;
+$nord6: #ECEFF4 !default;
+
+// frost
+$nord7: #8FBCBB !default;
+$nord8: #88C0D0 !default;
+$nord9: #81A1C1 !default;
+$nord10: #5E81AC !default;
+
+// aurora
+$nord11: #BF616A !default;
+$nord12: #D08770 !default;
+$nord13: #EBCB8B !default;
+$nord14: #A3BE8C !default;
+$nord14: #B48EAD !default;
+

@@ -11,6 +11,12 @@
   </head>
 
   <body id="app">
-    <%= yield %>
+    <div class="bg-white">
+      <%= render 'layouts/marketing_header' %>
+
+      <%= yield %>
+
+      <%= render 'layouts/marketing_footer' %>
+    </div>
   </body>
 </html>
