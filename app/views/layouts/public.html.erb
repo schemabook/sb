@@ -11,11 +11,11 @@
   </head>
 
   <body id="app">
-    <div class="bg-white">
+    <div class="<%= homepage? ? 'bg-white' : 'bg-gray-50' %>">
       <div class="relative overflow-hidden">
-        <%= render 'layouts/public_header' %>
+        <%= render_header %>
         <%= yield %> 
-        <%= render 'layouts/public_footer' %>
+        <%= render_footer %>
       </div>
     </div>
   </body>
