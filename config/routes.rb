@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   get 'terms', to: 'public#terms'
 
   ### Application routes
-
+  get 'dashboards', to: 'dashboards#index'
 end
