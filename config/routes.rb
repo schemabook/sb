@@ -27,4 +27,5 @@ Rails.application.routes.draw do
 
   ### Application routes
   get 'dashboards', to: 'dashboards#index'
+  get 'schema', to: 'schemas#show'
 end
