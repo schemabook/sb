@@ -38,3 +38,6 @@ $nord13: #EBCB8B !default;
 $nord14: #A3BE8C !default;
 $nord14: #B48EAD !default;
 
+pre {
+  background-color: $nord4;
+}

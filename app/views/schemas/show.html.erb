@@ -7,46 +7,38 @@
         <!-- Start left column area -->
         <div class="h-full relative" style="min-height: 12rem;">
           <div class="absolute inset-0 text-gray-700">
-            <!-- avatar -->
-            <div class="relative lg:flex">
-              <div class="py-1">
-              <button class="bg-indigo-700 flex text-sm rounded-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white" id="user-menu" aria-haspopup="true">
-                <span class="sr-only">Profile</span>
-                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </button>
-              </div>
-              <div class="relative px-3 w-full">
-                <ul>
-                  <li class="text-gray-800">
-                    Michael Krisher
-                  </li>
-                  <li class="text-gray-400">
-                    Joined 2021-03-01
-                  </li>
-                  <li class="text-gray-800">
-                    Team: Data Warehouse
-                  </li>
-                  <li class="text-gray-400">
-                    8 Schemas
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <h4 class="text-lg leading-6 font-medium text-gray-600">
+              Details
+            </h4>
 
-            <div class="relative px-3 w-full">
-              <ul>
-                <li class="py-2">
-                  <div class="mt-3 sm:mt-0 sm:ml-3">
-                    <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900 transition-colors duration-200">Publish Schema</button>
+            <div>
+              <ul class="divide-y divide-gray-200">
+                <li class="py-4">
+                  <span class="text-gray-400">Team:</span> Data Warehouse
+                </li>
+                <li class="py-4">
+                  <span class="text-gray-400">Created On:</span> January 7, 2002
+                </li>
+                <li class="md:flex">
+                  <div class="relative py-4">
+                    <span class="text-gray-400">Stakeholders:</span> 7
+                  </div>
+                  <div class="absolute right-0 py-2">
+                    <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                      <!-- Heroicon name: outline/user-add -->
+                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                      </svg>
+                    </button>
                   </div>
                 </li>
-                <li class="py-2">
-                  <div class="mt-3 sm:mt-0 sm:ml-3">
-                    <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-white text-gray-400 hover:text-gray-900 font-medium border border-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 focus:outline-none transition-colors duration-200">Invite Team</button>
-                  </div>
+                <li class="py-4">
+                  <span class="text-gray-400">Version:</span> 3
                 </li>
+                
               </ul>
             </div>
+
 
           </div>
         </div>
@@ -62,88 +54,116 @@
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
             <h3 class="text-lg leading-6 font-medium text-gray-600">
-              Schema Name
+              User Table in <a href="#" class="text-teal-500">Data Warehouse</a>
             </h3>
-            <div class="mt-3 sm:mt-0 sm:ml-4">
-              <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                <!-- Heroicon name: solid/sort-ascending -->
-                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
-                </svg>
-                <span class="ml-2">Sort</span>
-                <!-- Heroicon name: solid/chevron-down -->
-                <svg class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </button>
+            <div class="text-md text-gray-400 mt-3 sm:mt-0 sm:ml-4">
+              Last Updated: January 7, 2020
             </div>
           </div>
 
 
-          <!-- main area wrapper -->
-          <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+                    <div class="mb-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+            <div>
+              <div class="sm:hidden">
+                <label for="tabs" class="sr-only">Select a tab</label>
+                <select id="tabs" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  <option selected>JSON</option>
+                  <option>Avro</option>
+                  <option>Parquet</option>
+                  <option>XML</option>
+                </select>
+              </div>
+              <div class="hidden sm:block">
+                <div class="px-4 border-b border-gray-200">
+                  <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                    <a href="#" class="border-teal-500 text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
+                      JSON
+                    </a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                      Avro
+                    </a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                      Parquet
+                    </a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                      XML
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
 
             <!-- main area list -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-              <ul class="divide-y divide-gray-200">
-
-                <!-- list items -->
-                <li>
-                  <a href="#" class="block hover:bg-gray-50">
-                    <div class="px-4 py-4 flex items-center sm:px-6">
-                      <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                        <div>
-                          <div class="flex text-sm font-medium text-cyan-600 truncate">
-                            <!-- Heroicon name: solid/star -->
-                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                            </svg>
-
-                            <p>User Table</p>
-                            <p class="ml-1 font-normal text-gray-500">
-                            in Data Warehouse
-                            </p>
-                          </div>
-                          <div class="mt-2 flex">
-                            <div class="px-7 flex items-center text-sm text-gray-600">
-                              <p>
-                              This is the table containing the unique user IDs
-                              </p>
-                            </div>
-                          </div>
-                          <div class="mt-2 flex">
-                            <div class="px-7 flex items-center text-sm text-gray-400">
-                              <p>
-                              Last Updated on:
-                              <time datetime="2020-01-07">January 7, 2020</time>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mt-4 flex-shrink-0 sm:mt-0">
-                          <div class="flex overflow-hidden">
-                            <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                            <img class="-ml-1 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                            <img class="-ml-1 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="">
-                            <img class="-ml-1 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ml-5 flex-shrink-0">
-                        <!-- Heroicon name: solid/chevron-right -->
-                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-
-              </ul>
+            <div class="bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
+<pre class="font-mono">
+{
+  foo: "bar",
+  baz: {
+    [
+      "1",
+      "2",
+      "3"
+    ]
+  }
+}
+</pre>
             </div>
             <!-- end main area list -->
 
           </div>
+
+          <!-- main area event schema endpoints section -->
+          <div class="mb-8 relative inset-0 bg-white">
+            <div class="pb-5 border-b border-gray-200">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Event Schema Endpoints
+              </h3>
+            </div>
+
+            <div class="p-4">
+              <div class="flex text-sm font-medium text-cyan-600 truncate">
+                <!-- Heroicon name: outline/badge-check -->
+                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+
+                <p class="text-gray-500">
+                  <span class="text-black">Validation endpoint:</span> POST https://schemabook.com/schemas/:uuid/validate
+                </p>
+              </div>
+
+              <div class="flex text-sm font-medium text-cyan-600 truncate">
+                <!-- Heroicon name: outline/globe -->
+                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <p class="text-gray-500">
+                  <span class="text-black">CDN URI:</span> GET https://schemabook.cloudflare.com/schemas/:uuid
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- main area metrics section -->
+          <div class="mb-8 relative inset-0 bg-white">
+            <div class="pb-5 border-b border-gray-200">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Metrics
+              </h3>
+            </div>
+
+
+            <div class="p-4">
+              <ul>
+                <li>lookup from CDN</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
         <!-- End main area -->
       </div>
