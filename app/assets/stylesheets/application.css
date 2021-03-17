@@ -39,5 +39,5 @@ $nord14: #A3BE8C !default;
 $nord14: #B48EAD !default;
 
 pre {
-  background-color: $nord4;
+  //background-color: $nord4;
 }

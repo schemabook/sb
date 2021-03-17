@@ -14,7 +14,7 @@
             <div>
               <ul class="divide-y divide-gray-200">
                 <li class="py-4">
-                  <span class="text-gray-400">Team:</span> Data Warehouse
+                  <span class="text-gray-400">Team:</span> Product Inventory
                 </li>
                 <li class="py-4">
                   <span class="text-gray-400">Created On:</span> January 7, 2002
@@ -54,7 +54,7 @@
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
             <h3 class="text-lg leading-6 font-medium text-gray-600">
-              User Table in <a href="#" class="text-teal-500">Data Warehouse</a>
+              Product Event in <a href="#" class="text-teal-500">Data Pipeline</a>
             </h3>
             <div class="text-md text-gray-400 mt-3 sm:mt-0 sm:ml-4">
               Last Updated: January 7, 2020
@@ -62,32 +62,27 @@
           </div>
 
 
-                    <div class="mb-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+          <div class="mb-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
             <div>
-              <div class="sm:hidden">
-                <label for="tabs" class="sr-only">Select a tab</label>
-                <select id="tabs" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                  <option selected>JSON</option>
-                  <option>Avro</option>
-                  <option>Parquet</option>
-                  <option>XML</option>
-                </select>
-              </div>
               <div class="hidden sm:block">
                 <div class="px-4 border-b border-gray-200">
                   <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                    <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                    <a href="#" class="border-teal-500 text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
+                    <% highlight = 'border-teal-500' %>
+                    <a href="/schema?tab=json" class="<%= !params.keys.include?(:tab) || params[:tab] == 'json' ? highlight : 'border-transparent' %> text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                       JSON
                     </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <a href="/schema?tab=avro" class="<%= params[:tab] == 'avro' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                       Avro
                     </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <a href="/schema?tab=parquet" class="<%= params[:tab] == 'parquet' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                       Parquet
                     </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <a href="/schema?tab=xml" class="<%= params[:tab] == 'xml' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                       XML
+                    </a>
+
+                    <a href="#" class="md:absolute md:right-8 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                      General Information
                     </a>
                   </nav>
                 </div>
@@ -96,25 +91,72 @@
 
 
             <!-- main area list -->
-            <div class="bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
+            <div id="json" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
 <pre class="font-mono">
 {
-  foo: "bar",
-  baz: {
-    [
-      "1",
-      "2",
-      "3"
-    ]
-  }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemabook.cloudfront.com/schemas/abc123",
+  "title": "Product",
+  "description": "A product from Acme's catalog",
+  "type": "object",
+  "properties": {
+    "productId": {
+      "description": "The unique identifier for a product",
+      "type": "integer"
+    },
+    "productName": {
+      "description": "Name of the product",
+      "type": "string"
+    },
+    "price": {
+      "description": "The price of the product",
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "tags": {
+      "description": "Tags for the product",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "length": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "required": [ "length", "width", "height" ]
+    },
+    "warehouseLocation": {
+      "description": "Coordinates of the warehouse where the product is located.",
+      "$ref": "https://example.com/geographical-location.schema.json"
+    }
+  },
+  "required": [ "productId", "productName", "price" ]
 }
 </pre>
+            </div>
+
+
+            <div id="avro" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
+              this is the avro content
             </div>
             <!-- end main area list -->
 
           </div>
 
           <!-- main area event schema endpoints section -->
+          <!--
           <div class="mb-8 relative inset-0 bg-white">
             <div class="pb-5 border-b border-gray-200">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -124,7 +166,7 @@
 
             <div class="p-4">
               <div class="flex text-sm font-medium text-cyan-600 truncate">
-                <!-- Heroicon name: outline/badge-check -->
+                Heroicon name: outline/badge-check 
                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
@@ -135,7 +177,7 @@
               </div>
 
               <div class="flex text-sm font-medium text-cyan-600 truncate">
-                <!-- Heroicon name: outline/globe -->
+                Heroicon name: outline/globe
                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -146,20 +188,21 @@
               </div>
             </div>
           </div>
+          -->
 
 
           <!-- main area metrics section -->
           <div class="mb-8 relative inset-0 bg-white">
             <div class="pb-5 border-b border-gray-200">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Metrics
+                Comments
               </h3>
             </div>
 
 
             <div class="p-4">
               <ul>
-                <li>lookup from CDN</li>
+                <li>Why do the dimensions not include height?</li>
               </ul>
             </div>
           </div>
@@ -191,7 +234,21 @@
                       <h3 class="text-sm font-medium">Whitney Francis</h3>
                       <p class="text-sm text-gray-500">1h</p>
                     </div>
-                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">User Table</a> in Data Warehouse</p>
+                    <p class="text-sm text-gray-500">Commented</p>
+                    <p class="text-sm text-gray-500">Why do the dimensions not include ...</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Whitney Francis</h3>
+                      <p class="text-sm text-gray-500">1h</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">Product Event</a> in Data Pipeline</p>
                     <p class="text-sm text-gray-500">Bumps schema to version 1.1</p>
                   </div>
                 </div>
@@ -205,8 +262,8 @@
                       <h3 class="text-sm font-medium">Floyd Miles</h3>
                       <p class="text-sm text-gray-500">1h</p>
                     </div>
-                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Search Event</a> in Data Pipeline</p>
-                    <p class="text-sm text-gray-500">Add user first name and last name</p>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Product Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add height to dimensions</p>
                   </div>
                 </div>
               </li>
@@ -219,8 +276,8 @@
                       <h3 class="text-sm font-medium">Sharin Foo</h3>
                       <p class="text-sm text-gray-500">13d</p>
                     </div>
-                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
-                    <p class="text-sm text-gray-500">Add size on item page views</p>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Product Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add product colorway</p>
                   </div>
                 </div>
               </li>
