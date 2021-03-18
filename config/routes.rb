@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   get 'privacy', to: 'public#privacy'
   get 'terms', to: 'public#terms'
 
+  # signup/sign in routes
+  get 'signup', to: 'signup#show'
+
   ### Application routes
   get 'dashboards', to: 'dashboards#index'
   get 'schema', to: 'schemas#show'
