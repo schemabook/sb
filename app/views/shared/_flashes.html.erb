@@ -1,0 +1,6 @@
+<%=
+if notice.present?
+  render 'shared/notice'
+elsif alert.present?
+  render 'shared/alert'
+end %>

@@ -64,9 +64,7 @@
         <!-- Start main area-->
         <div class="relative h-full" style="min-height: 36rem;">
 
-        <% # TODO: put in a partial %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+          <%= render 'shared/flashes' %>
 
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">

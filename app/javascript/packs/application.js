@@ -25,4 +25,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //  console.log(error)
   //  // TODO: alert on error to create tabs
   //}
+
+  var elem = document.querySelector('.dismiss');
+  elem.addEventListener('click', function() {
+    var closestElement = elem.closest('.flash');
+    closestElement.parentNode.removeChild(closestElement);
+  })
 });
