@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
+  #devise_for :users,
+  #  path: 'auth',
+  #  path_names: {
+  #    sign_in: 'login',
+  #    sign_out: 'logout',
+  #    password: 'secret',
+  #    confirmation: 'verification',
+  #    unlock: 'unblock',
+  #    registration: 'register',
+  #    sign_up: 'cmon_let_me_in'
+  #  }
+
+  #resources :users
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'public#index'
 
@@ -27,6 +40,8 @@ Rails.application.routes.draw do
   get 'signup', to: 'signup#show'
 
   ### Application routes
+  # TODO: add a redirect to the dashboards page
+  get '/users' => 'dashboards#index', as: :user_root # creates user_root_path, used for after sign in path
   get 'dashboards', to: 'dashboards#index'
   get 'schema', to: 'schemas#show'
 end
