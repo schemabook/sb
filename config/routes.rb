@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   ### Application routes
   # TODO: add a redirect to the dashboards page
-  get '/users', to: redirect('/dashboards'), as: :user_root # creates user_root_path, used for after sign in path
+  get 'users', to: redirect('dashboards'), as: :user_root # creates user_root_path, used for after sign in path
   get 'dashboards', to: 'dashboards#index'
   get 'schema', to: 'schemas#show'
 end

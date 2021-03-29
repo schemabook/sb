@@ -7,6 +7,7 @@ RSpec.feature "Sign Up", :type => :feature do
     fill_in 'user_email', with: 'admin@example.com'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
+    #fill_in 'user_company', with: 'example'
 
     click_button "Get started"
 
