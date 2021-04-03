@@ -4,5 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :business
+
+  accepts_nested_attributes_for :business
+
   validates_presence_of :email
 end

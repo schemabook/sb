@@ -8,6 +8,9 @@
 - helpers are tested inside spec/helpers
 
 # TODOs:
+- Add business to sign up process
+- Remove business scaffolding that is not needed
+
 - Add testing for Dashboards Controller
 - Setup linting (Rubocop, bundle-audit)
 - Remove Search from Sign Up and Sign In

@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Sign In", :type => :feature do
-  let!(:user)  { create(:user) }
+  let!(:business) { create(:business) }
+  let!(:user)     { create(:user, business: business) }
 
   scenario "User is already registered" do
     visit new_user_session_path
