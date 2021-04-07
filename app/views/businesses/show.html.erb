@@ -1,4 +1,285 @@
-<p id="notice"><%= notice %></p>
+<!-- 3 column wrapper -->
+<div class="flex-grow w-full mx-auto xl:px-8 lg:flex">
+  <!-- Left sidebar & main wrapper -->
+  <div class="flex-1 min-w-0 bg-white xl:flex">
+    <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+      <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+        <!-- Start left column area -->
+        <div class="h-full relative" style="min-height: 12rem;">
+          <div class="absolute inset-0 text-gray-700">
+            <!-- avatar -->
+            <div class="relative lg:flex">
+              <div class="py-1">
+              <button class="bg-indigo-700 flex text-sm rounded-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white" id="user-menu" aria-haspopup="true">
+                <span class="sr-only">Profile</span>
+                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              </button>
+              </div>
+              <div class="relative px-3 w-full">
+                <ul>
+                  <li class="text-gray-800">
+                    <%= current_user.email %>
+                  </li>
+                  <li class="text-gray-400">
+                    Joined <%= l current_user.created_at, format: :sample %>
+                  </li>
+                  <li class="text-gray-800">
+                    Team: Data Warehouse
+                  </li>
+                  <li class="text-gray-400">
+                    8 Schemas
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-<%= link_to 'Edit', edit_business_path(@business) %> |
-<%= link_to 'Back', businesses_path %>
+            <div class="relative px-3 w-full">
+              <ul>
+                <li class="py-2">
+                  <div class="mt-3 sm:mt-0 sm:ml-3">
+                    <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900 transition-colors duration-200">Publish Schema</button>
+                  </div>
+                </li>
+                <li class="py-2">
+                  <div class="mt-3 sm:mt-0 sm:ml-3">
+                    <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-white text-gray-400 hover:text-gray-900 font-medium border border-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 focus:outline-none transition-colors duration-200">Invite Team</button>
+                  </div>
+                </li>
+                <li class="py-2">
+                  <a href="<%= dashboards_path %>" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+                     Back
+                  </a>
+                </li>
+
+                <li class="py-2">
+                  <a href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+                    Log out
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <!-- End left column area -->
+      </div>
+    </div>
+
+    <div class="bg-white lg:min-w-0 lg:flex-1">
+      <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+        <!-- Start main area-->
+        <div class="relative h-full" style="min-height: 36rem;">
+
+          <%= render 'shared/flashes' %>
+
+          <!-- header -->
+          <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
+            <h3 class="text-lg leading-6 font-medium text-gray-600">
+              <%= @business.name %>
+            </h3>
+            <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-600">
+              <%= link_to "edit", edit_business_path(@business) %>
+            </div>
+          </div>
+
+
+          <!-- main area wrapper -->
+          <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+
+            <!-- main area list -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+              <div class="p-4">
+                <h2>Business settings:</h2>
+                Created by: <%= @creator.email %>
+                <br />
+                Created on: <%= l @business.created_at, format: :sample %>
+              </div>
+            </div>
+            <!-- end main area list -->
+
+          </div>
+        </div>
+        <!-- End main area -->
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
+    <div class="h-full pl-6 py-6 lg:w-80">
+      <!-- Start right column area -->
+      <div class="h-full relative" style="min-height: 16rem;">
+        <div class="absolute inset-0 rounded-lg">
+          <h4 class="text-lg leading-6 font-medium text-gray-600">
+            Activity Feed
+          </h4>
+
+          <!-- feed -->
+          <div>
+            <ul class="divide-y divide-gray-200">
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Whitney Francis</h3>
+                      <p class="text-sm text-gray-500">1h</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">User Table</a> in Data Warehouse</p>
+                    <p class="text-sm text-gray-500">Bumps schema to version 1.1</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Floyd Miles</h3>
+                      <p class="text-sm text-gray-500">1h</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Search Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add user first name and last name</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Floyd Miles</h3>
+                      <p class="text-sm text-gray-500">1d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Search Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add geo code</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Sharin Foo</h3>
+                      <p class="text-sm text-gray-500">13d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add size on item page views</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Whitney Francis</h3>
+                      <p class="text-sm text-gray-500">14d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">User Table</a> in Data Warehouse</p>
+                    <p class="text-sm text-gray-500">Bumps schema to version 1.0</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Sharin Foo</h3>
+                      <p class="text-sm text-gray-500">14d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add color on item pages views</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Sharin Foo</h3>
+                      <p class="text-sm text-gray-500">16d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add user id on item pages views</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Sharin Foo</h3>
+                      <p class="text-sm text-gray-500">18d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add absolute url on item pages views</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Sharin Foo</h3>
+                      <p class="text-sm text-gray-500">19d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Requested change to <a href="#" class="text-sm text-cyan-600">Page View Event</a> in Data Pipeline</p>
+                    <p class="text-sm text-gray-500">Add item id and timestamps on item pages views</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Whitney Francis</h3>
+                      <p class="text-sm text-gray-500">20d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">User Table</a> in Data Warehouse</p>
+                    <p class="text-sm text-gray-500">Accepts Change Request to add email to User Table</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                  <div class="flex-1 space-y-1">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-medium">Whitney Francis</h3>
+                      <p class="text-sm text-gray-500">21d</p>
+                    </div>
+                    <p class="text-sm text-gray-500">Updated <a href="#" class="text-sm text-cyan-600">User Table</a> in Data Warehouse</p>
+                    <p class="text-sm text-gray-500">Accepts Change Request to add first and last name to User Table</p>
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- More items... -->
+            </ul>
+          </div>
+          <!-- end feed -->
+
+        </div>
+      </div>
+      <!-- End right column area -->
+    </div>
+  </div>
+</div>

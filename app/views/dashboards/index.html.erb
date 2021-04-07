@@ -18,10 +18,10 @@
               <div class="relative px-3 w-full">
                 <ul>
                   <li class="text-gray-800">
-                    Michael Krisher
+                    <%= current_user.email %>
                   </li>
                   <li class="text-gray-400">
-                    Joined 2021-03-01
+                    Joined <%= l current_user.created_at, format: :sample %>
                   </li>
                   <li class="text-gray-800">
                     Team: Data Warehouse
@@ -46,10 +46,16 @@
                   </div>
                 </li>
                 <li class="py-2">
+                  <a href="<%= business_path(current_user.business) %>" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+                    <%= "Business: #{current_user.business.name}" %>
+                  </a>
+                </li>
+                <li class="py-2">
                   <a href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
                     Log out
                   </a>
                 </li>
+
               </ul>
             </div>
 

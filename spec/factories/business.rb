@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :business do
-    name { "example" }
+    sequence :name do |n|
+      "business-#{n}"
+    end
   end
 end

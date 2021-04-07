@@ -4,7 +4,12 @@ FactoryBot.define do
     password { "password" }
 
     factory :user_with_business do
-      business { "example" }
+      business { create(:business) }
+
+      after(:create) do |user, evaluator|
+        evaluator.business.update(created_by: user.id)
+        evaluator.business.reload
+      end
     end
   end
 end
