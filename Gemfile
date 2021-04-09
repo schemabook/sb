@@ -38,6 +38,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   # Use Pry bindings
   gem 'pry'
+  # Use rubocop for linting
+  gem 'rubocop'
+  # audit gems
+  gem 'bundler-audit'
+  # check for vulns
+  gem 'brakeman'
 end
 
 group :development do
