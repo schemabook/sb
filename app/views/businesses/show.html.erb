@@ -74,9 +74,9 @@
 
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
-            <h3 class="text-lg leading-6 font-medium text-gray-600">
+            <h2 class="text-lg leading-6 font-medium text-gray-600">
               <%= @business.name %>
-            </h3>
+            </h2>
             <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-600">
               <%= link_to "edit", edit_business_path(@business) %>
             </div>
@@ -89,10 +89,17 @@
             <!-- main area list -->
             <div class="bg-white shadow overflow-hidden sm:rounded-md">
               <div class="p-4">
-                <h2>Business settings:</h2>
-                Created by: <%= @creator.email %>
-                <br />
-                Created on: <%= l @business.created_at, format: :sample %>
+                <ul>
+                  <li>Created by: <%= @creator.email %></li>
+                  <li>Created on: <%= l @business.created_at, format: :sample %></li>
+                </ul>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-600">Stakeholders</h3>
+
+                <ul id="stakeholders">
+                  <li><%= @creator.email %></li>
+                </ul>
               </div>
             </div>
             <!-- end main area list -->

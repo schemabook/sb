@@ -15,5 +15,10 @@ RSpec.feature "Businesses", :type => :feature do
     expect(page).to have_link("edit", :href => edit_business_path(business))
     expect(page).to have_text("Created by: #{user.email}")
     expect(page).to have_text("Created on: #{I18n.l(business.created_at, format: :sample)}")
+    expect(page).to have_text("Stakeholders")
+
+    within("ul#stakeholders") do
+      expect(page).to have_text(user.email)
+    end
   end
 end
