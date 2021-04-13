@@ -46,8 +46,8 @@ jobs:
 
       - name: Run security checks
         run: |
-          #bin/bundler-audit --update
-          #bin/brakeman -q -w2
+          bundle exec bundler-audit --update
+          bundle exec brakeman -q -w2
 
   tests:
     name: Tests
@@ -109,4 +109,4 @@ jobs:
           bundle exec rails db:migrate
 
       - name: Run tests
-        run: bundle exec rspec
+        run: bundle exec rspec --format documentation
