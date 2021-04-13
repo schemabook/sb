@@ -11,7 +11,7 @@ RSpec.describe "Registration", type: :request do
 
   describe "POST users" do
     let(:user_params) { attributes_for(:user_with_business) }
-    let(:params)      { { user:  user_params } }
+    let(:params)      { { user: user_params.merge(business: "valid-business") } }
 
     subject { post user_registration_path, params: params }
 
@@ -32,8 +32,8 @@ RSpec.describe "Registration", type: :request do
     end
 
     context "when a business name is already taken" do
-      let(:business)       { create(:business) }
-      let(:invalid_params) { user_params.merge({ busines: business.name })  }
+      let!(:business)      { create(:business) }
+      let(:invalid_params) { user_params.merge(business: business.name) }
 
       subject { post user_registration_path, params: { user: invalid_params } }
 

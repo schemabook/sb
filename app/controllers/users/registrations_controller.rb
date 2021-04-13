@@ -12,11 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      #if resource.errors
-      #  business_error = resource.errors.select { |e| e.attribute == "business.name" }.first
-      #  resource.business_id = Business.where(name: business_error.options[:value]).first.id if business_error
-      #  binding.pry
-      #end
+      unless resource.errors
+        resource.business.update!(created_by: resource.id)
+      end
     end
   end
 
@@ -58,7 +56,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create_business
     name = sanitized_params["business"]
 
-    # TODO: name has to be unique
     Business.create(name: name)
   end
 
