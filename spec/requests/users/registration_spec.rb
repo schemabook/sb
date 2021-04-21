@@ -18,13 +18,13 @@ RSpec.describe "Registration", type: :request do
     it "should create a business" do
       expect {
         subject
-      }.to change { Business.count }
+      }.to change(Business, :count)
     end
 
     it "should create a user" do
       expect {
         subject
-      }.to change { User.count }
+      }.to change(User, :count)
     end
 
     it "should go to the after sign up path upon success" do

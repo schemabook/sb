@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Businesses", :type => :feature do
+RSpec.describe "Businesses", type: :feature do
   let(:user)     { create(:user_with_business) }
   let(:business) { user.business }
 
@@ -8,11 +8,11 @@ RSpec.feature "Businesses", :type => :feature do
     sign_in user
   end
 
-  scenario "User sees business info" do
+  it "User sees business info" do
     visit business_path(business)
 
     expect(page).to have_text(business.name)
-    expect(page).to have_link("edit", :href => edit_business_path(business))
+    expect(page).to have_link("edit", href: edit_business_path(business))
     expect(page).to have_text("Created by: #{user.email}")
     expect(page).to have_text("Created on: #{I18n.l(business.created_at, format: :sample)}")
     expect(page).to have_text("Stakeholders")

@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :business
 
-  validates_presence_of :email
+  validates :email, presence: true
 end

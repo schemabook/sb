@@ -30,11 +30,12 @@ class BusinessesController < ApplicationController
   end
 
   private
-    def set_business
-      @business = Business.find(params[:id])
-    end
 
-    def business_params
-      params.require(:business).permit(:name)
-    end
+  def set_business
+    @business = Business.find(params[:id])
+  end
+
+  def business_params
+    params.require(:business).permit(:name)
+  end
 end

@@ -1,4 +1,4 @@
- require 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe "businesses", type: :request do
   let!(:user) { create(:user_with_business) }
@@ -29,7 +29,7 @@ RSpec.describe "businesses", type: :request do
     context "with valid parameters" do
       it "updates the requested business" do
         business = user.business
-        patch business_url(business), params: { business: {name: 'new name'} }
+        patch business_url(business), params: { business: { name: 'new name' } }
         business.reload
 
         expect(business.name).to eq('new name')
@@ -37,7 +37,7 @@ RSpec.describe "businesses", type: :request do
 
       it "redirects to the business" do
         business = user.business
-        patch business_url(business), params: { business: {name: 'new name'} }
+        patch business_url(business), params: { business: { name: 'new name' } }
         business.reload
 
         expect(response).to redirect_to(business_url(business))
@@ -47,7 +47,7 @@ RSpec.describe "businesses", type: :request do
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         business = user.business
-        patch business_url(business), params: { business: {foo: 'bar'} }
+        patch business_url(business), params: { business: { foo: 'bar' } }
 
         expect(response.status).to eq(302)
       end
