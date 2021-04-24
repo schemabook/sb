@@ -13,7 +13,7 @@ module Users
     # POST /resource
     def create
       super do |resource|
-        resource.business.update!(created_by: resource.id) unless resource.errors
+        resource.business.update!(created_by: resource.id) if resource.errors.errors.blank?
       end
     end
 

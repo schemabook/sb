@@ -27,6 +27,13 @@ RSpec.describe "Registration", type: :request do
       }.to change(User, :count)
     end
 
+    it "associates the business to the user" do
+      subject
+
+      user = User.last
+      expect(user.business).to eq(Business.last)
+    end
+
     it "should go to the after sign up path upon success" do
       expect(subject).to redirect_to(user_root_path) # which redirects to /dashboards
     end
