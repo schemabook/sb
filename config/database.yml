@@ -1,9 +1,18 @@
-development: &common
-  adapter:  postgresql
-  host:     localhost
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
   database: schemabook_development
 
 test:
-  <<: *common
+  <<: *default
   database: schemabook_test
 
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
