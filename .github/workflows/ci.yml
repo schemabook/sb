@@ -110,3 +110,9 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec --format documentation
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find yarn cache location
+        run: curl "https://api.render.com/deploy/srv-c228fvm1aaad4odpg11g?key=xt0CcAFh3E8"
+
