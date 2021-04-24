@@ -13,6 +13,6 @@ services:
      - key: DATABASE_URL
        fromDatabase:
          name: schemabook
-         property: postgres://schemabook_user:LCDiOgxP2EOiwnNj2zSlMy4KJ5iwOhfu@dpg-c2289fm1aaa42cr2a0s0/schemabook
+         property: connectionString
      - key: RAILS_MASTER_KEY
        sync: false
