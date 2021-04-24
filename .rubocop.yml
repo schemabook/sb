@@ -96,3 +96,6 @@ Layout/LeadingCommentSpace:
 
 Layout/TrailingEmptyLines:
   Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
