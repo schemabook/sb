@@ -6,6 +6,7 @@ class BusinessesController < ApplicationController
   end
 
   def edit
+    @creator = User.find(@business.created_by)
   end
 
   def update
