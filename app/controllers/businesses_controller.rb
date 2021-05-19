@@ -6,6 +6,7 @@ class BusinessesController < ApplicationController
   end
 
   def edit
+    @creator = User.find(@business.created_by)
   end
 
   def update
@@ -36,6 +37,6 @@ class BusinessesController < ApplicationController
   end
 
   def business_params
-    params.require(:business).permit(:name)
+    params.require(:business).permit(:name, :street_address, :city, :state, :postal, :country)
   end
 end

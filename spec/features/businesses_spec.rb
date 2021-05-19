@@ -21,4 +21,19 @@ RSpec.describe "Businesses", type: :feature do
       expect(page).to have_text(user.email)
     end
   end
+
+  it "User edits business info" do
+    visit edit_business_path(business)
+
+    fill_in :business_name, with: "Nike"
+    fill_in :business_street_address, with: "1 Bowerman Drive"
+    fill_in :business_city, with: "Beaverton"
+    fill_in :business_state, with: "OR"
+    fill_in :business_postal, with: "97222"
+    select "United States", from: :business_country
+
+    click_on "Save"
+
+    expect(page).to have_text("Nike")
+  end
 end
