@@ -99,3 +99,6 @@ Layout/TrailingEmptyLines:
 
 Rails/LexicallyScopedActionFilter:
   Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
