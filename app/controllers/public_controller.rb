@@ -14,4 +14,8 @@ class PublicController < ApplicationController
 
   def company
   end
+
+  def status
+    render status: 200
+  end
 end

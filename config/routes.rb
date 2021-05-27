@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
 
   root 'public#index'
+  get 'status', to: 'public#status'
 
   ### Marketing pages
   get 'features', to: 'public#features'
