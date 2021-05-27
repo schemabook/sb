@@ -16,6 +16,6 @@ class PublicController < ApplicationController
   end
 
   def status
-    render status: 200
+    render status: :ok
   end
 end
