@@ -21,6 +21,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Devise for Authentication
 gem 'devise'
+# Use Devise invitable for inviting team members
+gem 'devise_invitable', '~> 2.0.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
