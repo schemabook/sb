@@ -1,4 +1,5 @@
 class DeviseInvitableAddToUsers < ActiveRecord::Migration[6.1]
+  # rubocop:disable Metrics/MethodLength
   def up
     change_table :users do |t|
       t.string     :invitation_token
@@ -12,6 +13,7 @@ class DeviseInvitableAddToUsers < ActiveRecord::Migration[6.1]
       t.index      :invited_by_id
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def down
     change_table :users do |t|

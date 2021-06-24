@@ -63,6 +63,9 @@ Style/PerlBackrefs:
 Style/EmptyMethod:
   Enabled: false
 
+Style/WordArray:
+  Enabled: false
+
 RSpec/NamedSubject:
   Enabled: false
 
