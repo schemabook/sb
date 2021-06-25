@@ -35,6 +35,12 @@
             <div class="bg-white shadow overflow-hidden sm:rounded-md">
               <div class="p-4">
                 <ul>
+                  <li><%= @business.street_address %></li>
+                  <li><%= @business.city %>, <%= @business.state %> <%= @business.postal %></li>
+                </ul>
+              </div>
+              <div class="p-4">
+                <ul>
                   <li>Created by: <%= @creator.email %></li>
                   <li>Created on: <%= l @business.created_at, format: :sample %></li>
                 </ul>
