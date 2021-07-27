@@ -60,7 +60,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     bcrypt (3.1.16)
@@ -90,6 +90,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.5)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
     factory_bot (6.1.0)
@@ -284,6 +287,7 @@ DEPENDENCIES
   bundler-audit
   capybara (>= 3.26)
   devise
+  devise_invitable (~> 2.0.0)
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
