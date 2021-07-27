@@ -105,3 +105,6 @@ Rails/LexicallyScopedActionFilter:
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
