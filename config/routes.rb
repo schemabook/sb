@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-  resources :businesses
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations',
-    invitations: 'users/invitations'
-  }
+
 
   root 'public#index'
   get 'status', to: 'public#status'
@@ -33,4 +28,13 @@ Rails.application.routes.draw do
   get 'users', to: redirect('dashboards'), as: :user_root # creates user_root_path, used for after sign in path
   get 'dashboards', to: 'dashboards#index'
   get 'schema', to: 'schemas#show'
+
+  resources :teams, except: :index
+  resources :businesses
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    invitations: 'users/invitations'
+  }
 end
