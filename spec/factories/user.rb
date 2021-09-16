@@ -3,13 +3,9 @@ FactoryBot.define do
     email    { "admin@example.com" }
     password { "password" }
 
-    factory :user_with_business do
-      business { create(:business) }
+    business { association :business }
+    team     { association :team, business: business }
 
-      after(:create) do |user, evaluator|
-        evaluator.business.update(created_by: user.id)
-        evaluator.business.reload
-      end
-    end
+    after(:create) { |object| object.business.update_column(:created_by, object.id) }
   end
 end
