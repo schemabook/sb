@@ -6,6 +6,6 @@ FactoryBot.define do
     business { association :business }
     team     { association :team, business: business }
 
-    after(:create) { |object| object.business.update_column(:created_by, object.id) }
+    after(:create) { |object| object.business.update({ created_by: object.id }) }
   end
 end

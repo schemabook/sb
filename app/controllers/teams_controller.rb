@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[show edit update destroy]
 
   # NOTE: shown on the business#show page
   # GET /teams or /teams.json
@@ -59,14 +59,15 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # TODO: introduce RBAC and limit writes to team members and administrators
-    def set_team
-      @team = Team.where(id: params[:id], business_id: current_user.business.id).first
-    end
 
-    # Only allow a list of trusted parameters through.
-    def team_params
-      params.require(:team).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  # TODO: introduce RBAC and limit writes to team members and administrators
+  def set_team
+    @team = Team.where(id: params[:id], business_id: current_user.business.id).first
+  end
+
+  # Only allow a list of trusted parameters through.
+  def team_params
+    params.require(:team).permit(:name)
+  end
 end

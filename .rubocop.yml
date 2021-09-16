@@ -66,6 +66,12 @@ Style/EmptyMethod:
 Style/WordArray:
   Enabled: false
 
+Style/MutableConstant:
+  Enabled: false
+
+RSpec/ScatteredLet:
+  Enabled: false
+
 RSpec/NamedSubject:
   Enabled: false
 
@@ -107,4 +113,7 @@ Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
 Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/AbcSize:
   Enabled: false

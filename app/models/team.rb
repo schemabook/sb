@@ -4,5 +4,5 @@ class Team < ApplicationRecord
   has_many :users
   belongs_to :business
 
-  validates_presence_of :business_id
+  validates :business_id, presence: true
 end
