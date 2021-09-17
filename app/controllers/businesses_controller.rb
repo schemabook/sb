@@ -4,6 +4,7 @@ class BusinessesController < ApplicationController
   def show
     @creator      = User.find(@business.created_by)
     @stakeholders = User.where(business_id: @business.id)
+    @teams        = Team.where(business_id: @business.id)
   end
 
   def edit
@@ -35,7 +36,7 @@ class BusinessesController < ApplicationController
   private
 
   def set_business
-    @business = Business.find(params[:id])
+    @business = current_user.business
   end
 
   def business_params

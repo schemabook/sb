@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: [:email, :business_id])
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :business_id, :team_id])
   end
 end
 

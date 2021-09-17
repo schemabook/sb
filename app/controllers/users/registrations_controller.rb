@@ -49,7 +49,7 @@ module Users
     end
 
     def sanitized_params
-      params.require(:user).permit(:business, :email, :password, :password_confirmation)
+      params.require(:user).permit(:business, :team, :email, :password, :password_confirmation)
     end
 
     def create_business
@@ -58,8 +58,15 @@ module Users
       Business.create(name: name)
     end
 
+    def create_team(business: :business)
+      Team.create(name: Team::ADMIN_TEAM_NAME, business_id: business.id)
+    end
+
     def sign_up_params
-      sanitized_params.merge(business: create_business)
+      business = create_business
+      team     = create_team(business: business)
+
+      sanitized_params.merge(business: business, team: team)
     end
 
     # If you have extra params to permit, append them to the sanitizer.

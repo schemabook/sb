@@ -4,15 +4,21 @@
   <div class="space-y-8 divide-y divide-gray-200">
     <div class="pt-0">
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-        <div class="sm:col-span-3">
+        <div class="sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700">
-            Stakeholder Email:
+            Teammate Email Address:
           </label>
           <div class="mt-1">
             <%= f.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
           </div>
           <div class="hidden">
-            <%= f.hidden_field :business_id, value: current_user.business_id, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+            <%= f.hidden_field :business_id, value: current_user.business_id %>
+          </div>
+          <div class="hidden">
+            <%= f.hidden_field :team_id, value: current_user.team_id %>
+          </div>
+          <div class="py-6 block text-sm text-gray-500">
+            When you invite a teammate they will be placed on the same team as you. An administrator can move them to a different team if needed.
           </div>
         </div>
       </div>

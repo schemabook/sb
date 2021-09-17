@@ -10,7 +10,7 @@ RSpec.describe "Registration", type: :request do
   end
 
   describe "POST users" do
-    let(:user_params) { attributes_for(:user_with_business) }
+    let(:user_params) { attributes_for(:user) }
     let(:params)      { { user: user_params.merge(business: "valid-business") } }
 
     subject { post user_registration_path, params: params }
@@ -19,6 +19,12 @@ RSpec.describe "Registration", type: :request do
       expect {
         subject
       }.to change(Business, :count)
+    end
+
+    it "should create a team" do
+      expect {
+        subject
+      }.to change(Team, :count)
     end
 
     it "should create a user" do
@@ -32,6 +38,13 @@ RSpec.describe "Registration", type: :request do
 
       user = User.last
       expect(user.business).to eq(Business.last)
+    end
+
+    it "associates the team to the user" do
+      subject
+
+      user = User.last
+      expect(user.team).to eq(Team.last)
     end
 
     it "should go to the after sign up path upon success" do
