@@ -68,12 +68,12 @@ Rails.application.configure do
   # mailgun options
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :authentication => :plain,
-    :address => "smtp.mailgun.org",
-    :port => 587,
-    :domain => "#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
-    :user_name => "postmaster@#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
-    :password => ENV['MAILGUN_SMTP_PASSWORD']
+    authentication: :plain,
+    address: "smtp.mailgun.org",
+    port: 587,
+    domain: "#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
+    user_name: "postmaster@#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
+    password: ENV['MAILGUN_SMTP_PASSWORD']
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

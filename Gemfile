@@ -34,10 +34,8 @@ gem 'devise_invitable', '~> 2.0.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-#group :production do
-  # used to send email from Render
-  gem 'mailgun-ruby', '~>1.2.5'
-#end
+# used to send email from Render
+gem 'mailgun-ruby', '~>1.2.5'
 
 group :development, :test do
   # Use rspec  instead of test-unit
