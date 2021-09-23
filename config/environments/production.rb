@@ -63,11 +63,11 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "schemabook_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'schemabook-cm6f.onrender.com' }
+  #config.action_mailer.default_url_options = { host: 'schemabook-cm6f.onrender.com' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: ENV['mailgun-api-key'],
-    domain: 'schemabook.com'
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: ENV['MAILGUN_API_URL']
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
   }
 

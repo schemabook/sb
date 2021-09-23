@@ -4,6 +4,10 @@ class Users::InvitationsController < Devise::InvitationsController
   # This is called when creating invitation.
   # It should return an instance of resource class.
   def invite_resource
+    Rails.logger.info "####"
+    Rails.logger.info "Mailgun: #{ENV['MAILGUN_API_URL']}"
+    Rails.logger.info "####"
+
     super { |user| ActiveSupport::Notifications.instrument('invited.user', user) }
   end
 
