@@ -38,12 +38,16 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # mailgun options
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: ENV['MAILGUN_API_KEY'],
-    domain: 'localhost'
-    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
+    :user_name => "postmaster@#{ENV['MAILGUN_SMTP_DOMAIN']}.mailgun.org",
+    :password => ENV['MAILGUN_SMTP_PASSWORD']
   }
 
   # Print deprecation notices to the Rails logger.
