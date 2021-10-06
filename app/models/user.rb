@@ -13,4 +13,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :business, presence: true
   validates :team, presence: true
+
+  delegate :admin?, to: :team
 end
