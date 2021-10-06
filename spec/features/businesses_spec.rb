@@ -12,14 +12,35 @@ RSpec.describe "Businesses", type: :feature do
     visit business_path(business)
 
     expect(page).to have_text(business.name)
-    expect(page).to have_link("Edit Info", href: edit_business_path(business))
     expect(page).to have_text("Created by: #{user.email}")
     expect(page).to have_text("Created on: #{I18n.l(business.created_at, format: :sample)}")
     expect(page).to have_text("Teammates")
+    expect(page).to have_link("Invite Teammate", href: new_user_invitation_path)
 
     within("ul#stakeholders") do
       expect(page).to have_text(user.email)
     end
+
+    expect(page).to_not have_link("Edit Info", href: edit_business_path(business))
+    expect(page).to_not have_link("Create Team", href: new_team_path)
+  end
+
+  it "Admin user can edit business info" do
+    user.team = create(:team, name: Team::ADMIN_TEAM_NAME, business: user.business)
+
+    visit business_path(business)
+
+    expect(page).to have_text(business.name)
+    expect(page).to have_link("Edit Info", href: edit_business_path(business))
+  end
+
+  it "Admin user can create teams" do
+    user.team = create(:team, name: Team::ADMIN_TEAM_NAME, business: user.business)
+
+    visit business_path(business)
+
+    expect(page).to have_text(business.name)
+    expect(page).to have_link("Create Team", href: new_team_path)
   end
 
   it "User edits business info" do
