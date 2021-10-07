@@ -1,33 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe "Businesses", type: :feature do
-  let(:user)     { create(:user) }
+  let(:user)     { create(:user, :admin) }
   let(:business) { user.business }
 
   before do
     sign_in user
   end
 
-  it "User sees business info" do
-    visit business_path(business)
-
-    expect(page).to have_text(business.name)
-    expect(page).to have_text("Created by: #{user.email}")
-    expect(page).to have_text("Created on: #{I18n.l(business.created_at, format: :sample)}")
-    expect(page).to have_text("Teammates")
-    expect(page).to have_link("Invite Teammate", href: new_user_invitation_path)
-
-    within("ul#stakeholders") do
-      expect(page).to have_text(user.email)
+  context "non-admin" do
+    before do
+      user.team = create(:team, business: business)
     end
 
-    expect(page).to_not have_link("Edit Info", href: edit_business_path(business))
-    expect(page).to_not have_link("Create Team", href: new_team_path)
+    it "User sees business info" do
+      visit business_path(business)
+
+      expect(page).to have_text(business.name)
+      expect(page).to have_text("Created by: #{user.email}")
+      expect(page).to have_text("Created on: #{I18n.l(business.created_at, format: :sample)}")
+      expect(page).to have_text("Teammates")
+      expect(page).to have_link("Invite Teammate", href: new_user_invitation_path)
+
+      within("ul#stakeholders") do
+        expect(page).to have_text(user.email)
+      end
+
+      expect(page).to_not have_link("Edit Info", href: edit_business_path(business))
+      expect(page).to_not have_link("Create Team", href: new_team_path)
+    end
   end
 
   it "Admin user can edit business info" do
-    user.team = create(:team, name: Team::ADMIN_TEAM_NAME, business: user.business)
-
     visit business_path(business)
 
     expect(page).to have_text(business.name)
@@ -35,15 +39,13 @@ RSpec.describe "Businesses", type: :feature do
   end
 
   it "Admin user can create teams" do
-    user.team = create(:team, name: Team::ADMIN_TEAM_NAME, business: user.business)
-
     visit business_path(business)
 
     expect(page).to have_text(business.name)
     expect(page).to have_link("Create Team", href: new_team_path)
   end
 
-  it "User edits business info" do
+  it "Admin edits business info" do
     visit edit_business_path(business)
 
     fill_in :business_name, with: "Nike"

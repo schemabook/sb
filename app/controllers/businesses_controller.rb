@@ -1,5 +1,6 @@
 class BusinessesController < ApplicationController
   before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:edit, :update, :destroy]
 
   def show
     @creator      = User.find(@business.created_by)

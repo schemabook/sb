@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "businesses", type: :request do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, :admin) }
 
   before do
     sign_in user
@@ -22,6 +22,20 @@ RSpec.describe "businesses", type: :request do
       get edit_business_url(business)
 
       expect(response).to be_successful
+    end
+
+    context "requires admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        get edit_business_url(user.business)
+
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
@@ -52,6 +66,20 @@ RSpec.describe "businesses", type: :request do
         expect(response.status).to eq(302)
       end
     end
+
+    context "requires admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        patch business_url(user.business), params: { business: { name: "new name" } }
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe "DELETE /destroy" do
@@ -60,6 +88,20 @@ RSpec.describe "businesses", type: :request do
       expect {
         delete business_url(business)
       }.to change(Business, :count).by(-1)
+    end
+
+    context "requires admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        delete business_url(user.business)
+
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
