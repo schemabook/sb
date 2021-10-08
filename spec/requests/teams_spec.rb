@@ -45,7 +45,7 @@ RSpec.describe "/teams", type: :request do
       expect(response).to be_successful
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -68,7 +68,7 @@ RSpec.describe "/teams", type: :request do
       expect(response).to be_successful
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -113,7 +113,7 @@ RSpec.describe "/teams", type: :request do
       end
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -159,7 +159,7 @@ RSpec.describe "/teams", type: :request do
       end
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -189,7 +189,7 @@ RSpec.describe "/teams", type: :request do
       expect(response).to redirect_to(teams_url)
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do

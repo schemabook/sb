@@ -24,7 +24,7 @@ RSpec.describe "businesses", type: :request do
       expect(response).to be_successful
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -67,7 +67,7 @@ RSpec.describe "businesses", type: :request do
       end
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do
@@ -90,7 +90,7 @@ RSpec.describe "businesses", type: :request do
       }.to change(Business, :count).by(-1)
     end
 
-    context "requires admin" do
+    context "with admin" do
       let!(:user) { create(:user) }
 
       before do

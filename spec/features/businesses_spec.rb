@@ -8,12 +8,12 @@ RSpec.describe "Businesses", type: :feature do
     sign_in user
   end
 
-  context "non-admin" do
+  context "when non-admin" do
     before do
       user.team = create(:team, business: business)
     end
 
-    it "User sees business info" do
+    it "sees business info" do
       visit business_path(business)
 
       expect(page).to have_text(business.name)
@@ -25,9 +25,11 @@ RSpec.describe "Businesses", type: :feature do
       within("ul#stakeholders") do
         expect(page).to have_text(user.email)
       end
+    end
 
-      expect(page).to_not have_link("Edit Info", href: edit_business_path(business))
-      expect(page).to_not have_link("Create Team", href: new_team_path)
+    it "does not see edit buttons" do
+      expect(page).not_to have_link("Edit Info", href: edit_business_path(business))
+      expect(page).not_to have_link("Create Team", href: new_team_path)
     end
   end
 

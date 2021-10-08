@@ -6,7 +6,7 @@ RSpec.describe Team, type: :model do
   it { should have_many :users }
   it { should belong_to :business }
 
-  context "validations" do
+  context "with validations" do
     it { should validate_presence_of :business_id }
 
     describe "uniqueness" do
