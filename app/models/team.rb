@@ -3,6 +3,7 @@ class Team < ApplicationRecord
 
   has_many :users
   has_many :services
+  has_many :schemas
   belongs_to :business
 
   validates :business_id, presence: true
