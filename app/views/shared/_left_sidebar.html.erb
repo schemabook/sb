@@ -13,13 +13,13 @@
       <div class="relative px-3 w-full">
         <ul>
           <li class="text-gray-800">
-            <%= current_user.email %>
+            <%= link_to current_user.display_name, user_profile_path(current_user) %>
           </li>
           <li class="text-gray-400">
             Joined <%= l current_user.created_at, format: :sample %>
           </li>
           <li class="text-gray-800">
-            Team: Data Warehouse
+            Team: <%= current_user.team.name %>
           </li>
           <li class="text-gray-400">
             8 Schemas

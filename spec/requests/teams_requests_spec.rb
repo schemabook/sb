@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/teams", type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :admin) }
 
   before do
     sign_in user
@@ -44,6 +44,20 @@ RSpec.describe "/teams", type: :request do
 
       expect(response).to be_successful
     end
+
+    context "with admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        get new_team_url
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe "GET /edit" do
@@ -52,6 +66,21 @@ RSpec.describe "/teams", type: :request do
       get edit_team_url(team)
 
       expect(response).to be_successful
+    end
+
+    context "with admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        team = Team.create! valid_attributes
+        get edit_team_url(team)
+
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
@@ -81,6 +110,20 @@ RSpec.describe "/teams", type: :request do
         post teams_url, params: { team: invalid_attributes }
 
         expect(response).not_to be_successful
+      end
+    end
+
+    context "with admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        post teams_url, params: { team: valid_attributes }
+
+        expect(response).to redirect_to(root_path)
       end
     end
   end
@@ -115,6 +158,21 @@ RSpec.describe "/teams", type: :request do
         expect(response).not_to be_successful
       end
     end
+
+    context "with admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        team = Team.create! valid_attributes
+        patch team_url(team), params: { team: { name: "something" } }
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe "DELETE /destroy" do
@@ -129,6 +187,21 @@ RSpec.describe "/teams", type: :request do
       team = Team.create! valid_attributes
       delete team_url(team)
       expect(response).to redirect_to(teams_url)
+    end
+
+    context "with admin" do
+      let!(:user) { create(:user) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects non-admins" do
+        team = Team.create! valid_attributes
+        delete team_url(team)
+
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end

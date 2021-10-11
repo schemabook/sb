@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_185340) do
+ActiveRecord::Schema.define(version: 2021_10_08_174917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_185340) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "business_id"
     t.index ["business_id"], name: "index_teams_on_business_id"
+    t.index ["name", "business_id"], name: "index_teams_on_name_and_business_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,6 +61,8 @@ ActiveRecord::Schema.define(version: 2021_08_31_185340) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.bigint "team_id"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
