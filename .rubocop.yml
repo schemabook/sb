@@ -115,5 +115,8 @@ Layout/EmptyLinesAroundBlockBody:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/RedundantInterpolation:
+  Enabled: false
+
 Metrics/AbcSize:
   Enabled: false

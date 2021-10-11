@@ -5,7 +5,7 @@
     <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
       <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
 
-      <%= render 'shared/left_sidebar' %>
+        <%= render 'shared/left_sidebar' %>
 
       </div>
     </div>
@@ -20,51 +20,109 @@
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
             <h2 class="text-lg leading-6 font-medium text-gray-600">
-              Teams
+              <%= @user.display_name_with_email %>
             </h2>
-            <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-400">
-              Invite some team members!
+            <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-600">
+              Schemabook appreciates <%= @user.business.name %>!
             </div>
           </div>
 
-
           <!-- main area wrapper -->
           <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-
-            <!-- main area form -->
-            <div class="p-6 bg-white shadow overflow-hidden sm:rounded-md">
+            <!-- main area list -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
               <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
                 <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
                   <div class="ml-4 mt-2">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                      <%= @team.name %>
+                      Info
+                    </h3>
+                    <ul id="info">
+                      <li><%= @user.first_name %> <%= @user.last_name %></li>
+                      <li><%= @user.email %></li>
+                    </ul>
+                  </div>
+                  <div class="ml-4 mt-2 flex-shrink-0">
+                    <% if current_user.admin? || current_user == @user %>
+                    <a href="<%= edit_user_profile_path(@user) %>">
+                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        Edit Info
+                      </button>
+                    </a>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end main area list -->
+          </div>
+          <!-- end main area wrapper -->
+
+          <!-- main area wrapper -->
+          <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+            <!-- main area list -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
+              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                  <div class="ml-4 mt-2">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Team
                     </h3>
                   </div>
                   <div class="ml-4 mt-2 flex-shrink-0">
-                    <a href="<%= edit_team_path(@team) %>">
+                    <% if current_user.admin? %>
+                    <a href="<%= edit_user_profile_path(@user) %>">
                       <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                         Edit Team
                       </button>
                     </a>
+                    <% end %>
                   </div>
                 </div>
               </div>
 
               <div class="p-4">
-                <ul id="teammates">
-                  <% @teammates.each do |mate| %>
-                  <li><%= link_to mate.email, user_profile_path(mate) %></li>
-                  <% end %>
+                <ul id="team">
+                  <li><%= link_to @user.team.name, team_path(@user.team) %></li>
                 </ul>
               </div>
- 
-              <%= link_to 'See all teams', business_path(current_user.business) %>
             </div>
             <!-- end main area list -->
 
           </div>
+          <!-- end main area wrapper -->
+
+          <!-- main area wrapper -->
+          <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+            <!-- main area list -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
+             <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                  <div class="ml-4 mt-2">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Activity
+                    </h3>
+                  </div>
+                  <div class="ml-4 mt-2 flex-shrink-0">
+                  </div>
+                </div>
+              </div>
+             <div class="p-4">
+
+                <ul id="activity">
+                  <li>Joined Team on mm/dd/yyyy</li>
+                </ul>
+              </div>
+            </div>
+            <!-- end main area list -->
+          </div>
+          <!-- end main area wrapper -->
+
         </div>
         <!-- End main area -->
+
       </div>
     </div>
   </div>

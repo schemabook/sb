@@ -22,10 +22,14 @@ Rails.application.routes.draw do
   get 'terms', to: 'public#terms'
 
   ### Application routes
-  # TODO: add a redirect to the dashboards page
   get 'users', to: redirect('dashboards'), as: :user_root # creates user_root_path, used for after sign in path
   get 'dashboards', to: 'dashboards#index'
   get 'schema', to: 'schemas#show'
+
+  # profiles (user is the resource)
+  get 'profiles/:id/edit', to: 'profiles#edit', as: :edit_user_profile
+  get 'profiles/:id', to: 'profiles#show', as: :user_profile
+  patch 'profiles/:id', to: 'profiles#update', as: :patch_user_profile
 
   resources :teams, except: :index
   resources :businesses

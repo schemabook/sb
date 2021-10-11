@@ -129,7 +129,7 @@
 
                 <ul id="stakeholders">
                   <% @stakeholders.each do |stakeholder| %>
-                  <li><%= stakeholder.email %></li>
+                  <li><%= link_to stakeholder.email, user_profile_path(stakeholder) %></li>
                   <% end %>
                 </ul>
               </div>
@@ -137,7 +137,6 @@
             <!-- end main area list -->
           </div>
           <!-- end main area wrapper -->
-
 
         </div>
         <!-- End main area -->

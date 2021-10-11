@@ -15,4 +15,20 @@ class User < ApplicationRecord
   validates :team, presence: true
 
   delegate :admin?, to: :team
+
+  def display_name
+    return email if first_name.blank?
+
+    "#{first_name} #{last_name}"
+  end
+
+  def display_name_with_email
+    str = ""
+    str += "#{first_name} " if first_name
+    str += "#{last_name} " if last_name
+    str += "(#{email})" if first_name
+    str += "#{email}" unless first_name
+
+    str
+  end
 end
