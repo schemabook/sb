@@ -25,7 +25,7 @@
             Team: <%= link_to current_user.team.name, team_path(current_user.team) %>
           </li>
           <li class="text-gray-400">
-            8 Schemas
+            <%= pluralize(current_user.team.schemas.size, "Schema") %>
           </li>
           <li class="text-gray-400">
             <%= pluralize(current_user.team.services.count, "Service") %>
