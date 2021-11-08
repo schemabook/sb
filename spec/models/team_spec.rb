@@ -4,6 +4,7 @@ RSpec.describe Team, type: :model do
   subject { create(:team, business: create(:business)) }
 
   it { should have_many :users }
+  it { should have_many :services }
   it { should belong_to :business }
 
   context "with validations" do

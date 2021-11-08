@@ -1,7 +1,8 @@
 class Team < ApplicationRecord
-  ADMIN_TEAM_NAME = "Administrators" # created when business is created
+  ADMIN_TEAM_NAME = "Administrators" # admin team created when business is created
 
   has_many :users
+  has_many :services
   belongs_to :business
 
   validates :business_id, presence: true
