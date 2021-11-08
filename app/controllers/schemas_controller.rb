@@ -9,6 +9,7 @@ class SchemasController < ApplicationController
     @content = define_content(@tab)
   end
 
+  # TODO: associate schemes to businesses for scoping
   def create
     @schema = Schema.new(schema_params)
 
