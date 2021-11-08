@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :teams, except: :index
   resources :businesses
+  resources :services
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
