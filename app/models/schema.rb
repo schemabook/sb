@@ -1,4 +1,6 @@
 class Schema < ApplicationRecord
+  FORMATS = ["JSON Schema", "Avro", "CSV"]
+
   belongs_to :team
 
   validates :name, presence: true

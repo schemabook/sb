@@ -20,8 +20,8 @@ RSpec.describe "Schemas", type: :feature do
       expect(page).to have_text("Name")
     end
 
-    xit "can add a type" do
-      expect(page).to have_text("select")
+    it "can add a type" do
+      expect(page).to have_text("Format")
     end
   end
 

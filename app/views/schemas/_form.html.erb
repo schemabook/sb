@@ -32,11 +32,11 @@
         </div>
 
         <div class="sm:col-span-3">
-          <label for="country" class="block text-sm font-medium text-gray-700">
+          <label for="format" class="block text-sm font-medium text-gray-700">
             Schema Format
           </label>
           <div class="mt-1">
-            <%= form.select :format, ["JSON Schema", "Avro", "CSV"], {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
+            <%= form.select :format, Schema::FORMATS, {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
           </div>
         </div>
       </div>
