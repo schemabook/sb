@@ -1,4 +1,4 @@
- require 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe "Services", type: :request do
   let(:business) { create(:business) }
@@ -53,7 +53,7 @@ RSpec.describe "Services", type: :request do
       end
 
       it "redirects to the created service" do
-        post services_url, params: { service: { name: "bar" }  }
+        post services_url, params: { service: { name: "bar" } }
 
         expect(response).to redirect_to(service_url(Service.last))
       end
@@ -103,13 +103,14 @@ RSpec.describe "Services", type: :request do
     end
 
     context "with invalid parameters" do
+      let!(:service) { create(:service, team: user.team, name: "bar") }
+
       before do
         create(:service, team: user.team, name: "foo")
-        @service = create(:service, team: user.team, name: "bar")
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        patch service_url(@service), params: { service: { name: "foo" } }
+        patch service_url(service), params: { service: { name: "foo" } }
 
         expect(response.status).to be(422)
         expect(response).not_to be_successful

@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_10_23_202522) do
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "team_id"], name: "index_services_on_name_and_team_id", unique: true
     t.index ["team_id"], name: "index_services_on_team_id"
   end
 

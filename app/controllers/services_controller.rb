@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: %i[ show edit update destroy ]
+  before_action :set_service, only: %i[show edit update destroy]
 
   # GET /services or /services.json
   def index
@@ -57,14 +57,15 @@ class ServicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      teams    = current_user.business.teams
-      @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
-    end
 
-    # Only allow a list of trusted parameters through.
-    def service_params
-      params.require(:service).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_service
+    teams    = current_user.business.teams
+    @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
+  end
+
+  # Only allow a list of trusted parameters through.
+  def service_params
+    params.require(:service).permit(:name, :description)
+  end
 end
