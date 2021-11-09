@@ -9,9 +9,9 @@ class SchemasController < ApplicationController
     @content = define_content(@tab)
   end
 
-  # TODO: associate schemes to businesses for scoping
   def create
-    @schema = Schema.new(schema_params)
+    @format = Format.create(format_params)
+    @schema = Schema.new(schema_params.merge(format_id: @format.id))
 
     if @schema.save
       redirect_to schema_path(@schema)
@@ -22,8 +22,12 @@ class SchemasController < ApplicationController
 
   private
 
+  def format_params
+    params.require(:schema).permit(:file_type)
+  end
+
   def schema_params
-    params.require(:schema).permit(:name).merge(team_id: current_user.team.id)
+    params.require(:schema).permit(:name, :service_id).merge(team_id: current_user.team.id)
   end
 
   def define_content(tab)

@@ -1,19 +1,17 @@
-class Format < ActiveRecord::Base
-  enum file_type: [:json, :avro, :csv]
+class Format < ApplicationRecord
+  enum file_type: {
+    json: 0,
+    avro: 1,
+    csv: 2
+  }
 
   VALIDATORS = {
     "json" => "JsonValidator",
     "avro" => "AvroValidator",
-    "csv"  => "CsvValidator"
+    "csv" => "CsvValidator"
   }
 
   validates :file_type, presence: true
 
   before_save { self.name = file_type.to_s }
-
-  #def validated?(schema_body)
-    #validator = VALIDATORS[self.file_type].constantize
-
-    #validator.new(schema_body: schema_body).valid?
-  #end
 end

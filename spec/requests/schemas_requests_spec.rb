@@ -20,7 +20,7 @@ RSpec.describe "/schemas", type: :request do
   end
 
   let(:valid_attributes) {
-    { "name" => "schema 1", team_id: user.team_id }
+    { "name" => "schema 1", "file_type" => "json", team_id: user.team_id }
   }
 
   let(:invalid_attributes) {
@@ -28,8 +28,10 @@ RSpec.describe "/schemas", type: :request do
   }
 
   describe "GET /show" do
+    let!(:format) { create(:format) }
+    let!(:schema) { create(:schema, format: format, team: user.team) }
+
     it "renders a successful response" do
-      schema = Schema.create! valid_attributes
       get schema_url(schema)
 
       expect(response).to be_successful
@@ -46,10 +48,25 @@ RSpec.describe "/schemas", type: :request do
 
   describe "POST /create" do
     context "with valid parameters" do
+      it "creates a format" do
+        expect {
+          post schemas_url, params: { schema: valid_attributes }
+        }.to change(Format, :count).by(1)
+      end
+
       it "creates a new Schema" do
         expect {
           post schemas_url, params: { schema: valid_attributes }
         }.to change(Schema, :count).by(1)
+      end
+
+      it "associates the schema with the format" do
+        post schemas_url, params: { schema: valid_attributes }
+
+        schema = assigns(:schema)
+        format = assigns(:format)
+
+        expect(schema.format).to eq(format)
       end
 
       it "redirects to the created schema" do

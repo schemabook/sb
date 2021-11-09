@@ -16,17 +16,22 @@ RSpec.describe "Schemas", type: :feature do
       expect(page).to have_text("Schema Information")
     end
 
-    it "can add a name" do
-      expect(page).to have_text("Name")
+    it "requires a name" do
+      expect(page).to have_field(:schema_name)
     end
 
-    it "can add a type" do
-      expect(page).to have_text("Format")
+    it "requires a file_type" do
+      expect(page).to have_field(:schema_file_type)
+    end
+
+    it "can associate a service" do
+      expect(page).to have_field(:schema_service_id)
     end
   end
 
   context "when viewing a schema" do
-    let!(:schema) { create(:schema, team: user.team) }
+    let!(:format) { create(:format) }
+    let!(:schema) { create(:schema, format: format, team: user.team) }
 
     before do
       visit schema_path(schema)
