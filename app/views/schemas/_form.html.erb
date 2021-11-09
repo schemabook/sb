@@ -24,7 +24,7 @@
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
         <div class="sm:col-span-3">
           <label for="first_name" class="block text-sm font-medium text-gray-700">
-            Name
+            Name*
           </label>
           <div class="mt-1">
             <%= form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
@@ -32,14 +32,26 @@
         </div>
 
         <div class="sm:col-span-3">
-          <label for="country" class="block text-sm font-medium text-gray-700">
-            Schema Format
+          <label for="format" class="block text-sm font-medium text-gray-700">
+            Schema Format*
           </label>
           <div class="mt-1">
-            <%= form.select :format, ["JSON Schema", "Avro", "CSV"], {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
+            <%= form.select :file_type, Format.file_types.keys, {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
           </div>
         </div>
       </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="service" class="block text-sm font-medium text-gray-700">
+            Service (optional)
+          </label>
+          <div class="mt-1">
+            <%= form.select :service_id, current_user.team.services.map { |service| [service.name, service.id] }, {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

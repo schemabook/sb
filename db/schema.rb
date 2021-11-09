@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_23_202522) do
+ActiveRecord::Schema.define(version: 2021_11_09_123405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,23 @@ ActiveRecord::Schema.define(version: 2021_10_23_202522) do
     t.index ["name"], name: "index_businesses_on_name", unique: true
   end
 
+  create_table "formats", force: :cascade do |t|
+    t.string "name"
+    t.string "file_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "schemas", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "team_id"
+    t.bigint "service_id"
+    t.bigint "format_id"
+    t.index ["format_id"], name: "index_schemas_on_format_id"
+    t.index ["name", "service_id"], name: "index_schemas_on_name_and_service_id", unique: true
+    t.index ["service_id"], name: "index_schemas_on_service_id"
     t.index ["team_id"], name: "index_schemas_on_team_id"
   end
 

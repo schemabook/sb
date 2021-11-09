@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
   # GET /teams/1 or /teams/1.json
   def show
     @teammates = @team.users
+    @schemas   = @team.schemas
   end
 
   # GET /teams/new
