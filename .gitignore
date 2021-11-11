@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Ingore coverage stats
 /coverage
+
+# mac files
+.DS_Store
