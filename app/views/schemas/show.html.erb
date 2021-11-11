@@ -90,11 +90,9 @@
 
             <!-- main area list -->
             <div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
-              <% if @content %>
               <pre class="font-mono">
-<%= @content %>
+<%= @schema.body %>
               </pre>
-              <% end %>
 
               <% if @tab == 'info' %>
               <div class="pb-5 border-b border-gray-200">

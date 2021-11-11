@@ -6,7 +6,6 @@ class SchemasController < ApplicationController
   def show
     @schema  = current_user.team.schemas.where(id: params[:id]).first
     @tab     = params[:tab] || "json"
-    @content = define_content(@tab)
   end
 
   def create
@@ -27,10 +26,6 @@ class SchemasController < ApplicationController
   end
 
   def schema_params
-    params.require(:schema).permit(:name, :service_id).merge(team_id: current_user.team.id)
-  end
-
-  def define_content(tab)
-    "this is the #{tab} content" unless tab == "info"
+    params.require(:schema).permit(:name, :service_id, :file_type, :body).merge(team_id: current_user.team.id)
   end
 end
