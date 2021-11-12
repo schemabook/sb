@@ -31,17 +31,12 @@
             </div>
           </div>
 
-          <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-
-            <!-- main area form -->
+          <!-- main area section -->
+          <div class="relative my-6 inset-0 border-2 border-gray-200 border-solid rounded-lg">
             <div class="p-6 bg-white shadow overflow-hidden sm:rounded-md">
               <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
                 <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
                   <div class="mt-2">
-                    <p class="text-md font-medium text-gray-900">
-                      Team: <%= @service.team.name %>
-                    </p>
-
                     <p class="text-md font-medium text-gray-400">
                       Description: <%= @service.description %>
                     </p>
@@ -50,15 +45,44 @@
               </div>
 
               <div class="p-4">
-                <h3>Schemas</h3>
                 <ul>
-                  <li>Schema FPO</li>
+                  <li>Team: <%= @service.team.name %></li>
+                  <li>Created at: <%= @service.created_at.to_s %></li>
+                  <li>Created by: <%= @service.creator.email %></li>
                 </ul>
               </div>
             </div>
-            <!-- end main area list -->
-
           </div>
+          <!-- end main area section -->
+
+          <!-- main area section -->
+          <div class="relative my-6 inset-0 border-2 border-gray-200 border-solid rounded-lg">
+            <div class="p-6 bg-white shadow overflow-hidden sm:rounded-md">
+              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                  <div class="mt-2">
+                    <p class="text-md font-medium text-gray-900">
+                      Schemas: 
+                    </p>
+
+                    <p class="text-sm font-small text-gray-400">
+                      Schemas associated with the service
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4">
+                <ul>
+                  <% @service.schemas.each do |schema| %>
+                    <li><%= link_to schema.name, schema_path(schema) %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- end main area section -->
+
         </div>
         <!-- End main area -->
       </div>

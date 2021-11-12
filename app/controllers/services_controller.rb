@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
 
   # POST /services or /services.json
   def create
-    @service = Service.new(service_params.merge(team_id: current_user.team.id))
+    @service = Service.new(service_params.merge({ team_id: current_user.team.id, created_by: current_user.id }))
 
     respond_to do |format|
       if @service.save
@@ -66,6 +66,6 @@ class ServicesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def service_params
-    params.require(:service).permit(:name, :description)
+    params.require(:service).permit(:name, :description, :created_by)
   end
 end
