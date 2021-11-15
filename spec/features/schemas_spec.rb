@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Schemas", type: :feature do
-  let(:user) { create(:user, :admin) }
+  let(:user)    { create(:user, :admin) }
+  let(:service) { create(:service, team: user.team, created_by: user.id) }
 
   before do
     sign_in user
@@ -31,7 +32,7 @@ RSpec.describe "Schemas", type: :feature do
 
   context "when viewing a schema" do
     let!(:format) { create(:format) }
-    let!(:schema) { create(:schema, format: format, team: user.team) }
+    let!(:schema) { create(:schema, format: format, team: user.team, service_id: service.id, body: '[1]') }
 
     before do
       visit schema_path(schema)

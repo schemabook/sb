@@ -11,6 +11,7 @@ class Schema < ApplicationRecord
   validates :team_id, presence: true
   validates :format_id, presence: true
   validates :raw_body, presence: true
+  validate :body_format
 
   def body=(value)
     @body = value
@@ -23,12 +24,26 @@ class Schema < ApplicationRecord
   end
 
   def body
-    @body ||= raw_body.blob.download
+    @body ||= raw_body.try(:blob).try(:download)
   end
 
   private
 
   def filename
     "#{self.name.gsub(" ", "-")}.#{self.file_type}"
+  end
+
+  def body_format
+    return true if self.body.nil?
+
+    validator = format.validator
+
+    if validator.constantize.validate(self.body)
+      return true
+    else
+      self.errors.add :body, "is not valid JSON"
+
+      return false
+    end
   end
 end

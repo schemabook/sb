@@ -16,4 +16,8 @@ class Format < ApplicationRecord
   before_save do
     self.name = file_type.to_s
   end
+
+  def validator
+    VALIDATORS[self.file_type]
+  end
 end

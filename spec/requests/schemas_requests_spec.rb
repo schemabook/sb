@@ -13,14 +13,15 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/schemas", type: :request do
-  let(:user) { create(:user, :admin) }
+  let(:user)    { create(:user, :admin) }
+  let(:service) { create(:service, team: user.team, created_by: user.id) }
 
   before do
     sign_in user
   end
 
   let(:valid_attributes) {
-    { "name" => "schema 1", "file_type" => "json", team_id: user.team_id }
+    { "name" => "schema 1", "file_type" => "json", team_id: user.team_id, body: '[1]' }
   }
 
   let(:invalid_attributes) {
@@ -29,7 +30,7 @@ RSpec.describe "/schemas", type: :request do
 
   describe "GET /show" do
     let!(:format) { create(:format) }
-    let!(:schema) { create(:schema, format: format, team: user.team) }
+    let!(:schema) { create(:schema, format: format, team: user.team, name: "schema", file_type: "json", body: "[1]", service_id: service.id) }
 
     it "renders a successful response" do
       get schema_url(schema)

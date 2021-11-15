@@ -15,6 +15,9 @@ class SchemasController < ApplicationController
     if @schema.save
       redirect_to schema_path(@schema)
     else
+      flash[:alert] = "Schema could not be saved"
+      @format.destroy
+
       render :new
     end
   end
