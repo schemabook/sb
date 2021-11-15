@@ -14,7 +14,7 @@ RSpec.describe Format, type: :model do
 
   describe "#validator" do
     it "returns the validator class for a given file_type" do
-      subject = Format.new(file_type: 'json')
+      subject = described_class.new(file_type: 'json')
 
       expect(subject.validator).to eq(Format::VALIDATORS['json'])
     end

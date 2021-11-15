@@ -18,6 +18,6 @@ class Format < ApplicationRecord
   end
 
   def validator
-    VALIDATORS[self.file_type]
+    VALIDATORS[file_type]
   end
 end

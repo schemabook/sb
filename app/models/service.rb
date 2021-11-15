@@ -6,6 +6,6 @@ class Service < ApplicationRecord
   validates :created_by, presence: true
 
   def creator
-    User.find self.created_by
+    User.find created_by
   end
 end

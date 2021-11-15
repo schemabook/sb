@@ -1,10 +1,8 @@
 class JsonValidator
   def self.validate(body)
-    begin
-      JSON.parse(body)
-      return true
-    rescue JSON::ParserError
-      return false
-    end
+    JSON.parse(body)
+    true
+  rescue JSON::ParserError
+    false
   end
 end

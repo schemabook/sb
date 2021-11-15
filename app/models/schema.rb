@@ -1,7 +1,7 @@
 class Schema < ApplicationRecord
   has_one_attached :raw_body
 
-  attr_accessor :file_type, :body
+  attr_accessor :file_type
 
   belongs_to :team
   belongs_to :service, optional: true
@@ -30,20 +30,20 @@ class Schema < ApplicationRecord
   private
 
   def filename
-    "#{self.name.gsub(" ", "-")}.#{self.file_type}"
+    "#{name.gsub(' ', '-')}.#{file_type}"
   end
 
   def body_format
-    return true if self.body.nil?
+    return true if body.nil?
 
     validator = format.validator
 
-    if validator.constantize.validate(self.body)
-      return true
+    if validator.constantize.validate(body)
+      true
     else
-      self.errors.add :body, "is not valid JSON"
+      errors.add :body, "is not valid JSON"
 
-      return false
+      false
     end
   end
 end

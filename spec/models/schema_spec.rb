@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Schema, type: :model do
-  it { should belong_to :team }
-  it { should belong_to(:service).optional }
-
-  it { should validate_presence_of :name }
-  it { should validate_uniqueness_of(:name).scoped_to(:service_id) }
-  it { should validate_presence_of :team_id }
-
   let(:business) { create(:business) }
   let(:team)     { create(:team, business: business) }
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"foo": {"bar": 1}}' }
 
   subject { create(:schema, name: "foo", file_type: "json", body: json, team: team, format: format) }
+
+  it { should belong_to :team }
+  it { should belong_to(:service).optional }
+
+  it { should validate_presence_of :name }
+  it { should validate_uniqueness_of(:name).scoped_to(:service_id) }
+  it { should validate_presence_of :team_id }
 
   describe "#body" do
     it "converts string to file and attaches" do
