@@ -54,7 +54,7 @@
           <!-- header -->
           <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
             <h3 class="text-lg leading-6 font-medium text-gray-600">
-              <%= @schema.name %> in <a href="#" class="text-teal-500">Data Pipeline</a>
+              <%= @schema.name %> in <a href="<%= service_path(@schema.service) %>" class="text-teal-500"><%= @schema.service.name %></a>
             </h3>
             <div class="text-md text-gray-400 mt-3 sm:mt-0 sm:ml-4">
               <span class="text-gray-400">Last Updated:</span> <%= l @schema.updated_at, format: :sample %>
@@ -90,11 +90,9 @@
 
             <!-- main area list -->
             <div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
-              <% if @content %>
               <pre class="font-mono">
-<%= @content %>
+<%= @schema.body %>
               </pre>
-              <% end %>
 
               <% if @tab == 'info' %>
               <div class="pb-5 border-b border-gray-200">

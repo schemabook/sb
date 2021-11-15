@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Services", type: :request do
   let(:business) { create(:business) }
   let(:team)     { create(:team, business: business) }
-  let(:service)  { create(:service, team: team) }
   let!(:user)    { create(:user, business: business) }
+  let(:service)  { create(:service, team: team, created_by: user.id) }
 
   before do
     sign_in user
@@ -61,7 +61,7 @@ RSpec.describe "Services", type: :request do
 
     context "with invalid parameters" do
       before do
-        create(:service, team: user.team, name: "foo")
+        create(:service, team: user.team, created_by: user.id, name: "foo")
       end
 
       it "does not create a new Service" do
@@ -103,10 +103,10 @@ RSpec.describe "Services", type: :request do
     end
 
     context "with invalid parameters" do
-      let!(:service) { create(:service, team: user.team, name: "bar") }
+      let!(:service) { create(:service, team: user.team, created_by: user.id, name: "bar") }
 
       before do
-        create(:service, team: user.team, name: "foo")
+        create(:service, team: user.team, created_by: user.id, name: "foo")
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do

@@ -1,15 +1,4 @@
 <%= form_with(model: @schema) do |form| %>
-  <% if @schema.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@schema.errors.count, "error") %> prohibited this schema from being saved:</h2>
-
-      <ul>
-        <% @schema.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="space-y-8 divide-y divide-gray-200">
     <div class="pt-0">
@@ -21,6 +10,23 @@
           We'll give this schema a unique identifier.
         </p>
       </div>
+      <% if @schema.errors.any? %>
+        <div id="error_explanation" class="mt-4">
+
+          <p class="mt-1 text-sm text-red-900">
+            <%= pluralize(@schema.errors.count, "error") %> prohibited this schema from being saved:
+          </p>
+
+          <ul>
+            <% @schema.errors.each do |error| %>
+              <li class="py-1 px-2 mt-1 text-sm text-red-900">
+                <%= error.full_message %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
         <div class="sm:col-span-3">
           <label for="first_name" class="block text-sm font-medium text-gray-700">
@@ -48,6 +54,17 @@
           </label>
           <div class="mt-1">
             <%= form.select :service_id, current_user.team.services.map { |service| [service.name, service.id] }, {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="service" class="block text-sm font-medium text-gray-700">
+            Body*
+          </label>
+          <div class="mt-1">
+            <%= form.text_area :body, cols: 20, rows: 40, value: "", class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
           </div>
         </div>
       </div>

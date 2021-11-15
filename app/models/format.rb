@@ -13,5 +13,11 @@ class Format < ApplicationRecord
 
   validates :file_type, presence: true
 
-  before_save { self.name = file_type.to_s }
+  before_save do
+    self.name = file_type.to_s
+  end
+
+  def validator
+    VALIDATORS[file_type]
+  end
 end

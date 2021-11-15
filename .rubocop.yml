@@ -4,6 +4,7 @@ AllCops:
     - 'bin/*'
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - 'db/**/*'
 
 require:
   - rubocop-rails
@@ -29,6 +30,13 @@ Lint/AmbiguousBlockAssociation:
 
 Metrics/BlockLength:
   Enabled: false
+  IgnoredMethods:
+    - change
+
+Metrics/MethodLength:
+  Enabled: true
+  IgnoredMethods:
+    - change
 
 Style/NumericLiterals:
   Enabled: false
@@ -122,4 +130,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
   Enabled: false
