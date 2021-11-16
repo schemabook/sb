@@ -6,12 +6,24 @@ RSpec.describe AvroValidator do
     context "with valid avro" do
       # validate json string matching avro parsing standards
       let(:body) do
-        {"type": "record", "name": "RootRecord", "fields": [
-          {"name": "field1", "type": {
-            "type": "record", "name": "InnerRecord", "fields": []
-          }},
-          {"name": "field2", "type": "InnerRecord"}
-        ]}.to_json
+        {
+          type: "record",
+          name: "RootRecord",
+          fields: [
+            {
+              name: "field1",
+              type: {
+                type: "record",
+                name: "InnerRecord",
+                fields: []
+              }
+            },
+            {
+              name: "field2",
+              type: "InnerRecord"
+            }
+          ]
+        }.to_json
       end
 
       it "returns true" do
@@ -22,9 +34,16 @@ RSpec.describe AvroValidator do
     context "with invalid avro" do
       # valid json but invalid avro field name
       let(:body) do
-        {"type": "record", "name": "my-invalid-name", "fields": [
-          {"name": "id", "type": "int"}
-        ]}.to_json
+        {
+          type: "record",
+          name: "my-invalid-name",
+          fields: [
+            {
+              name: "id",
+              type: "int"
+            }
+          ]
+        }.to_json
       end
 
       it "returns false" do
