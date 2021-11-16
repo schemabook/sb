@@ -14,7 +14,7 @@
             <div>
               <ul class="divide-y divide-gray-200">
                 <li class="py-4">
-                  <span class="text-gray-400">Team:</span> <%= @schema.team.name %>
+                  <span class="text-gray-400">Team:</span> <%= link_to @schema.team.name, team_path(@schema.team) %>
                 </li>
                 <li class="py-4">
                   <span class="text-gray-400">Created On:</span> <%= l @schema.created_at, format: :sample %>

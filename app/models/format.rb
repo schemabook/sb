@@ -17,6 +17,10 @@ class Format < ApplicationRecord
     self.name = file_type.to_s
   end
 
+  def to_s
+    file_type
+  end
+
   def validator
     VALIDATORS[file_type]
   end
