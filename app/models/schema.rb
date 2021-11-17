@@ -41,7 +41,7 @@ class Schema < ApplicationRecord
     if validator.constantize.validate(body)
       true
     else
-      errors.add :body, "is not valid JSON"
+      errors.add :body, "is not valid #{file_type}"
 
       false
     end

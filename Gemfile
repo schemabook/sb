@@ -37,11 +37,16 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # used to send email from Render
 gem 'mailgun-ruby', '~>1.2.5'
 
+# avro gems
+gem 'avro'
+gem 'avro-builder'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem 'rspec-rails', '~> 4.0.2'
   # Use Pry bindings
   gem 'pry'
+  gem 'pry-rails'
   # Use rubocop for linting
   gem 'rubocop'
   gem 'rubocop-rails'

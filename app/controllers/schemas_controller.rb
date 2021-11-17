@@ -5,7 +5,7 @@ class SchemasController < ApplicationController
 
   def show
     @schema  = current_user.team.schemas.where(id: params[:id]).first
-    @tab     = params[:tab] || "json"
+    @tab     = params[:tab] || @schema.format.to_s
   end
 
   def create
@@ -15,7 +15,7 @@ class SchemasController < ApplicationController
     if @schema.save
       redirect_to schema_path(@schema)
     else
-      flash[:alert] = "Schema could not be saved"
+      flash.now[:alert] = "Schema could not be saved"
       @format.destroy
 
       render :new

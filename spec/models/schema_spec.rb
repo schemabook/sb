@@ -34,7 +34,7 @@ RSpec.describe Schema, type: :model do
         subject.body = "foo"
 
         expect(subject.send(:body_format)).to eq(false)
-        expect(subject.errors.messages[:body].include?("is not valid JSON")).to eq(true)
+        expect(subject.errors.messages[:body].include?("is not valid json")).to eq(true)
       end
     end
   end
