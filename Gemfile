@@ -41,6 +41,9 @@ gem 'mailgun-ruby', '~>1.2.5'
 gem 'avro'
 gem 'avro-builder'
 
+# csv support
+gem 'csv'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem 'rspec-rails', '~> 4.0.2'
