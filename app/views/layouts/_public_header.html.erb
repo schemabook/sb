@@ -26,22 +26,22 @@
       </div>
 
       <nav class="hidden md:flex space-x-10">
-        <a href="/features" class="text-base font-medium text-gray-500 hover:text-gray-900">
+        <a href="<%= features_path %>" class="text-base font-medium text-gray-500 hover:text-gray-900">
           Features
         </a>
-        <a href="/pricing" class="text-base font-medium text-gray-500 hover:text-gray-900">
+        <a href="<%= pricing_path %>" class="text-base font-medium text-gray-500 hover:text-gray-900">
           Pricing
         </a>
-        <a href="/company" class="text-base font-medium text-gray-500 hover:text-gray-900">
+        <a href="<%= company_path %>" class="text-base font-medium text-gray-500 hover:text-gray-900">
           Company
         </a>
       </nav>
 
       <div class="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
-        <a href="#" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+        <a href="<%= new_user_session_path %>" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
           Sign in
         </a>
-        <a href="/signup" class="whitespace-nowrap bg-cyan-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex items-center justify-center text-base font-medium text-white hover:bg-cyan-700">
+        <a href="<%= new_user_registration_path %>" class="whitespace-nowrap bg-cyan-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex items-center justify-center text-base font-medium text-white hover:bg-cyan-700">
           Get started
         </a>
       </div>

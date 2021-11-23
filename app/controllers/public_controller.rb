@@ -12,10 +12,19 @@ class PublicController < ApplicationController
   def pricing
   end
 
+  def docs
+  end
+
   def company
   end
 
   def status
     render status: :ok
+  end
+
+  def privacy
+  end
+
+  def terms
   end
 end
