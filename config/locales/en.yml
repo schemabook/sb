@@ -33,3 +33,4 @@ en:
   time:
     formats:
       sample: '%d-%m-%Y'
+      db: '%Y-%m-%d'

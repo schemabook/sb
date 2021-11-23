@@ -11,8 +11,8 @@
       </div>
 
       <div class="bg-white">
-        <div class="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
-          <dl class="mt-12 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
+        <div class="max-w-7xl mx-auto px-4 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+          <dl class="sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-8">
             <div class="flex">
               <!-- Heroicon name: outline/check -->
               <svg class="flex-shrink-0 h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -117,7 +117,7 @@
             <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-2 md:gap-x-8 md:gap-y-12">
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Why schemas?
+                  Collaborative schema definition
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
                   Defining a schema allows others, whether they be stakeholders or systems, an opportunity to know ahead of time what data is being provided and what the shape of it is. Defining a schema provides an opportunity to explain items that may not be straight forward.
@@ -126,7 +126,7 @@
 
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Why publish schemas?
+                  Central registry
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
                   Having teams contribute to a central repository of schemas can be of huge value. By creating a catalog of schemas, you can enable search. Search can be used for discovery. It can also be used to quickly identify redundancy.
@@ -135,41 +135,198 @@
 
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Who are stakeholders?
+                  Regulatory compliance
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  By having the definition of all of your data, the services producing and consuming the data, as well as the stakeholders of the data, you can quickly take account of your regulatory compliance. Need to know where all PII information is being used? Search your schemas. Schemabook provides universal search.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Schema migration notifications
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  When a stakeholder identifies themselves as interested in your data, they will receive notifications any time the schema changes. It's a virtual "heads up" so they can prepare their consumption. You don't want to rip the rug right out from under them by removing attributes they rely on. Schemabook automates this and prevents irrate consumers and data loss.
+                </dd>
+              </div>
+            </dl>
+
+            <dl class="mt-14 space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-x-8 md:gap-y-12">
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Stakeholder features
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
                 Stakeholders are all interested parties in a given data set. They may be downstream consumers. They may be upstream systems generating the data. Systems have ways of identify the systems upstream and downstream but not the people behind those systems. Systems can be accomodating when data changes, but may not be able to identify when a change ultimately means a report can't be run at the end of the month because data was removed from a data pipeline. Changes need to be communicated beyond the interfaces we use to integrate systems.
                 </dd>
               </div>
+            </dl>
 
+            <dl class="mt-14 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 md:gap-x-8 md:gap-y-12">
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Who are publishers?
+                  Producer features
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
-                  A publisher is anyone that generates data and makes it available for others to consume.
+                  A producer is anyone that generates data and makes it available for others to consume. This includes owners of databases that expose a query interface. If you have a service that publishes events to a url, webhook, or data pipeline. If you control the schema of a database table. Maybe you are responsible for declaring the mapping of a document in the Elasticsearch cluster. If others consume data you are responsible for, you are a data producer.
                 </dd>
               </div>
 
-              <h2>Insert picture of publishing interface here</h2>
+              <div class="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
+                <%= image_tag("p_schema_definition.png") %>
+              </div>
+            </dl>
 
+
+            <dl class="mt-14 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 md:gap-x-8 md:gap-y-12">
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Who are subscribers?
+                  Consumer features
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
-                  Subscibers are the consumer of data.
+                  Consumers are anyone using the data. They may not even be direct consumers. You may be a producer publishing your data to a data pipeline that feeds the data lake. The consumer in this scenario may be a data scientist that uses the data in the lake. Schemabook allows them to know what team and service is publishing the data. They can now request changes and both parties can collaborate to make the data more usable.
                 </dd>
               </div>
 
-              <h2>Insert picture of subscribing interface here</h2>
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Can stakeholders be more than producers or consumers?
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  Absolutely! Any company that has dedicated people responsible for regulatory compliance could be a stakeholder in data for example. Architects and systems engineers may not consume the data, but may be interested in all of the places user data exists. Stakeholders can include security focused individuals that want to track all of the services publishing sensitive PII data. Schemabook accomodates all of these stakeholders and many more.
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            <a name="data-producers"></a>
+            Data Producers
+          </h2>
+          <div class="mt-6 pt-10">
+            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-2 md:gap-x-8 md:gap-y-12">
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Defining a schema
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  As a data producer, you can help the consumers of your data by declaring your schema ahead of time. This allows quick feedback before implmentation. Don't waste time publishing events that will not be consumed. Define a schema as if it the contract between your service and the downstream services consuming your data.
+                </dd>
+              </div>
 
               <div>
                 <dt class="text-lg leading-6 font-medium text-gray-900">
-                  Can stakeholders be more than publishers or subscribers?
+                  Schema Formats
                 </dt>
                 <dd class="mt-2 text-base text-gray-500">
-                  Absolutely! Any company that has dedicated people responsible for regulatory compliance could be a stakeholder in data sets.
+                  Schemabook supports a number of format options including JSON, Avro, and CSV. We'll even help convert formats if your consumers would like to see your schema in a format they prefer.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Validation
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  Schemabook provides an endpoint to validate payloads against for every schema defined. Have confidence that your service is publishing schema compatible payloads by validating during your implementation and testing phase. Your consumers will greatly appreciate you putting quality first.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Stakeholders
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  Ever lose track of who is consuming your data? Not any more. When you publish your schema on schemabook, your consumers can subscribe to your schema identifying themselves as a stakeholder of the data. When you want to make changes to the schema you are publishing, the stakeholders will be notified to solicit feedback. No more breaking downstream systems you weren't aware of.
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            <a name="data-consumers"></a>
+            Data Consumers
+          </h2>
+          <div class="mt-6 pt-10">
+            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-2 md:gap-x-8 md:gap-y-12">
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Declare yourself a stakeholder
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  If you are consuming data from a publisher identify yourself as a stakeholder so you can be notified of changes. If you've ever been surprised by a data change, such as a column being removed, you know how frustrating it is to suffer data loss. In addition, if you've ever wanted to ask for additional data from a publisher but didn't know how to ask, Schemabook can be the method you use to collaborate with publishers.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Collaborate with publishers
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  Ever needed to ask for a change to the data being provided but had know idea who to contact? When your company uses a central schema registry like Schemabook, the information around the publisher of the data is available. Schemabook also provides collaboration tools so you can request a new column in a database or a new attribute in the payloads being delivered via the data pipeline.
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Data quality
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                By asking a data producer to provide a schema of the data, you're asking the producer for consistency and definition. The quality of data goes up when consistency is achieved. Schemas can be used to validate data. Invalid data can be prevented from causing a disruption or even data loss. Consumers should be asking producers to declare their schemas before any data is sent. This ensures both sides have agreed to the contract and are set up for success.
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            <a name="api-admins"></a>
+            API Administrators
+          </h2>
+          <div class="mt-6 pt-10">
+            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-x-8 md:gap-y-12">
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Why schemas?
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                  You publish documentation around your API, maybe even Swagger docs. Isn't that enough? Swagger docs are great, but they don't provide a mechanism to know who is consuming your data. Nor do your docs provide a way for consumers to ask for changes. By publishing the schemas of the data returned by your API endpoints, you provide stakeholders the ability to step forward and identify themselves. You can collaborate on your schemas, as well as, be included in any regulatory compliance.
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            <a name="database-admins"></a>
+            Database Administrators
+          </h2>
+          <div class="mt-6 pt-10">
+            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-1 md:grid-rows-2 md:gap-x-8 md:gap-y-12">
+              <div>
+                <dt class="text-lg leading-6 font-medium text-gray-900">
+                  Why schemas?
+                </dt>
+                <dd class="mt-2 text-base text-gray-500">
+                Have you every experienced a database table being dropped that someone or some service was still using? Ever had someone ask "what is in the users table?"? Ever had someone email you directly asking if a column could be added to record the timestamp a row was created? Schemabook solves these problems and more. By listing the schemas of the tables in your database, you can provide insight into the contents before ever granting access. By listing the schemas, you can ask stakeholders to identify themselves, so you can notify them whenever a table is being migrated. By listing your schemas, you invite others to collborate on the requirements.
                 </dd>
               </div>
             </dl>

@@ -21,7 +21,7 @@
                     <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">Get Started</button>
                   </div>
                 </div>
-                <p class="mt-3 text-sm text-gray-300 sm:mt-4">Get started today, no credit card necessary. By providing your email, you agree to our <a href="#" class="font-medium text-white">terms or service</a>.</p>
+                <p class="mt-3 text-sm text-gray-300 sm:mt-4">Get started today, no credit card necessary. By providing your email, you agree to our <a href="<%= terms_path %>" class="font-medium text-white">terms or service</a>.</p>
               <% end %>
             </div>
           </div>
@@ -48,7 +48,7 @@
         </p>
       </div>
       <div class="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-        <img class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5" src="https://tailwindui.com/img/component-images/green-project-app-screenshot.jpg" alt="">
+        <img class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5" src="/assets/p_dashboard.png" alt="">
       </div>
     </div>
   </div>
@@ -336,14 +336,13 @@
         <span class="block bg-gradient-to-r from-cyan-600 to-cyan-600 bg-clip-text text-transparent">Create an account for your organization.</span>
       </h2>
       <div class="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
-        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-700 hover:to-teal-800">
+        <a href="<%= features_path %>" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-700 hover:to-teal-800">
           Learn more
         </a>
-        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-cyan-800 bg-cyan-50 hover:bg-cyan-100">
+        <a href="<%= new_user_registration_path %>" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-cyan-800 bg-cyan-50 hover:bg-cyan-100">
           Get started
         </a>
       </div>
     </div>
   </div>
-
 </main>

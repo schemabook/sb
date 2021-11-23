@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   }
 
   root 'public#index'
-  get 'status', to: 'public#status'
 
   ### Marketing pages
   get 'features', to: 'public#features'
@@ -19,8 +18,7 @@ Rails.application.routes.draw do
   get 'about', to: 'public#company'
 
   get 'docs', to: 'public#docs'
-  get 'guides', to: 'public#guides'
-  get 'status' => redirect("http://twitter.com/schemabook_status")
+  get 'status', to: 'public#status'
 
   get 'blog' => redirect("http://medium.com/schemabook")
 

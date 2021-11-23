@@ -16,7 +16,7 @@
             <%= link_to current_user.display_name, user_profile_path(current_user) %>
           </li>
           <li class="text-gray-400">
-            Joined <%= l current_user.created_at, format: :sample %>
+            Joined: <%= l current_user.created_at, format: :db %>
           </li>
           <li>
             &nbsp;
