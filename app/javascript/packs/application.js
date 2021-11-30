@@ -26,9 +26,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //  // TODO: alert on error to create tabs
   //}
 
-  var elem = document.querySelector('.dismiss');
-  elem.addEventListener('click', function() {
-    var closestElement = elem.closest('.flash');
-    closestElement.parentNode.removeChild(closestElement);
-  })
+  try {
+    var elem = document.querySelector('.dismiss');
+    elem.addEventListener('click', function() {
+      var closestElement = elem.closest('.flash');
+      closestElement.parentNode.removeChild(closestElement);
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
+  try {
+    const element = document.querySelector("#new-newsletter");
+
+    element.addEventListener("ajax:success", (event) => {
+      const [_data, _status, xhr] = event.detail;
+      var elem = document.querySelector('#subscribe-message')
+      elem.innerHTML = "Thanks! You'll hear from us soon.";
+    });
+    element.addEventListener("ajax:error", () => {
+      var elem = document.querySelector('#subscribe-message')
+      elem.innerHTML = "Please enter a valid email address.";
+    });
+  } catch (error) {
+    console.log(error)
+  }
 });
