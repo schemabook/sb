@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'privacy', to: 'public#privacy'
   get 'terms', to: 'public#terms'
 
+  post 'newsletters', to: 'newsletters#create'
+
   ### Application routes
   get 'users', to: redirect('dashboards'), as: :user_root # creates user_root_path, used for after sign in path
   get 'dashboards', to: 'dashboards#index'
