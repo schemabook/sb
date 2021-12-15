@@ -15,23 +15,8 @@
           <li class="text-gray-800">
             <%= link_to current_user.display_name, user_profile_path(current_user) %>
           </li>
-          <li class="text-gray-400">
-            Joined: <%= l current_user.created_at, format: :db %>
-          </li>
-          <li>
-            &nbsp;
-          </li>
           <li class="text-gray-800">
             Team: <%= link_to current_user.team.name, team_path(current_user.team) %>
-          </li>
-          <li class="text-gray-400">
-            <%= pluralize(current_user.team.schemas.size, "Schema") %>
-          </li>
-          <li class="text-gray-400">
-            <%= pluralize(current_user.team.services.count, "Service") %>
-          </li>
-          <li class="text-gray-400">
-            <%= pluralize(current_user.team.users.count, "Teammate") %>
           </li>
         </ul>
       </div>
