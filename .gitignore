@@ -40,8 +40,11 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Ingore coverage stats
+# Ignore coverage stats
 /coverage
 
 # mac files
 .DS_Store
+
+# Ignore notes
+/notes
