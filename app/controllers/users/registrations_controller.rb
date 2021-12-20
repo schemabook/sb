@@ -55,7 +55,11 @@ module Users
     def create_business
       name = sanitized_params["business"]
 
-      Business.create(name: name)
+      business = Business.create(name: name)
+
+      Events::Businesses::Created.new(business: business, user: current_user).publish if business.valid?
+
+      return business
     end
 
     def create_team(business: :business)

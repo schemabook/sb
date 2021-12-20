@@ -22,7 +22,7 @@ module Events
             optional :before, :record
 
             required :after, :record do
-              required :id, :string
+              required :id, :int
               optional :actor, :string
             end
 
@@ -47,7 +47,7 @@ module Events
           before: nil,
           after: {
             id: @business.id,
-            actor: @user&.uuid
+            actor: @user&.id
           },
           source: {
             version: EVENT_VERSION,
@@ -56,7 +56,7 @@ module Events
             table: @business.class.table_name
           },
           op: 'c',
-          ts_ms: (Time.now.to_f * 1000).to_i
+          ts_ms: (Time.zone.now.to_f * 1000).to_i
         }
       end
       # rubocop:enable Metrics/MethodLength

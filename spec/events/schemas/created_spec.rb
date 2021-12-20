@@ -48,7 +48,7 @@ RSpec.describe Events::Schemas::Created do
       it "requires attributes" do
         # id
         expect(block["type"]["fields"][0]["name"]).to eq("id")
-        expect(block["type"]["fields"][0]["type"]).to eq("string")
+        expect(block["type"]["fields"][0]["type"]).to eq("int")
       end
     end
 

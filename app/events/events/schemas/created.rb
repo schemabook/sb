@@ -22,7 +22,7 @@ module Events
             optional :before, :record
 
             required :after, :record do
-              required :id, :string
+              required :id, :int
               optional :actor, :string
             end
 

@@ -155,3 +155,6 @@ RSpec/ContextWording:
 
 RSpec/AnyInstance:
   Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
