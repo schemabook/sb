@@ -140,3 +140,18 @@ Rails/UniqueValidationWithoutIndex:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+RSpec/SubjectStub:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
