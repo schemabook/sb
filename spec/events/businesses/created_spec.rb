@@ -1,11 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Events::Schemas::Created do
-  let(:format)   { create(:format, file_type: :json) }
-  let(:json)     { '{"foo": {"bar": 1}}' }
-  let(:schema)   { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format: format) }
+RSpec.describe Events::Businesses::Created do
+  let(:business) { create(:business) }
+  let(:user)     { create(:user) }
 
-  subject { described_class.new(record: schema) }
+  subject { described_class.new(business: business, user: user) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil
@@ -17,7 +16,7 @@ RSpec.describe Events::Schemas::Created do
     end
 
     it "requires a record" do
-      expect(JSON.parse(subject.schema)["name"]).to eq("schema")
+      expect(JSON.parse(subject.schema)["name"]).to eq("business")
     end
 
     it "requires an operation attribute" do
@@ -49,6 +48,11 @@ RSpec.describe Events::Schemas::Created do
         # id
         expect(block["type"]["fields"][0]["name"]).to eq("id")
         expect(block["type"]["fields"][0]["type"]).to eq("int")
+
+        # actor id
+        expect(block["type"]["fields"][1]["name"]).to eq("actor_id")
+        expect(block["type"]["fields"][1]["type"]).to eq("int")
+
       end
     end
 
@@ -92,16 +96,16 @@ RSpec.describe Events::Schemas::Created do
       }.not_to raise_error
     end
 
-    it "includes the schema id" do
-      expect(subject.payload[:after][:id]).to eq(schema.id)
+    it "includes the business id" do
+      expect(subject.payload[:after][:id]).to eq(business.id)
     end
 
-    it "includes the schema created_at timestamp" do
-      expect(subject.payload[:source][:ts_ms]).to eq((schema.created_at.to_f * 1000).to_i)
+    it "includes the business created_at timestamp" do
+      expect(subject.payload[:source][:ts_ms]).to eq((business.created_at.to_f * 1000).to_i)
     end
 
-    it "includes the schema table name" do
-      expect(subject.payload[:source][:table]).to eq(schema.class.table_name)
+    it "includes the business table name" do
+      expect(subject.payload[:source][:table]).to eq(business.class.table_name)
     end
 
     it "includes the operation" do

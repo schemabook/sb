@@ -15,6 +15,8 @@ module Users
       super do |resource|
         resource.business.update!(created_by: resource.id) if resource.errors.errors.blank?
       end
+
+      Events::Businesses::Created.new(business: resource.business, user: resource).publish if resource.business.valid?
     end
 
     # GET /resource/edit

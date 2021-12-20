@@ -1,16 +1,16 @@
 module Events
-  module Schemas
+  module Businesses
     class Created
       include Events::Event
 
-      EVENT_NAME    = "created.schema".freeze
+      EVENT_NAME    = "created.business".freeze
       EVENT_VERSION = "0.1".freeze
 
-      attr_accessor :record
+      attr_accessor :business
 
-      def initialize(record:, user: nil)
-        @record = record
-        @user   = user
+      def initialize(business:, user:)
+        @business = business
+        @user     = user
       end
 
       # rubocop:disable Metrics/MethodLength
@@ -18,12 +18,12 @@ module Events
         Avro::Builder.build do
           namespace EVENT_NAME
 
-          record :schema do
+          record :business do
             optional :before, :record
 
             required :after, :record do
               required :id, :int
-              optional :actor, :string
+              required :actor_id, :int
             end
 
             required :source, :record do
@@ -46,17 +46,17 @@ module Events
         {
           before: nil,
           after: {
-            id: @record.id,
-            actor: @user&.uuid
+            id: @business.id,
+            actor_id: @user.id
           },
           source: {
             version: EVENT_VERSION,
             name: EVENT_NAME,
-            ts_ms: (@record.created_at.to_f * 1000).to_i,
-            table: @record.class.table_name
+            ts_ms: (@business.created_at.to_f * 1000).to_i,
+            table: @business.class.table_name
           },
           op: 'c',
-          ts_ms: (Time.now.to_f * 1000).to_i
+          ts_ms: (Time.zone.now.to_f * 1000).to_i
         }
       end
       # rubocop:enable Metrics/MethodLength
