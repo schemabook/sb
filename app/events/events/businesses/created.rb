@@ -1,0 +1,65 @@
+module Events
+  module Businesses
+    class Created
+      include Events::Event
+
+      EVENT_NAME    = "created.business".freeze
+      EVENT_VERSION = "0.1".freeze
+
+      attr_accessor :business
+
+      def initialize(business:, user: nil)
+        @business = business
+        @user     = user
+      end
+
+      # rubocop:disable Metrics/MethodLength
+      def schema
+        Avro::Builder.build do
+          namespace EVENT_NAME
+
+          record :business do
+            optional :before, :record
+
+            required :after, :record do
+              required :id, :string
+              optional :actor, :string
+            end
+
+            required :source, :record do
+              required :version, :string
+              required :name, :string
+              required :ts_ms, :long, logical_type: 'timestamp-millis'
+              required :table, :string
+              optional :query, :string
+            end
+
+            required :op, :enum, symbols: [:c, :u, :d]
+            required :ts_ms, :long, logical_type: 'timestamp-millis'
+          end
+        end
+      end
+      # rubocop:enable Metrics/MethodLength
+
+      # rubocop:disable Metrics/MethodLength
+      def payload
+        {
+          before: nil,
+          after: {
+            id: @business.id,
+            actor: @user&.uuid
+          },
+          source: {
+            version: EVENT_VERSION,
+            name: EVENT_NAME,
+            ts_ms: (@business.created_at.to_f * 1000).to_i,
+            table: @business.class.table_name
+          },
+          op: 'c',
+          ts_ms: (Time.now.to_f * 1000).to_i
+        }
+      end
+      # rubocop:enable Metrics/MethodLength
+    end
+  end
+end
