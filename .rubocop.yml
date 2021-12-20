@@ -152,3 +152,6 @@ RSpec/NestedGroups:
 
 RSpec/ContextWording:
   Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false

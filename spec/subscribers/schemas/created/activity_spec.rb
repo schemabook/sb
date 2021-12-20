@@ -21,10 +21,10 @@ RSpec.describe Subscribers::Schemas::Created::Activity do
     it "persists an Activity object" do
       payload    = Events::Schemas::Created.new(record: schema, user: nil).payload
       event_type = "foo"
-      event      = ActiveSupport::Notifications::Event.new(
+      _event     = ActiveSupport::Notifications::Event.new(
         event_type,
-        Time.now - 1.second,
-        Time.now,
+        Time.zone.now - 1.second,
+        Time.zone.now,
         123,
         payload
       )
