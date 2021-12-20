@@ -149,3 +149,6 @@ RSpec/SubjectStub:
 
 RSpec/NestedGroups:
   Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
