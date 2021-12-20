@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Schemas::Created do
+RSpec.describe Events::Schemas::Created do
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"foo": {"bar": 1}}' }
   let(:schema)   { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format: format) }
