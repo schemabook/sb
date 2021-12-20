@@ -6,5 +6,6 @@ RSpec.describe ActivityLog, type: :model do
   subject { create(:activity_log, business: business) }
 
   it { should belong_to :business }
+  it { should have_many :activities }
   it { should validate_presence_of :business_id }
 end

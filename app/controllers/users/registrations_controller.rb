@@ -15,6 +15,8 @@ module Users
       super do |resource|
         resource.business.update!(created_by: resource.id) if resource.errors.errors.blank?
       end
+
+      Events::Businesses::Created.new(business: resource.business, user: resource).publish if resource.business.valid?
     end
 
     # GET /resource/edit
@@ -55,11 +57,7 @@ module Users
     def create_business
       name = sanitized_params["business"]
 
-      business = Business.create(name: name)
-
-      Events::Businesses::Created.new(business: business, user: current_user).publish if business.valid?
-
-      return business
+      Business.create(name: name)
     end
 
     def create_team(business: :business)

@@ -8,7 +8,7 @@ module Events
 
       attr_accessor :business
 
-      def initialize(business:, user: nil)
+      def initialize(business:, user:)
         @business = business
         @user     = user
       end
@@ -23,7 +23,7 @@ module Events
 
             required :after, :record do
               required :id, :int
-              optional :actor, :string
+              required :actor_id, :int
             end
 
             required :source, :record do
@@ -47,7 +47,7 @@ module Events
           before: nil,
           after: {
             id: @business.id,
-            actor: @user&.id
+            actor_id: @user.id
           },
           source: {
             version: EVENT_VERSION,

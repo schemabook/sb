@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe Events::Businesses::Created do
   let(:business) { create(:business) }
+  let(:user)     { create(:user) }
 
-  subject { described_class.new(business: business) }
+  subject { described_class.new(business: business, user: user) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil
@@ -47,6 +48,11 @@ RSpec.describe Events::Businesses::Created do
         # id
         expect(block["type"]["fields"][0]["name"]).to eq("id")
         expect(block["type"]["fields"][0]["type"]).to eq("int")
+
+        # actor id
+        expect(block["type"]["fields"][1]["name"]).to eq("actor_id")
+        expect(block["type"]["fields"][1]["type"]).to eq("int")
+
       end
     end
 

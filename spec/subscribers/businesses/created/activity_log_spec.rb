@@ -15,9 +15,10 @@ RSpec.describe Subscribers::Businesses::Created::ActivityLog do
 
   describe "#process" do
     let(:business) { create(:business) }
+    let(:user)     { create(:user) }
 
     it "persists an ActivityLog object" do
-      payload    = Events::Businesses::Created.new(business: business, user: nil).payload
+      payload    = Events::Businesses::Created.new(business: business, user: user).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
@@ -29,7 +30,7 @@ RSpec.describe Subscribers::Businesses::Created::ActivityLog do
 
       expect {
         subject.process(event: event)
-      }.to change { ActivityLog.count }.by(1)
+      }.to change(Activity, :count)
     end
   end
 end
