@@ -5,6 +5,7 @@ RSpec.describe Business, type: :model do
 
   it { should have_many :users }
   it { should have_many :teams }
+  it { should have_one :activity_log }
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
 end
