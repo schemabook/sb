@@ -6,4 +6,8 @@ class Activity < ApplicationRecord
   validates :activity_log_id, presence: true
   validates :title, presence: true
   validates :detail, presence: true
+
+  def resource
+    resource_class.constantize.find(resource_id)
+  end
 end
