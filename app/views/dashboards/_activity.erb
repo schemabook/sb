@@ -1,0 +1,14 @@
+<li class="py-4">
+  <div class="flex space-x-3">
+    <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=1HVGark79X&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+    <div class="flex-1 space-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-medium"><%= activity.user.display_name %></h3>
+        <p class="text-sm text-gray-500"><%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago</p>
+      </div>
+      <p class="text-sm text-gray-500"><%= activity_title(activity) %></p>
+      <p class="text-sm text-gray-500"><%= activity.detail %></p>
+    </div>
+  </div>
+</li>
+
