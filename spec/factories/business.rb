@@ -3,5 +3,11 @@ FactoryBot.define do
     sequence :name do |n|
       "business-#{n}"
     end
+
+    trait :with_activity_log do
+      after(:create) do |business|
+        create(:activity_log, business: business)
+      end
+    end
   end
 end

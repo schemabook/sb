@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe DashboardsController, type: :controller do
-  let(:business)  { create(:business) }
+  let!(:business) { create(:business, :with_activity_log) }
   let!(:user)     { create(:user, business: business) }
-  let!(:log)      { create(:activity_log, business: business) }
-  let!(:activity) { create(:activity, activity_log: log, user: user) }
+  let!(:activity) { create(:activity, activity_log: business.activity_log, user: user) }
 
   before do
     sign_in user

@@ -158,3 +158,6 @@ RSpec/AnyInstance:
 
 Style/RedundantReturn:
   Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
