@@ -11,11 +11,15 @@ class ProfilesController < ApplicationController
 
   def update
     require_admin_or_actual_user
-    @user.update(profile_params)
-    flash[:notice] = "User profile has been updated"
 
-    #TODO: when moved to a new team, send an email
-    #
+    if @user.update(profile_params)
+      flash[:notice] = "User profile has been updated"
+
+      Events::Users::Updated.new(user: @user).publish
+    else
+      flash[:warning] = "User profile has not been updated"
+    end
+
     redirect_to user_profile_path(@user)
   end
 

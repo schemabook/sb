@@ -57,4 +57,44 @@ RSpec.describe "Profiles", type: :request do
       end
     end
   end
+
+  describe "PATCH update" do
+    context "when updating the associated team" do
+      let(:new_team) { create(:team, business: user.business) }
+      let(:params)   { { id: user.id, user: { team_id: new_team.id } } }
+
+      before do
+        sign_in user
+      end
+
+      it "assign the user to the new team" do
+        patch patch_user_profile_path(params)
+
+        user.reload
+        expect(user.team_id).to eq(new_team.id)
+      end
+
+      it "should set a flash notice" do
+        patch patch_user_profile_path(params)
+
+        expect(flash[:notice]).to match(/User profile has been updated/)
+      end
+
+      it "should publish an event" do
+        expect_any_instance_of(Events::Users::Updated).to receive(:publish)
+
+        patch patch_user_profile_path(params)
+      end
+
+      context "with an invalid team id" do
+        let(:params)   { { id: user.id, user: { team_id: 999999999 } } }
+
+        it "should" do
+          patch patch_user_profile_path(params)
+
+          expect(flash[:warning]).to match(/User profile has not been updated/)
+        end
+      end
+    end
+  end
 end
