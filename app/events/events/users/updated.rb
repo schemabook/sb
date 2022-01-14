@@ -9,7 +9,7 @@ module Events
       attr_accessor :user
 
       def initialize(user:)
-        @user     = user
+        @user = user
       end
 
       # rubocop:disable Metrics/MethodLength
