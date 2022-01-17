@@ -8,8 +8,13 @@ class Team < ApplicationRecord
 
   validates :business_id, presence: true
   validates :name, uniqueness: { scope: :business }
+  validates :administrators, uniqueness: { scope: :business }, allow_blank: true
+
+  before_save do
+    readonly! if !new_record? && administrators?
+  end
 
   def admin?
-    name == ADMIN_TEAM_NAME
+    administrators?
   end
 end

@@ -21,14 +21,40 @@ RSpec.describe Team, type: :model do
           create(:team, name: team_a.name, business: business)
         }.to raise_error(ActiveRecord::RecordInvalid)
       end
+
+      # rubocop:disable Rails/SkipsModelValidations
+      it "prevents a second team from claiming to be the administrators" do
+        subject.update_column(:administrators, true)
+
+        new_team = build(:team, business: subject.business, administrators: true)
+        expect(new_team.valid?).to eq(false)
+      end
+      # rubocop:enable Rails/SkipsModelValidations
+    end
+  end
+
+  context "callbacks" do
+    context "before_save" do
+      # rubocop:disable Rails/SkipsModelValidations
+      it "prevents the admin team from being mutated" do
+        subject.update_column(:administrators, true)
+
+        subject.name = "foo"
+        expect {
+          subject.save
+        }.to raise_error(StandardError, /readonly/i)
+      end
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
   describe "#admin?" do
-    it "returns true if the team name matches the admin team name" do
-      team = build(:team, name: Team::ADMIN_TEAM_NAME)
+    context "when the administrators attribute is true" do
+      it "returns true" do
+        subject.administrators = true
 
-      expect(team.admin?).to eq(true)
+        expect(subject.admin?).to eq(true)
+      end
     end
   end
 end
