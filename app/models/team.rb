@@ -11,10 +11,10 @@ class Team < ApplicationRecord
   validates :administrators, uniqueness: { scope: :business }, allow_blank: true
 
   before_save do
-    self.readonly! if !self.new_record? && self.administrators?
+    readonly! if !new_record? && administrators?
   end
 
   def admin?
-    self.administrators?
+    administrators?
   end
 end

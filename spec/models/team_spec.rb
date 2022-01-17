@@ -22,17 +22,20 @@ RSpec.describe Team, type: :model do
         }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
+      # rubocop:disable Rails/SkipsModelValidations
       it "prevents a second team from claiming to be the administrators" do
         subject.update_column(:administrators, true)
 
         new_team = build(:team, business: subject.business, administrators: true)
         expect(new_team.valid?).to eq(false)
       end
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
   context "callbacks" do
     context "before_save" do
+      # rubocop:disable Rails/SkipsModelValidations
       it "prevents the admin team from being mutated" do
         subject.update_column(:administrators, true)
 
@@ -41,6 +44,7 @@ RSpec.describe Team, type: :model do
           subject.save
         }.to raise_error(StandardError, /readonly/i)
       end
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
