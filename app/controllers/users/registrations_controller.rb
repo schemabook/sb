@@ -61,7 +61,7 @@ module Users
     end
 
     def create_team(business: :business)
-      Team.create(name: Team::ADMIN_TEAM_NAME, business_id: business.id)
+      Team.create(name: Team::ADMIN_TEAM_NAME, business_id: business.id, administrators: true)
     end
 
     def sign_up_params

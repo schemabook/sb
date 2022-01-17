@@ -11,7 +11,7 @@ FactoryBot.define do
     end
 
     trait :admin do
-      team { association :team, name: Team::ADMIN_TEAM_NAME, business: business }
+      team { association :team, name: Team::ADMIN_TEAM_NAME, business: business, administrators: true }
     end
   end
 end
