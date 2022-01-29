@@ -12,6 +12,8 @@ class ProfilesController < ApplicationController
   def update
     require_admin_or_actual_user
 
+    # process avatar
+
     if @user.update(profile_params)
       flash[:notice] = "User profile has been updated"
 
@@ -30,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:email, :first_name, :last_name, :team_id)
+    params.require(:user).permit(:email, :first_name, :last_name, :team_id, :avatar)
   end
 
   def require_admin_or_actual_user

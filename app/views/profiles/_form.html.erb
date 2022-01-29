@@ -21,9 +21,27 @@
           Provide more information to build out your profile
         </p>
       </div>
+
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
         <div class="sm:col-span-3">
-          <label for="first_name" class="block text-sm font-medium text-gray-700">
+          <label for="avatar" class="block text-sm font-medium text-gray-700">
+            Avatar
+          </label>
+          <div class="mt-1 p-4">
+            <%= avatar(@user, size: 100) %>
+          </div>
+
+          <% if current_user == @user || current_user.admin? %>
+          <div class="mt-1">
+            <%= form.file_field :avatar %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm font-medium text-gray-700">
             Email
           </label>
           <% if current_user == @user || current_user.admin? %>

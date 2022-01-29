@@ -13,5 +13,9 @@ FactoryBot.define do
     trait :admin do
       team { association :team, name: Team::ADMIN_TEAM_NAME, business: business, administrators: true }
     end
+
+    trait :with_avatar do
+      avatar { Rack::Test::UploadedFile.new('app/assets/images/l_logo.png', 'image/png') }
+    end
   end
 end

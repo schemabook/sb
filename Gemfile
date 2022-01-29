@@ -44,6 +44,9 @@ gem 'avro-builder'
 # csv support
 gem 'csv'
 
+# for avatars
+gem 'image_processing'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem 'rspec-rails', '~> 4.0.2'
