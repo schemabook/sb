@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [:email, :business_id, :team_id])
+    devise_parameter_sanitizer.permit(:profile_update, keys: [:email, :first_name, :last_name, :avatar, :team_id])
   end
 end
 
