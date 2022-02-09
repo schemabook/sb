@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
 
   def show
-    @activities = @user.business&.activity_log&.for_user(user_id: @user.id)
+    @activities = @user.business.activity_log.for_user(user_id: @user.id)
   end
 
   def edit
@@ -11,8 +11,6 @@ class ProfilesController < ApplicationController
 
   def update
     require_admin_or_actual_user
-
-    # process avatar
 
     if @user.update(profile_params)
       flash[:notice] = "User profile has been updated"
