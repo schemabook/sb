@@ -161,3 +161,6 @@ Style/RedundantReturn:
 
 Rails/OutputSafety:
   Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false

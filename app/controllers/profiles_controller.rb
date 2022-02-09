@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
 
   def show
-    # TODO: retrieve activity of user
+    @activities = @user.business&.activity_log&.for_user(user_id: @user.id)
   end
 
   def edit

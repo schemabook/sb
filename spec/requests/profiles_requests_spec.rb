@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Profiles", type: :request do
-  let!(:business) { create(:business) }
+  let!(:business) { create(:business, :with_activity_log) }
   let!(:user)     { create(:user, business: business) }
 
   before do
@@ -13,6 +13,12 @@ RSpec.describe "Profiles", type: :request do
 
     it "should render the template" do
       expect(subject).to render_template(:show)
+    end
+
+    it "should assign activities" do
+      subject
+
+      expect(assigns(:activities)).to eq(Activity.none)
     end
   end
 

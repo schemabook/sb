@@ -4,4 +4,8 @@ class ActivityLog < ApplicationRecord
   has_many :activities
 
   validates :business_id, presence: true
+
+  def for_user(user_id:)
+    activities.for_user(user_id)
+  end
 end
