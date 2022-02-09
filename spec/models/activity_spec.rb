@@ -14,11 +14,11 @@ RSpec.describe Activity, type: :model do
 
   describe "self.for_user" do
     context "with activities for users" do
-      let(:activity_1) { create(:activity, :with_activity_log, user_id: user.id) }
-      let(:activity_2) { create(:activity, :with_activity_log, user_id: user.id) }
+      let(:activity1) { create(:activity, :with_activity_log, user_id: user.id) }
+      let(:activity2) { create(:activity, :with_activity_log, user_id: user.id) }
 
       it "returns the activities" do
-        expect(described_class.for_user(user.id)).to match_array([activity_1, activity_2])
+        expect(described_class.for_user(user.id)).to match_array([activity1, activity2])
       end
     end
 
