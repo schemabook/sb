@@ -47,7 +47,7 @@ module Events
           before: nil,
           after: {
             id: @record.id,
-            actor: @user&.uuid
+            actor: @user&.id
           },
           source: {
             version: EVENT_VERSION,
