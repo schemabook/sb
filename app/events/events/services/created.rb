@@ -1,12 +1,12 @@
 module Events
-  module Schemas
+  module Services
     class Created
       include Events::Event
 
-      EVENT_NAME    = "created.schema".freeze
+      EVENT_NAME    = "created.service".freeze
       EVENT_VERSION = "0.1".freeze
 
-      attr_accessor :record
+      attr_accessor :record, :user
 
       def initialize(record:, user: nil)
         @record = record
@@ -18,12 +18,12 @@ module Events
         Avro::Builder.build do
           namespace EVENT_NAME
 
-          record :schema do
+          record :service do
             optional :before, :record
 
             required :after, :record do
               required :id, :int
-              optional :actor, :string
+              optional :actor, :int
             end
 
             required :source, :record do
@@ -56,7 +56,7 @@ module Events
             table: @record.class.table_name
           },
           op: 'c',
-          ts_ms: (Time.now.to_f * 1000).to_i
+          ts_ms: (Time.zone.now.to_f * 1000).to_i
         }
       end
       # rubocop:enable Metrics/MethodLength

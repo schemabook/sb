@@ -19,12 +19,15 @@ class ServicesController < ApplicationController
   def edit
   end
 
+  # rubocop:disable Metrics/MethodLength
   # POST /services or /services.json
   def create
     @service = Service.new(service_params.merge({ team_id: current_user.team.id, created_by: current_user.id }))
 
     respond_to do |format|
       if @service.save
+        Events::Services::Created.new(record: @service, user: current_user).publish
+
         format.html { redirect_to @service, notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
       else
@@ -33,6 +36,7 @@ class ServicesController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /services/1 or /services/1.json
   def update
