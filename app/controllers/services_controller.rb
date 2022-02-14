@@ -25,6 +25,8 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
+        Events::Services::Created.new(record: @service, user: current_user).publish
+
         format.html { redirect_to @service, notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
       else

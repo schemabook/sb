@@ -52,6 +52,12 @@ RSpec.describe "Services", type: :request do
         }.to change(Service, :count).by(1)
       end
 
+      it "publishes an event" do
+        expect_any_instance_of(Events::Services::Created).to receive(:publish)
+
+        post services_url, params: { service: { name: "foo" } }
+      end
+
       it "redirects to the created service" do
         post services_url, params: { service: { name: "bar" } }
 
