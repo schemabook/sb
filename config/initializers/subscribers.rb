@@ -3,4 +3,7 @@ Rails.application.reloader.to_prepare do
 
   # Businesses created
   Subscribers::Businesses::Created::ActivityLog.new
+
+  # Services created
+  Subscribers::Services::Created::Activity.new
 end

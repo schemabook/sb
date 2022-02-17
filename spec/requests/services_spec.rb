@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Services", type: :request do
-  let(:business) { create(:business) }
+  let(:business) { create(:business, :with_activity_log) }
   let(:team)     { create(:team, business: business) }
   let!(:user)    { create(:user, business: business) }
   let(:service)  { create(:service, team: team, created_by: user.id) }

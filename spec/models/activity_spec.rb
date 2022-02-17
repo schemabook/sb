@@ -31,6 +31,26 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe "self.for_service" do
+    context "with activities for services" do
+      let(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }
+      let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
+      let(:activity2) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
+
+      it "returns the activities" do
+        expect(described_class.for_service(service.id)).to match_array([activity1, activity2])
+      end
+    end
+
+    context "without activities for services" do
+      let(:service) { create(:service, team: user.team, name: "foo", created_by: user.id) }
+
+      it "returns an empty array" do
+        expect(described_class.for_service(service.id)).to match_array([])
+      end
+    end
+  end
+
   describe "#resource" do
     let!(:resource) { create(:business) }
     let!(:activity) { create(:activity, :with_activity_log, user: user, title: "foo", detail: "bar", resource_class: resource.class.to_s, resource_id: resource.id) }
