@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
 
   def show
-    @activities = @user.business.activity_log.for_user(user_id: @user.id)
+    @activities = @user.business.activity_log.for_user(user_id: @user.id).reverse
   end
 
   def edit
