@@ -8,6 +8,7 @@ class Activity < ApplicationRecord
   validates :detail, presence: true
 
   scope :for_user, ->(user_id) { where(user_id: user_id) }
+  scope :for_service, ->(service_id) { where(resource_class: 'Service', resource_id: service_id) }
 
   def resource
     resource_class.constantize.find(resource_id)
