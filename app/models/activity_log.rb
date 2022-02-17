@@ -8,4 +8,8 @@ class ActivityLog < ApplicationRecord
   def for_user(user_id:)
     activities.for_user(user_id)
   end
+
+  def for_service(service_id:)
+    activities.for_service(service_id)
+  end
 end
