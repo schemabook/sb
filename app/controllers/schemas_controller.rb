@@ -13,6 +13,8 @@ class SchemasController < ApplicationController
     @schema = Schema.new(schema_params.merge(format_id: @format.id))
 
     if @schema.save
+      Events::Schemas::Created.new(record: @schema, user: current_user).publish
+
       redirect_to schema_path(@schema)
     else
       flash.now[:alert] = "Schema could not be saved"
