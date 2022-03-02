@@ -6,4 +6,7 @@ Rails.application.reloader.to_prepare do
 
   # Services created
   Subscribers::Services::Created::Activity.new
+
+  # Schemas created
+  Subscribers::Schemas::Created::Activity.new
 end
