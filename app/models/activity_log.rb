@@ -12,4 +12,8 @@ class ActivityLog < ApplicationRecord
   def for_service(service_id:)
     activities.for_service(service_id)
   end
+
+  def for_team(team:)
+    activities.for_team(team)
+  end
 end

@@ -10,8 +10,9 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
-    @teammates = @team.users
-    @schemas   = @team.schemas
+    @teammates  = @team.users
+    @schemas    = @team.schemas
+    @activities = current_user.business.activity_log.for_team(team: @team).reverse
   end
 
   # GET /teams/new

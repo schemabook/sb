@@ -69,6 +69,12 @@ RSpec.describe "/schemas", type: :request do
         expect(schema.format).to eq(format)
       end
 
+      it "publishes an event" do
+        expect_any_instance_of(Events::Schemas::Created).to receive(:publish)
+
+        post schemas_url, params: { schema: valid_attributes }
+      end
+
       it "redirects to the created schema" do
         post schemas_url, params: { schema: valid_attributes }
 

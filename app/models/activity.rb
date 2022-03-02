@@ -9,6 +9,7 @@ class Activity < ApplicationRecord
 
   scope :for_user, ->(user_id) { where(user_id: user_id) }
   scope :for_service, ->(service_id) { where(resource_class: 'Service', resource_id: service_id) }
+  scope :for_team, ->(team) { where(resource_class: 'Service', resource_id: team.services.pluck(:id)).or(where(resource_class: 'Schema', resource_id: team.schemas.pluck(:id))) }
 
   def resource
     resource_class.constantize.find(resource_id)

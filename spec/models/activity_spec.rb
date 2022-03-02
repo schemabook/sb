@@ -51,6 +51,43 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe "self.for_team" do
+    context "with activities for services" do
+      let!(:service)  { create(:service, team: user.team, name: "foo", created_by: user.id) }
+      let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
+      let(:activity2) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
+
+      it "returns the activities" do
+        expect(described_class.for_team(user.team)).to match_array([activity1, activity2])
+      end
+    end
+
+    context "with activities for schemas" do
+      let!(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
+      let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
+
+      it "returns the activities" do
+        expect(described_class.for_team(user.team)).to match_array([activity1])
+      end
+    end
+
+    context "without activities for services" do
+      let!(:service) { create(:service, team: user.team, name: "foo", created_by: user.id) }
+
+      it "returns an empty array" do
+        expect(described_class.for_team(user.team)).to match_array([])
+      end
+    end
+
+    context "without activities for schemas" do
+      let!(:schema) { create(:schema, :with_format_and_body, team: user.team) }
+
+      it "returns an empty array" do
+        expect(described_class.for_team(user.team)).to match_array([])
+      end
+    end
+  end
+
   describe "#resource" do
     let!(:resource) { create(:business) }
     let!(:activity) { create(:activity, :with_activity_log, user: user, title: "foo", detail: "bar", resource_class: resource.class.to_s, resource_id: resource.id) }

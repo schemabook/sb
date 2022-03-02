@@ -12,9 +12,24 @@ module Subscribers
 
         def process(event:)
           payload = JSON.parse(event.payload.to_json, object_class: OpenStruct)
-          _schema = Schema.where(id: payload.after.id).first
+          schema  = Schema.where(id: payload.after.id).first
+          user    = User.find(payload.after.actor)
+          log     = user.business.activity_log
 
-          # TODO: create ActivityLog Activity
+          create_activity(log: log, schema: schema, user: user)
+        end
+
+        private
+
+        def create_activity(log:, schema:, user:)
+          ::Activity.create(
+            activity_log: log,
+            user: user,
+            title: "Created Schema",
+            detail: "Created schema #{schema.name}",
+            resource_id: schema.id,
+            resource_class: schema.class.to_s
+          )
         end
       end
     end

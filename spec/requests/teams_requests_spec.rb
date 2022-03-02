@@ -36,6 +36,13 @@ RSpec.describe "/teams", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "assigns the activities" do
+      team = Team.create! valid_attributes
+      get team_url(team)
+
+      expect(assigns(:activities)).not_to be_nil
+    end
   end
 
   describe "GET /new" do
