@@ -36,6 +36,12 @@ RSpec.describe "/schemas", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "assigns activities" do
+      get schema_url(schema)
+
+      expect(assigns(:activities)).not_to be_nil
+    end
   end
 
   describe "GET /new" do
