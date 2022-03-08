@@ -45,5 +45,17 @@ RSpec.describe ActivityLog, type: :model do
       expect(subject.for_team(team: user.team)).to match_array([activity, activity2, activity3])
     end
   end
+
+  describe "for_schema" do
+    let!(:user)      { create(:user) }
+    let!(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }
+    let!(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+    let!(:activity)  { create(:activity, activity_log: subject, user: user, resource_class: 'Service', resource_id: service.id) }
+    let!(:activity2) { create(:activity, activity_log: subject, user: user, resource_class: 'Schema', resource_id: schema.id) }
+
+    it "should return all activities for a given schema" do
+      expect(subject.for_schema(schema: schema)).to match_array([activity2])
+    end
+  end
 end
 
