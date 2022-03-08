@@ -99,7 +99,7 @@ RSpec.describe Activity, type: :model do
     end
 
     context "without activities for schema" do
-      let(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+      let(:schema) { create(:schema, :with_format_and_body, team: user.team) }
 
       it "returns an empty array" do
         expect(described_class.for_schema(schema)).to match_array([])
