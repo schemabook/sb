@@ -49,6 +49,13 @@ RSpec.describe "businesses", type: :request do
         expect(business.name).to eq('new name')
       end
 
+      it "broadcasts an event" do
+        expect_any_instance_of(Events::Businesses::Updated).to receive(:publish)
+
+        business = user.business
+        patch business_url(business), params: { business: { name: 'new name' } }
+      end
+
       it "redirects to the business" do
         business = user.business
         patch business_url(business), params: { business: { name: 'new name' } }

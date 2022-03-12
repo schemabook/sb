@@ -16,6 +16,8 @@ class BusinessesController < ApplicationController
   def update
     respond_to do |format|
       if @business.update(business_params)
+        Events::Businesses::Updated.new(business: @business, user: current_user).publish
+
         format.html { redirect_to @business, notice: 'Business was successfully updated.' }
         format.json { render :show, status: :ok, location: @business }
       else
