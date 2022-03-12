@@ -36,6 +36,8 @@ RSpec.describe Events::Businesses::Updated do
         expect(block["name"]).to eq("before")
       end
 
+      # rubocop:disable RSpec/ExampleLength
+      # rubocop:disable RSpec/MultipleExpectations
       it "requires attributes" do
         # id
         expect(block["type"]["fields"][0]["name"]).to eq("id")
@@ -69,6 +71,8 @@ RSpec.describe Events::Businesses::Updated do
         expect(block["type"]["fields"][7]["name"]).to eq("actor_id")
         expect(block["type"]["fields"][7]["type"]).to eq("int")
       end
+      # rubocop:enable RSpec/MultipleExpectations
+      # rubocop:enable RSpec/ExampleLength
     end
 
     context "after block" do
@@ -78,6 +82,8 @@ RSpec.describe Events::Businesses::Updated do
         expect(block["name"]).to eq("after")
       end
 
+      # rubocop:disable RSpec/MultipleExpectations
+      # rubocop:disable RSpec/ExampleLength
       it "requires attributes" do
         # id
         expect(block["type"]["fields"][0]["name"]).to eq("id")
@@ -111,6 +117,8 @@ RSpec.describe Events::Businesses::Updated do
         expect(block["type"]["fields"][7]["name"]).to eq("actor_id")
         expect(block["type"]["fields"][7]["type"]).to eq("int")
       end
+      # rubocop:enable RSpec/ExampleLength
+      # rubocop:enable RSpec/MultipleExpectations
     end
 
     context "source block" do
