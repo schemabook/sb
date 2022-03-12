@@ -24,5 +24,4 @@ class ActivityLog < ApplicationRecord
   def for_business(business:)
     activities.for_business(business)
   end
-
 end
