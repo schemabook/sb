@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
 
   # GET /services/1 or /services/1.json
   def show
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).reverse
+    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8).reverse
   end
 
   # GET /services/new

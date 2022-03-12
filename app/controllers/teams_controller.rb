@@ -12,7 +12,7 @@ class TeamsController < ApplicationController
   def show
     @teammates  = @team.users
     @schemas    = @team.schemas
-    @activities = current_user.business.activity_log.for_team(team: @team).reverse
+    @activities = current_user.business.activity_log.for_team(team: @team).limit(8).reverse
   end
 
   # GET /teams/new
