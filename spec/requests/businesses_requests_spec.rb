@@ -14,6 +14,13 @@ RSpec.describe "businesses", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "assigns activities" do
+      business = user.business
+      get business_url(business)
+
+      expect(assigns(:activities)).not_to be_nil
+    end
   end
 
   describe "GET /edit" do
