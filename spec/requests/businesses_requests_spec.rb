@@ -14,6 +14,13 @@ RSpec.describe "businesses", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "assigns activities" do
+      business = user.business
+      get business_url(business)
+
+      expect(assigns(:activities)).not_to be_nil
+    end
   end
 
   describe "GET /edit" do
@@ -47,6 +54,13 @@ RSpec.describe "businesses", type: :request do
         business.reload
 
         expect(business.name).to eq('new name')
+      end
+
+      it "broadcasts an event" do
+        expect_any_instance_of(Events::Businesses::Updated).to receive(:publish)
+
+        business = user.business
+        patch business_url(business), params: { business: { name: 'new name' } }
       end
 
       it "redirects to the business" do

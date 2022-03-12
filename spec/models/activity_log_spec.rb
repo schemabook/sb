@@ -57,5 +57,13 @@ RSpec.describe ActivityLog, type: :model do
       expect(subject.for_schema(schema: schema)).to match_array([activity2])
     end
   end
-end
 
+  describe "for_business" do
+    let!(:user)     { create(:user) }
+    let!(:activity) { create(:activity, activity_log: subject, user: user, resource_class: 'Business', resource_id: user.business.id) }
+
+    it "should return all activities for a given business" do
+      expect(subject.for_business(business: user.business)).to match_array([activity])
+    end
+  end
+end
