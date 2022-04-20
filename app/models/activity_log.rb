@@ -24,4 +24,10 @@ class ActivityLog < ApplicationRecord
   def for_business(business:)
     activities.for_business(business)
   end
+
+  # rubocop:disable Rails/Delegate
+  def for_invitations
+    activities.for_invitations
+  end
+  # rubocop:enable Rails/Delegate
 end

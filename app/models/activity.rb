@@ -12,6 +12,7 @@ class Activity < ApplicationRecord
   scope :for_team, ->(team) { where(resource_class: 'Service', resource_id: team.services.pluck(:id)).or(where(resource_class: 'Schema', resource_id: team.schemas.pluck(:id))) }
   scope :for_schema, ->(schema) { where(resource_class: 'Schema', resource_id: schema.id) }
   scope :for_business, ->(business) { where(resource_class: 'Business', resource_id: business.id) }
+  scope :for_invitations, -> { where(title: "Invited Teammate") }
 
   def resource
     resource_class.constantize.find(resource_id)

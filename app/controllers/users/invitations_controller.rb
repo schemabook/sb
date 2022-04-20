@@ -1,14 +1,20 @@
 class Users::InvitationsController < Devise::InvitationsController
+  def new
+    @activities = current_user.business.activity_log.for_invitations.limit(8).reverse
+    super
+  end
+
   private
 
   # This is called when creating invitation.
   # It should return an instance of resource class.
   def invite_resource
-    Rails.logger.info "####"
-    Rails.logger.info "Mailgun: #{ENV['MAILGUN_API_URL']}"
-    Rails.logger.info "####"
+    resource = super { |user| ActiveSupport::Notifications.instrument('invited.user', user) }
 
-    super { |user| ActiveSupport::Notifications.instrument('invited.user', user) }
+    # notify subscribers
+    Events::Invitations::Created.new(teammate: resource, user: current_user).publish
+
+    resource
   end
 
   # This is called when accepting invitation.

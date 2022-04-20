@@ -12,4 +12,7 @@ Rails.application.reloader.to_prepare do
 
   # Schemas created
   Subscribers::Schemas::Created::Activity.new
+
+  # Invitation created
+  Subscribers::Invitations::Created::ActivityLog.new
 end

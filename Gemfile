@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Devise for Authentication
 gem 'devise'
 # Use Devise invitable for inviting team members
-gem 'devise_invitable', '~> 2.0.0'
+gem 'devise_invitable', '~> 2.0.6'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -64,6 +64,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener"
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
