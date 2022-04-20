@@ -66,4 +66,15 @@ RSpec.describe ActivityLog, type: :model do
       expect(subject.for_business(business: user.business)).to match_array([activity])
     end
   end
+
+  describe "for_invitations" do
+    let!(:user)     { create(:user) }
+    let!(:teammate) { create(:user, email: "teammate@example.com") }
+    let!(:activity) { create(:activity, activity_log: subject, title: "Invited Teammate", user: user, resource_class: 'User', resource_id: teammate.id) }
+
+    it "should return all activities for invitations" do
+      expect(subject.for_invitations).to match_array([activity])
+    end
+  end
+
 end

@@ -1,4 +1,9 @@
 class Users::InvitationsController < Devise::InvitationsController
+  def new
+    @activities = current_user.business.activity_log.for_invitations.limit(8).reverse
+    super
+  end
+
   private
 
   # This is called when creating invitation.

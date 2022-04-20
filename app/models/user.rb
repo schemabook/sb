@@ -23,6 +23,7 @@ class User < ApplicationRecord
 
     "#{first_name} #{last_name}"
   end
+  alias name display_name
 
   def display_name_with_email
     str = ""
