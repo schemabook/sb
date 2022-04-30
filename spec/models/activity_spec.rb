@@ -146,6 +146,24 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe "self.for_service_team" do
+    context "with activities" do
+      let!(:user)     { create(:user) }
+      let!(:service)  { create(:service, team: user.team, created_by: user.id) }
+      let!(:activity) { create(:activity, :with_activity_log, user_id: user.id, title: "Service Created", resource_class: Service, resource_id: service.id) }
+
+      it "returns the activities" do
+        expect(described_class.for_service_team(user.team)).to match_array([activity])
+      end
+    end
+
+    context "without activities" do
+      it "returns an empty array" do
+        expect(described_class.for_service_team(user.team)).to match_array([])
+      end
+    end
+  end
+
   describe "#resource" do
     let!(:resource) { create(:business) }
     let!(:activity) { create(:activity, :with_activity_log, user: user, title: "foo", detail: "bar", resource_class: resource.class.to_s, resource_id: resource.id) }
