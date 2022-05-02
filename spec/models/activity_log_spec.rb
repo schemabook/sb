@@ -77,4 +77,13 @@ RSpec.describe ActivityLog, type: :model do
     end
   end
 
+  describe "for_service_team" do
+    let!(:user)     { create(:user) }
+    let!(:service)  { create(:service, team: user.team, created_by: user.id) }
+    let!(:activity) { create(:activity, activity_log: subject, user_id: user.id, title: "Service Created", resource_class: Service, resource_id: service.id) }
+
+    it "should return all activities for services related to the team" do
+      expect(subject.for_service_team(team: user.team)).to match_array([activity])
+    end
+  end
 end

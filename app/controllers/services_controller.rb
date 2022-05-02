@@ -13,7 +13,8 @@ class ServicesController < ApplicationController
 
   # GET /services/new
   def new
-    @service = Service.new
+    @service    = Service.new
+    @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8).reverse
   end
 
   # GET /services/1/edit

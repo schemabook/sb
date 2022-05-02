@@ -30,4 +30,8 @@ class ActivityLog < ApplicationRecord
     activities.for_invitations
   end
   # rubocop:enable Rails/Delegate
+
+  def for_service_team(team:)
+    activities.for_service_team(team)
+  end
 end
