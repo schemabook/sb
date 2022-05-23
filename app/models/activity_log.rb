@@ -21,9 +21,11 @@ class ActivityLog < ApplicationRecord
     activities.for_schema(schema)
   end
 
+  # rubocop:disable Rails/Delegate
   def for_schema_new
     activities.for_schema_new
   end
+  # rubocop:enable Rails/Delegate
 
   def for_business(business:)
     activities.for_business(business)
