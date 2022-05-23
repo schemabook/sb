@@ -58,6 +58,16 @@ RSpec.describe ActivityLog, type: :model do
     end
   end
 
+  describe "for_schema_new" do
+    let!(:user)      { create(:user) }
+    let!(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+    let!(:activity)  { create(:activity, activity_log: subject, user: user, resource_class: 'Schema', resource_id: schema.id) }
+
+    it "should return all schema activities" do
+      expect(subject.for_schema_new).to match_array([activity])
+    end
+  end
+
   describe "for_business" do
     let!(:user)     { create(:user) }
     let!(:activity) { create(:activity, activity_log: subject, user: user, resource_class: 'Business', resource_id: user.business.id) }

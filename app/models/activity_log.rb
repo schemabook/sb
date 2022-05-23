@@ -21,6 +21,10 @@ class ActivityLog < ApplicationRecord
     activities.for_schema(schema)
   end
 
+  def for_schema_new
+    activities.for_schema_new
+  end
+
   def for_business(business:)
     activities.for_business(business)
   end
