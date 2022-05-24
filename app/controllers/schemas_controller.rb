@@ -1,6 +1,7 @@
 class SchemasController < ApplicationController
   def new
-    @schema = Schema.new
+    @schema     = Schema.new
+    @activities = current_user.business.activity_log.for_schema_new.limit(8).reverse
   end
 
   def show

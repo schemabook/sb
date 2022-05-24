@@ -89,7 +89,7 @@ RSpec.describe Activity, type: :model do
   end
 
   describe "self.for_schema" do
-    context "with activities for services" do
+    context "with activities for schema" do
       let(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
@@ -103,6 +103,23 @@ RSpec.describe Activity, type: :model do
 
       it "returns an empty array" do
         expect(described_class.for_schema(schema)).to match_array([])
+      end
+    end
+  end
+
+  describe "self.for_schema_new" do
+    context "with activities for schemas" do
+      let(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
+      let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
+
+      it "returns the activities" do
+        expect(described_class.for_schema_new).to match_array([activity])
+      end
+    end
+
+    context "without activities for schema" do
+      it "returns an empty array" do
+        expect(described_class.for_schema_new).to match_array([])
       end
     end
   end

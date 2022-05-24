@@ -50,6 +50,12 @@ RSpec.describe "/schemas", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "assigns activities" do
+      get new_schema_url
+
+      expect(assigns(:activities)).not_to be_nil
+    end
   end
 
   describe "POST /create" do
