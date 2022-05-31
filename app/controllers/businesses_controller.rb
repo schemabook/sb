@@ -12,6 +12,7 @@ class BusinessesController < ApplicationController
   def edit
     @creator      = User.find(@business.created_by)
     @stakeholders = User.where(business_id: @business.id)
+    @activities   = current_user.business.activity_log.activities.limit(8).reverse
   end
 
   def update
