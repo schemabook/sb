@@ -26,12 +26,15 @@ class TeamsController < ApplicationController
     @activities = current_user.business.activity_log.for_team(team: @team).limit(8).reverse
   end
 
+  # rubocop:disable Metrics/MethodLength
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params.merge(business_id: current_user.business.id))
 
     respond_to do |format|
       if @team.save
+        Events::Teams::Created.new(record: @team, user: current_user).publish
+
         format.html { redirect_to @team, notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
@@ -40,6 +43,7 @@ class TeamsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update

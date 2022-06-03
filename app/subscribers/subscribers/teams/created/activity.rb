@@ -1,0 +1,37 @@
+module Subscribers
+  module Teams
+    module Created
+      class Activity
+        include Subscribers::Subscriber
+
+        EVENT_NAME = Events::Teams::Created::EVENT_NAME
+
+        def initialize
+          subscribe
+        end
+
+        def process(event:)
+          payload = JSON.parse(event.payload.to_json, object_class: OpenStruct)
+          team    = Team.where(id: payload.after.id).first
+          log     = team.business.activity_log
+          user    = User.find(payload.after.actor)
+
+          create_activity(log: log, team: team, user: user)
+        end
+
+        private
+
+        def create_activity(log:, team:, user:)
+          ::Activity.create(
+            activity_log: log,
+            user: user,
+            title: "Created Team",
+            detail: "Establisheded team #{team.name}",
+            resource_id: team.id,
+            resource_class: team.class.to_s
+          )
+        end
+      end
+    end
+  end
+end

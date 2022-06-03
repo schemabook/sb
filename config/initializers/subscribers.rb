@@ -15,4 +15,7 @@ Rails.application.reloader.to_prepare do
 
   # Invitation created
   Subscribers::Invitations::Created::ActivityLog.new
+
+  # Team created
+  Subscribers::Teams::Created::Activity.new
 end
