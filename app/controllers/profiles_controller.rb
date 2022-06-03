@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
 
   def edit
     require_admin_or_actual_user
+
+    @activities = @user.business.activity_log.for_user(user_id: @user.id).limit(8).reverse
   end
 
   def update
