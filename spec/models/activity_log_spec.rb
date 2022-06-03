@@ -59,7 +59,6 @@ RSpec.describe ActivityLog, type: :model do
     end
   end
 
-
   describe "for_schema" do
     let!(:user)      { create(:user) }
     let!(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }
