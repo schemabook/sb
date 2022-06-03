@@ -17,6 +17,10 @@ class ActivityLog < ApplicationRecord
     activities.for_team(team)
   end
 
+  def for_teams
+    activities.for_teams
+  end
+
   def for_schema(schema:)
     activities.for_schema(schema)
   end
