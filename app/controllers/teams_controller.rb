@@ -22,6 +22,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    @activities = current_user.business.activity_log.for_team(team: @team).limit(8).reverse
   end
 
   # POST /teams or /teams.json
