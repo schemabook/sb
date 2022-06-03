@@ -19,6 +19,7 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8).reverse
   end
 
   # rubocop:disable Metrics/MethodLength
