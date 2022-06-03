@@ -17,7 +17,8 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @team       = Team.new
+    @activities = current_user.business.activity_log.for_teams.limit(8).reverse
   end
 
   # GET /teams/1/edit

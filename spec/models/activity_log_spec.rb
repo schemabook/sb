@@ -46,6 +46,19 @@ RSpec.describe ActivityLog, type: :model do
     end
   end
 
+  describe "for_teams" do
+    let!(:user1)     { create(:user, email: 'one@example.com') }
+    let!(:user2)     { create(:user, email: 'two@example.com') }
+    let!(:service)   { create(:service, team: user1.team, name: "foo", created_by: user1.id) }
+    let!(:service2)  { create(:service, team: user2.team, name: "bar", created_by: user2.id) }
+    let!(:activity1) { create(:activity, activity_log: subject, user: user1, resource_class: 'Team', resource_id: user1.team.id) }
+    let!(:activity2) { create(:activity, activity_log: subject, user: user2, resource_class: 'Team', resource_id: user2.team.id) }
+
+    it "should return all activities for all teams" do
+      expect(subject.for_teams).to match_array([activity1, activity2])
+    end
+  end
+
   describe "for_schema" do
     let!(:user)      { create(:user) }
     let!(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }

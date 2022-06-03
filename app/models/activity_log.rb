@@ -17,6 +17,12 @@ class ActivityLog < ApplicationRecord
     activities.for_team(team)
   end
 
+  # rubocop:disable Rails/Delegate
+  def for_teams
+    activities.for_teams
+  end
+  # rubocop:enable Rails/Delegate
+
   def for_schema(schema:)
     activities.for_schema(schema)
   end
