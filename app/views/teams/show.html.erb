@@ -1,142 +1,139 @@
-<!-- 3 column wrapper -->
-<div class="flex-grow w-full mx-auto xl:px-8 lg:flex">
-  <!-- Left sidebar & main wrapper -->
-  <div class="flex-1 min-w-0 bg-white xl:flex">
-    <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
-      <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+<!-- Left sidebar & main wrapper -->
+<div class="flex-1 min-w-0 bg-white xl:flex xl:px-8">
+  <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+    <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
 
-      <%= render 'shared/left_sidebar' %>
+    <%= render 'shared/left_sidebar' %>
 
-      </div>
-    </div>
-
-    <div class="bg-white lg:min-w-0 lg:flex-1">
-      <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
-        <!-- Start main area-->
-        <div class="relative h-full" style="min-height: 36rem;">
-
-          <%= render 'shared/flashes' %>
-
-          <!-- header -->
-          <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
-            <h2 class="text-lg leading-6 font-medium text-gray-600">
-              Team: <%= @team.name %>
-            </h2>
-            <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-400">
-              <a href="<%= new_user_invitation_path %>">
-                <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                  Invite Teammates
-                </button>
-              </a>
-            </div>
-          </div>
-
-          <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-            <!-- main area list -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-                  <div class="ml-4 mt-2">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                      Teammates
-                    </h3>
-                  </div>
-                  <div class="ml-4 mt-2 flex-shrink-0">
-                    <% if current_user.admin? %>
-                    <a href="<%= edit_team_path(@team) %>">
-                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                        Edit Info
-                      </button>
-                    </a>
-                  <% end %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <ul>
-                  <% @teammates.each do |mate| %>
-                    <li><%= mate.display_name_with_email %></li>
-                  <% end %>
-                </ul>
-              </div>
-
-            </div>
-            <!-- end main area list -->
-          </div>
-          <!-- end main area wrapper -->
-
-          <!-- main area wrapper -->
-          <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-            <!-- main area list -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-
-              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-                  <div class="ml-4 mt-2">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                      Schemas
-                    </h3>
-                  </div>
-                  <div class="ml-4 mt-2 flex-shrink-0">
-                  </div>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <ul id="schemas">
-                  <% @schemas.each do |schema| %>
-                  <li><%= link_to schema.name, schema_path(schema) %></li>
-                  <% end %>
-                </ul>
-              </div>
- 
-            </div>
-            <!-- end main area list -->
-
-          </div>
-          <!-- end main area wrapper -->
-
-          <!-- main area wrapper -->
-          <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-            <!-- main area list -->
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
-
-              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-                  <div class="ml-4 mt-2">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                      Services
-                    </h3>
-                  </div>
-                  <div class="ml-4 mt-2 flex-shrink-0">
-                  </div>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <ul id="services">
-                  <% @team.services.each do |service| %>
-                  <li><%= link_to service.name, service_path(service) %></li>
-                  <% end %>
-                </ul>
-              </div>
- 
-            </div>
-            <!-- end main area list -->
-
-          </div>
-          <!-- end main area wrapper -->
-
-        </div>
-        <!-- End main area -->
-      </div>
     </div>
   </div>
 
-  <div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
-    <div class="h-full pl-6 py-6 lg:w-80">
-      <%= render partial: 'shared/activity_feed' %>
+  <div class="bg-white lg:min-w-0 lg:flex-1">
+    <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+      <!-- Start main area-->
+      <div class="relative h-full" style="min-height: 36rem;">
+
+        <%= render 'shared/flashes' %>
+
+        <!-- header -->
+        <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
+          <h2 class="text-lg leading-6 font-medium text-gray-600">
+            Team: <%= @team.name %>
+          </h2>
+          <div class="mt-3 sm:mt-0 sm:ml-4 font-medium text-gray-400">
+            <a href="<%= new_user_invitation_path %>">
+              <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                Invite Teammates
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+          <!-- main area list -->
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Teammates
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                  <% if current_user.admin? %>
+                  <a href="<%= edit_team_path(@team) %>">
+                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                      Edit Info
+                    </button>
+                  </a>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <ul>
+                <% @teammates.each do |mate| %>
+                  <li><%= mate.display_name_with_email %></li>
+                <% end %>
+              </ul>
+            </div>
+
+          </div>
+          <!-- end main area list -->
+        </div>
+        <!-- end main area wrapper -->
+
+        <!-- main area wrapper -->
+        <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+          <!-- main area list -->
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
+            <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Schemas
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <ul id="schemas">
+                <% @schemas.each do |schema| %>
+                <li><%= link_to schema.name, schema_path(schema) %></li>
+                <% end %>
+              </ul>
+            </div>
+
+          </div>
+          <!-- end main area list -->
+
+        </div>
+        <!-- end main area wrapper -->
+
+        <!-- main area wrapper -->
+        <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+          <!-- main area list -->
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
+            <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Services
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4">
+              <ul id="services">
+                <% @team.services.each do |service| %>
+                <li><%= link_to service.name, service_path(service) %></li>
+                <% end %>
+              </ul>
+            </div>
+
+          </div>
+          <!-- end main area list -->
+
+        </div>
+        <!-- end main area wrapper -->
+
+      </div>
+      <!-- End main area -->
     </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-8">
+  <div class="pl-6 py-6 lg:w-80">
+    <%= render partial: 'shared/activity_feed' %>
   </div>
 </div>
