@@ -7,7 +7,7 @@ RSpec.describe "Sign Up", type: :feature do
     fill_in 'user_password_confirmation', with: 'password'
   end
 
-  it "User registers" do
+  xit "User registers" do
     visit new_user_registration_path
 
     fills_in_form_basics
@@ -18,7 +18,7 @@ RSpec.describe "Sign Up", type: :feature do
     expect(page).to have_text("Welcome! You have signed up successfully.")
   end
 
-  it "User registers with invalid params" do
+  xit "User registers with invalid params" do
     existing_business = create(:business)
 
     visit new_user_registration_path
