@@ -9,7 +9,7 @@
         <p class="text-sm text-gray-500"><%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago</p>
       </div>
       <h3 class="text-sm font-medium"><%= activity_title(activity) %></h3>
-      <p class="text-sm text-gray-500"><%= activity.detail %></p>
+      <p class="text-sm text-gray-500"><%= truncate(activity.detail, length: 30) %></p>
     </div>
   </div>
 </li>
