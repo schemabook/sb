@@ -1,4 +1,4 @@
-<div class="bg-gray-50">
+<div class="bg-gray-50 xl:px-8 w-full">
   <div class="relative">
 
     <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -7,6 +7,13 @@
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Create your account
         </h2>
+
+        <div class="text-center py-4 lg:px-4">
+          <div class="p-2 bg-teal-400 items-center text-white leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+            <span class="flex rounded-full bg-cyan-500 uppercase px-2 py-1 text-xs font-bold mr-3">Coming Soon</span>
+            <span class="font-semibold mr-2 text-left flex-auto">We're not quite ready to open to everyone just yet.</span>
+          </div>
+        </div>
       </div>
 
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -62,8 +69,8 @@
             </div>
 
             <div class="mt-6">
-              <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Get started
+              <button disabled type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-5 cursor-not-allowed">
+                Get Started
               </button>
             </div>
           <% end %>

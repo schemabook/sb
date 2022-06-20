@@ -6,7 +6,11 @@
       <!-- Logo section -->
       <div class="flex items-center px-2 lg:px-0 xl:w-64">
         <div class="flex-shrink-0">
+          <% if current_user %>
           <a href="/dashboards">
+          <% else %>
+          <a href="/">
+          <% end %>
             <span class="sr-only">Schemabook</span>
             <!-- Heroicon name: book-open -->
             <span class="flex items-center justify-center h-12 w-12 rounded-md">
