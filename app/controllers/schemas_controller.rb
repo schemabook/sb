@@ -33,6 +33,6 @@ class SchemasController < ApplicationController
   end
 
   def schema_params
-    params.require(:schema).permit(:name, :service_id, :file_type, :body).merge(team_id: current_user.team.id)
+    params.require(:schema).permit(:name, :service_id, :file_type, :body, :description).merge(team_id: current_user.team.id)
   end
 end
