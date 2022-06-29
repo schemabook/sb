@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_14_182838) do
+ActiveRecord::Schema.define(version: 2022_06_29_003228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_182838) do
     t.bigint "team_id"
     t.bigint "service_id"
     t.bigint "format_id"
+    t.text "description"
     t.index ["format_id"], name: "index_schemas_on_format_id"
     t.index ["name", "service_id"], name: "index_schemas_on_name_and_service_id", unique: true
     t.index ["service_id"], name: "index_schemas_on_service_id"
