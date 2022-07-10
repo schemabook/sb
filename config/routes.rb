@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   get 'profiles/:id', to: 'profiles#show', as: :user_profile
   patch 'profiles/:id', to: 'profiles#update', as: :patch_user_profile
 
+  # stakeholders
+  post 'stakeholders', to: 'stakeholders#create'
+
   resources :teams, except: :index
   resources :businesses
   resources :services
