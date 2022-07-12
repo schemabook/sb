@@ -48,3 +48,6 @@ yarn-debug.log*
 
 # Ignore obsidian index files
 /runbooks/.obsidian
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

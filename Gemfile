@@ -34,7 +34,7 @@ gem 'devise_invitable', '~> 2.0.6'
 # gem 'image_processing', '~> 1.12.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+#gem 'bootsnap', '>= 1.4.4', require: false
 
 # used to send email from Render
 gem 'mailgun-ruby', '~>1.2.5'

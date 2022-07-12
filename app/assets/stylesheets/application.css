@@ -2,11 +2,11 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * Any CSS file within this directory, lib/assets/stylesheets, or any plugin's
  * vendor/assets/stylesheets directory can be referenced here using a relative path.
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
@@ -14,30 +14,3 @@
  *= require_self
  */
 
-// polar night
-$nord0: #2E3440 !default;
-$nord1: #3B4252 !default;
-$nord2: #434C5E !default;
-$nord3: #4C566A !default;
-
-// snow storm
-$nord4: #D8DEE9 !default;
-$nord5: #E5E9F0 !default;
-$nord6: #ECEFF4 !default;
-
-// frost
-$nord7: #8FBCBB !default;
-$nord8: #88C0D0 !default;
-$nord9: #81A1C1 !default;
-$nord10: #5E81AC !default;
-
-// aurora
-$nord11: #BF616A !default;
-$nord12: #D08770 !default;
-$nord13: #EBCB8B !default;
-$nord14: #A3BE8C !default;
-$nord14: #B48EAD !default;
-
-pre {
-  //background-color: $nord4;
-}
