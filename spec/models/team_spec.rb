@@ -8,8 +8,6 @@ RSpec.describe Team, type: :model do
   it { should belong_to :business }
 
   context "with validations" do
-    it { should validate_presence_of :business_id }
-
     describe "uniqueness" do
       let(:name)     { "foo" }
       let(:business) { create(:business) }

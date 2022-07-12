@@ -13,7 +13,6 @@ RSpec.describe Schema, type: :model do
 
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of(:name).scoped_to(:service_id) }
-  it { should validate_presence_of :team_id }
 
   describe "#body" do
     it "converts string to file and attaches" do

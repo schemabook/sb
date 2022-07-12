@@ -7,7 +7,6 @@ RSpec.describe ActivityLog, type: :model do
 
   it { should belong_to :business }
   it { should have_many :activities }
-  it { should validate_presence_of :business_id }
 
   describe "for_user" do
     let!(:user)      { create(:user) }

@@ -7,8 +7,6 @@ RSpec.describe Activity, type: :model do
 
   it { should belong_to :user }
   it { should belong_to :activity_log }
-  it { should validate_presence_of :user_id }
-  it { should validate_presence_of :activity_log_id }
   it { should validate_presence_of :title }
   it { should validate_presence_of :detail }
 
