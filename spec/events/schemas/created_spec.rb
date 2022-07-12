@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Events::Schemas::Created do
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"foo": {"bar": 1}}' }
-  let(:schema)   { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format: format) }
+  let(:schema)   { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format:) }
 
   subject { described_class.new(record: schema) }
 
@@ -109,7 +109,7 @@ RSpec.describe Events::Schemas::Created do
     end
 
     it "includes the event timestamp" do
-      expect(subject.payload[:ts_ms]).not_to eq(nil)
+      expect(subject.payload[:ts_ms]).not_to be_nil
       expect(subject.payload[:ts_ms].to_s.size).to eq(13) # includes milliseconds
     end
   end

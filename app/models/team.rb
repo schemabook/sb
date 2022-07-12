@@ -6,7 +6,6 @@ class Team < ApplicationRecord
   has_many :schemas
   belongs_to :business
 
-  validates :business_id, presence: true
   validates :name, uniqueness: { scope: :business }
   validates :administrators, uniqueness: { scope: :business }, allow_blank: true
 

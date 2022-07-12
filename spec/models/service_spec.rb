@@ -8,9 +8,9 @@ RSpec.describe Service, type: :model do
 
   describe "#creator" do
     let(:business) { create(:business) }
-    let(:team)     { create(:team, business: business) }
-    let(:user)     { create(:user, team: team) }
-    let(:service)  { create(:service, team: team, created_by: user.id) }
+    let(:team)     { create(:team, business:) }
+    let(:user)     { create(:user, team:) }
+    let(:service)  { create(:service, team:, created_by: user.id) }
 
     it "returns the user that created the service" do
       expect(service.creator).to eq(user)

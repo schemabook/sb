@@ -13,7 +13,7 @@ RSpec.describe "Registration", type: :request do
     let(:user_params) { attributes_for(:user) }
     let(:params)      { { user: user_params.merge(business: "valid-business") } }
 
-    subject { post user_registration_path, params: params }
+    subject { post user_registration_path, params: }
 
     it "should create a business" do
       expect {

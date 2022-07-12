@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
     subject { create(:user, :admin) }
 
     it "returns true if the user belongs to the administrators team" do
-      expect(subject.admin?).to eq(true)
+      expect(subject.admin?).to be(true)
     end
   end
 

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Activity, type: :model do
   let(:user) { create(:user) }
 
-  subject { create(:activity, :with_activity_log, user: user) }
+  subject { create(:activity, :with_activity_log, user:) }
 
   it { should belong_to :user }
   it { should belong_to :activity_log }
@@ -199,7 +199,7 @@ RSpec.describe Activity, type: :model do
 
   describe "#resource" do
     let!(:resource) { create(:business) }
-    let!(:activity) { create(:activity, :with_activity_log, user: user, title: "foo", detail: "bar", resource_class: resource.class.to_s, resource_id: resource.id) }
+    let!(:activity) { create(:activity, :with_activity_log, user:, title: "foo", detail: "bar", resource_class: resource.class.to_s, resource_id: resource.id) }
 
     it "should return an instance of the resource" do
       expect(activity.resource).to eq(resource)

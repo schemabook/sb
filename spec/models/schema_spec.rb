@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Schema, type: :model do
   let(:business) { create(:business) }
-  let(:team)     { create(:team, business: business) }
+  let(:team)     { create(:team, business:) }
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"foo": {"bar": 1}}' }
 
-  subject { create(:schema, name: "foo", file_type: "json", body: json, team: team, format: format) }
+  subject { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
 
   it { should belong_to :team }
   it { should belong_to(:service).optional }
@@ -25,7 +25,7 @@ RSpec.describe Schema, type: :model do
   describe "#body_format" do
     context "with valid body content" do
       it "returns true" do
-        expect(subject.send(:body_format)).to eq(true)
+        expect(subject.send(:body_format)).to be(true)
       end
     end
 
@@ -33,8 +33,8 @@ RSpec.describe Schema, type: :model do
       it "returns false" do
         subject.body = "foo"
 
-        expect(subject.send(:body_format)).to eq(false)
-        expect(subject.errors.messages[:body].include?("is not valid json")).to eq(true)
+        expect(subject.send(:body_format)).to be(false)
+        expect(subject.errors.messages[:body].include?("is not valid json")).to be(true)
       end
     end
   end

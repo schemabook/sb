@@ -15,11 +15,11 @@ module Subscribers
           payload  = JSON.parse(event.payload.to_json, object_class: OpenStruct)
           business = Business.find(payload.after.id)
           user     = User.find(payload.after.actor_id)
-          log      = ::ActivityLog.create(business: business)
+          log      = ::ActivityLog.create(business:)
 
           Activity.create(
             activity_log: log,
-            user: user,
+            user:,
             title: "Created Business",
             detail: "Establed account for #{business.name}",
             resource_id: business.id,

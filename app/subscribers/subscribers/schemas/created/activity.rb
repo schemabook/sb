@@ -16,7 +16,7 @@ module Subscribers
           user    = User.find(payload.after.actor)
           log     = user.business.activity_log
 
-          create_activity(log: log, schema: schema, user: user)
+          create_activity(log:, schema:, user:)
         end
 
         private
@@ -24,7 +24,7 @@ module Subscribers
         def create_activity(log:, schema:, user:)
           ::Activity.create(
             activity_log: log,
-            user: user,
+            user:,
             title: "Created Schema",
             detail: "Created schema #{schema.name}",
             resource_id: schema.id,

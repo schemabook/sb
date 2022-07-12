@@ -4,7 +4,7 @@ RSpec.describe Events::Businesses::Updated do
   let(:business) { create(:business) }
   let(:user)     { create(:user) }
 
-  subject { described_class.new(business: business, user: user) }
+  subject { described_class.new(business:, user:) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil
@@ -178,7 +178,7 @@ RSpec.describe Events::Businesses::Updated do
     end
 
     it "includes the event timestamp" do
-      expect(subject.payload[:ts_ms]).not_to eq(nil)
+      expect(subject.payload[:ts_ms]).not_to be_nil
       expect(subject.payload[:ts_ms].to_s.size).to eq(13) # includes milliseconds
     end
   end

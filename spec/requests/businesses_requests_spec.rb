@@ -77,7 +77,7 @@ RSpec.describe "businesses", type: :request do
         business = user.business
         patch business_url(business), params: { business: { foo: 'bar' } }
 
-        expect(response.status).to eq(302)
+        expect(response).to have_http_status(:found)
       end
     end
 

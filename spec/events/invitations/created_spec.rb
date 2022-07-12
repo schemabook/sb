@@ -4,7 +4,7 @@ RSpec.describe Events::Invitations::Created do
   let(:teammate) { create(:user, email: "new-teammate@example.com") }
   let(:user)     { create(:user) }
 
-  subject { described_class.new(teammate: teammate, user: user) }
+  subject { described_class.new(teammate:, user:) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil
@@ -112,7 +112,7 @@ RSpec.describe Events::Invitations::Created do
     end
 
     it "includes the event timestamp" do
-      expect(subject.payload[:ts_ms]).not_to eq(nil)
+      expect(subject.payload[:ts_ms]).not_to be_nil
       expect(subject.payload[:ts_ms].to_s.size).to eq(13) # includes milliseconds
     end
   end

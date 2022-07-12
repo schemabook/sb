@@ -15,10 +15,10 @@ RSpec.describe Team, type: :model do
       let(:business) { create(:business) }
 
       it "should prevent teams with the same name in the same business" do
-        team_a = create(:team, name: name, business: business)
+        team_a = create(:team, name:, business:)
 
         expect {
-          create(:team, name: team_a.name, business: business)
+          create(:team, name: team_a.name, business:)
         }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
@@ -27,7 +27,7 @@ RSpec.describe Team, type: :model do
         subject.update_column(:administrators, true)
 
         new_team = build(:team, business: subject.business, administrators: true)
-        expect(new_team.valid?).to eq(false)
+        expect(new_team.valid?).to be(false)
       end
       # rubocop:enable Rails/SkipsModelValidations
     end
@@ -53,7 +53,7 @@ RSpec.describe Team, type: :model do
       it "returns true" do
         subject.administrators = true
 
-        expect(subject.admin?).to eq(true)
+        expect(subject.admin?).to be(true)
       end
     end
   end

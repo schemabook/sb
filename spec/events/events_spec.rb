@@ -99,7 +99,7 @@ RSpec.describe Events::Event do
     context "with a schema defined" do
       context "with a valid payload" do
         it "returns true" do
-          expect(subject.valid_payload?).to eq(true)
+          expect(subject.valid_payload?).to be(true)
         end
       end
 
@@ -109,7 +109,7 @@ RSpec.describe Events::Event do
         end
 
         it "returns false" do
-          expect(subject.valid_payload?).to eq(false)
+          expect(subject.valid_payload?).to be(false)
         end
       end
     end

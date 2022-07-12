@@ -108,7 +108,7 @@ RSpec.describe Events::Teams::Created do
     end
 
     it "includes the event timestamp" do
-      expect(subject.payload[:ts_ms]).not_to eq(nil)
+      expect(subject.payload[:ts_ms]).not_to be_nil
       expect(subject.payload[:ts_ms].to_s.size).to eq(13) # includes milliseconds
     end
   end

@@ -16,7 +16,7 @@ module Subscribers
           log     = service.team.business.activity_log
           user    = User.find(payload.after.actor)
 
-          create_activity(log: log, service: service, user: user)
+          create_activity(log:, service:, user:)
         end
 
         private
@@ -24,7 +24,7 @@ module Subscribers
         def create_activity(log:, service:, user:)
           ::Activity.create(
             activity_log: log,
-            user: user,
+            user:,
             title: "Created Service",
             detail: "Establisheded service for #{service.team.name}",
             resource_id: service.id,

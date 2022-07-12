@@ -18,18 +18,18 @@ RSpec.describe Subscribers::Businesses::Updated::ActivityLog do
     let(:user)     { create(:user) }
 
     it "persists an ActivityLog object" do
-      payload    = Events::Businesses::Updated.new(business: business, user: user).payload
+      payload    = Events::Businesses::Updated.new(business:, user:).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
-        Time.zone.now - 1.second,
+        1.second.ago,
         Time.zone.now,
         123,
         payload
       )
 
       expect {
-        subject.process(event: event)
+        subject.process(event:)
       }.to change(Activity, :count)
     end
   end

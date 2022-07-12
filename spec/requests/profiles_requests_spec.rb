@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Profiles", type: :request do
   let!(:business) { create(:business, :with_activity_log) }
-  let!(:user)     { create(:user, business: business) }
+  let!(:user)     { create(:user, business:) }
 
   before do
     sign_in user
@@ -24,7 +24,7 @@ RSpec.describe "Profiles", type: :request do
 
   describe "GET edit" do
     context "when an admin" do
-      let(:admin) { create(:user, :admin, business: business, email: "new_admin@example.com") }
+      let(:admin) { create(:user, :admin, business:, email: "new_admin@example.com") }
 
       before do
         sign_in admin
@@ -50,7 +50,7 @@ RSpec.describe "Profiles", type: :request do
     end
 
     context "when a different non-admin user" do
-      let(:colleague) { create(:user, business: business, email: "colleague@example.com") }
+      let(:colleague) { create(:user, business:, email: "colleague@example.com") }
 
       before do
         sign_in colleague

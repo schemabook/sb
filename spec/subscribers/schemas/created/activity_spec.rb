@@ -17,21 +17,21 @@ RSpec.describe Subscribers::Schemas::Created::Activity do
     let(:format) { create(:format, file_type: :json) }
     let(:json)   { '{"foo": {"bar": 1}}' }
     let(:user)   { create(:user) }
-    let(:schema) { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format: format) }
+    let(:schema) { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format:) }
 
     it "persists an Activity object" do
-      payload    = Events::Schemas::Created.new(record: schema, user: user).payload
+      payload    = Events::Schemas::Created.new(record: schema, user:).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
-        Time.zone.now - 1.second,
+        1.second.ago,
         Time.zone.now,
         123,
         payload
       )
 
       expect {
-        @activity = subject.process(event: event)
+        @activity = subject.process(event:)
       }.to change(Activity, :count)
     end
   end

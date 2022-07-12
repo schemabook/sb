@@ -19,7 +19,7 @@ module Subscribers
 
           Activity.create(
             activity_log: log,
-            user: user,
+            user:,
             title: "Invited Teammate",
             detail: "#{user.display_name} invited #{teammate.display_name}",
             resource_id: teammate.id,
