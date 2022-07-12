@@ -108,6 +108,7 @@ jobs:
           cp config/database.github.yml config/database.yml
           bundle exec rails db:create
           bundle exec rails db:migrate
+          bundle exec rails tailwindcss:build
 
       - name: Run tests
         run: bundle exec rspec --format documentation
