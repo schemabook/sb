@@ -1,20 +1,22 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.6'
+gem 'rails', '~> 7.0.3'
 # Use postgres
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 5.6.2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+# Rails 7 declares optional dependency, app was started in v 6 and needs this
+gem "sprockets-rails"
+# Ruby 3.1 uses Psych 4 which changes how YAML is loaded
+gem 'psych', '> 4'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Use tailwind CSS framework
-gem "tailwindcss-rails", "~> 0.3.3"
+gem "tailwindcss-rails", "~> 2.0.10"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -32,7 +34,7 @@ gem 'devise_invitable', '~> 2.0.6'
 # gem 'image_processing', '~> 1.12.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+#gem 'bootsnap', '>= 1.4.4', require: false
 
 # used to send email from Render
 gem 'mailgun-ruby', '~>1.2.5'

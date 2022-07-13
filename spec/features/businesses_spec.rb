@@ -10,7 +10,7 @@ RSpec.describe "Businesses", type: :feature do
 
   context "when non-admin" do
     before do
-      user.team = create(:team, business: business)
+      user.team = create(:team, business:)
 
       visit business_path(business)
     end

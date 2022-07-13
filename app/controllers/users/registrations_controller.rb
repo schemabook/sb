@@ -57,7 +57,7 @@ module Users
     def create_business
       name = sanitized_params["business"]
 
-      Business.create(name: name)
+      Business.create(name:)
     end
 
     def create_team(business: :business)
@@ -66,9 +66,9 @@ module Users
 
     def sign_up_params
       business = create_business
-      team     = create_team(business: business)
+      team     = create_team(business:)
 
-      sanitized_params.merge(business: business, team: team)
+      sanitized_params.merge(business:, team:)
     end
 
     # If you have extra params to permit, append them to the sanitizer.

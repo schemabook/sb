@@ -4,14 +4,14 @@ FactoryBot.define do
     password { "password" }
 
     business { association :business, :with_activity_log }
-    team     { association :team, business: business }
+    team     { association :team, business: }
 
     after(:create) do |object|
       object.business.update({ created_by: object.id })
     end
 
     trait :admin do
-      team { association :team, name: Team::ADMIN_TEAM_NAME, business: business, administrators: true }
+      team { association :team, name: Team::ADMIN_TEAM_NAME, business:, administrators: true }
     end
 
     trait :with_avatar do

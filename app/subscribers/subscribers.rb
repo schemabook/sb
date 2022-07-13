@@ -5,7 +5,7 @@ module Subscribers
     def subscribe
       raise NameError unless defined?(self.class::EVENT_NAME)
 
-      ActiveSupport::Notifications.subscribe(self.class::EVENT_NAME) { |event| process(event: event) }
+      ActiveSupport::Notifications.subscribe(self.class::EVENT_NAME) { |event| process(event:) }
     end
 
     def process

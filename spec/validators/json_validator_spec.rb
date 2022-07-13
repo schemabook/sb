@@ -6,7 +6,7 @@ RSpec.describe JsonValidator do
       let(:body) { '{"foo": {"bar": 1}}' }
 
       it "returns true" do
-        expect(described_class.validate(body)).to eq(true)
+        expect(described_class.validate(body)).to be(true)
       end
     end
 
@@ -14,7 +14,7 @@ RSpec.describe JsonValidator do
       let(:body) { 'foo' }
 
       it "returns false" do
-        expect(described_class.validate(body)).to eq(false)
+        expect(described_class.validate(body)).to be(false)
       end
     end
 

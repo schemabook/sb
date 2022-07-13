@@ -164,3 +164,9 @@ Rails/OutputSafety:
 
 RSpec/LetSetup:
   Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Style/OpenStructUse:
+  Enabled: false

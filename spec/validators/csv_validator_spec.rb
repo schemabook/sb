@@ -6,7 +6,7 @@ RSpec.describe CsvValidator do
       let(:body) { 'this,is,valid' }
 
       it "returns true" do
-        expect(described_class.validate(body)).to eq(true)
+        expect(described_class.validate(body)).to be(true)
       end
     end
 
@@ -14,7 +14,7 @@ RSpec.describe CsvValidator do
       let(:body) { nil }
 
       it "returns false" do
-        expect(described_class.validate(body)).to eq(false)
+        expect(described_class.validate(body)).to be(false)
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe CsvValidator do
       let(:body) { "foo,0\nbar,1\nbaz,2\n'\"'" }
 
       it "returns false" do
-        expect(described_class.validate(body)).to eq(false)
+        expect(described_class.validate(body)).to be(false)
       end
     end
   end

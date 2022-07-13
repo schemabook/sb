@@ -15,22 +15,22 @@ RSpec.describe Subscribers::Invitations::Created::ActivityLog do
 
   describe "#process" do
     let(:business) { create(:business) }
-    let(:user)     { create(:user, business: business) }
+    let(:user)     { create(:user, business:) }
     let(:teammate) { create(:user, email: "teammate@example.com") }
 
     it "persists an ActivityLog object" do
-      payload    = Events::Invitations::Created.new(teammate: teammate, user: user).payload
+      payload    = Events::Invitations::Created.new(teammate:, user:).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
-        Time.zone.now - 1.second,
+        1.second.ago,
         Time.zone.now,
         123,
         payload
       )
 
       expect {
-        subject.process(event: event)
+        subject.process(event:)
       }.to change(Activity, :count)
     end
   end

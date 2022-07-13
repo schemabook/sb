@@ -20,18 +20,18 @@ RSpec.describe Subscribers::Teams::Created::Activity do
     let(:team)   { user.team }
 
     it "persists an Activity object" do
-      payload    = Events::Teams::Created.new(record: team, user: user).payload
+      payload    = Events::Teams::Created.new(record: team, user:).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
-        Time.zone.now - 1.second,
+        1.second.ago,
         Time.zone.now,
         123,
         payload
       )
 
       expect {
-        subject.process(event: event)
+        subject.process(event:)
       }.to change(Activity, :count)
     end
   end

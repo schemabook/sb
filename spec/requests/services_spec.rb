@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Services", type: :request do
   let(:business) { create(:business, :with_activity_log) }
-  let(:team)     { create(:team, business: business) }
-  let!(:user)    { create(:user, business: business) }
-  let(:service)  { create(:service, team: team, created_by: user.id) }
+  let(:team)     { create(:team, business:) }
+  let!(:user)    { create(:user, business:) }
+  let(:service)  { create(:service, team:, created_by: user.id) }
 
   before do
     sign_in user
@@ -73,13 +73,13 @@ RSpec.describe "Services", type: :request do
       it "does not create a new Service" do
         expect {
           post services_url, params: { service: { name: "foo" } }
-        }.to change(Service, :count).by(0)
+        }.not_to change(Service, :count)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post services_url, params: { service: { name: "foo" } }
 
-        expect(response.status).to be(422)
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).not_to be_successful
       end
     end
@@ -118,7 +118,7 @@ RSpec.describe "Services", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         patch service_url(service), params: { service: { name: "foo" } }
 
-        expect(response.status).to be(422)
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response).not_to be_successful
       end
     end

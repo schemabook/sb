@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Events::Users::Updated do
   let(:user) { create(:user) }
 
-  subject { described_class.new(user: user) }
+  subject { described_class.new(user:) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil
@@ -106,7 +106,7 @@ RSpec.describe Events::Users::Updated do
     end
 
     it "includes the event timestamp" do
-      expect(subject.payload[:ts_ms]).not_to eq(nil)
+      expect(subject.payload[:ts_ms]).not_to be_nil
       expect(subject.payload[:ts_ms].to_s.size).to eq(13) # includes milliseconds
     end
   end

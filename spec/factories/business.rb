@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :with_activity_log do
       after(:create) do |business|
-        create(:activity_log, business: business)
+        create(:activity_log, business:)
       end
     end
   end

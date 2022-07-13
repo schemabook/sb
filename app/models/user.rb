@@ -13,8 +13,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :business
 
   validates :email, presence: true
-  validates :business, presence: true
-  validates :team, presence: true
 
   delegate :admin?, to: :team
 

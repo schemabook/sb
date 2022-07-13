@@ -8,8 +8,6 @@ class Schema < ApplicationRecord
   belongs_to :format
 
   validates :name, presence: true, uniqueness: { scope: :service_id }, length: { in: 2..120 }
-  validates :team_id, presence: true
-  validates :format_id, presence: true
   validates :raw_body, presence: true
   validate :body_format
 
@@ -18,7 +16,7 @@ class Schema < ApplicationRecord
 
     raw_body.attach(
       io: StringIO.new(value),
-      filename: filename,
+      filename:,
       content_type: 'text/plain'
     )
   end

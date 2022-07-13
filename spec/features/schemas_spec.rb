@@ -32,7 +32,7 @@ RSpec.describe "Schemas", type: :feature do
 
   context "when viewing a schema" do
     let!(:format) { create(:format) }
-    let!(:schema) { create(:schema, format: format, team: user.team, service_id: service.id, body: '[1]') }
+    let!(:schema) { create(:schema, format:, team: user.team, service_id: service.id, body: '[1]') }
 
     before do
       visit schema_path(schema)
