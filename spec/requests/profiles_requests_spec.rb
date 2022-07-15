@@ -20,6 +20,12 @@ RSpec.describe "Profiles", type: :request do
 
       expect(assigns(:activities)).to eq(Activity.none)
     end
+
+    it "should assign stakeholdings" do
+      subject
+
+      expect(assigns(:stakeholdings)).to match_array([])
+    end
   end
 
   describe "GET edit" do

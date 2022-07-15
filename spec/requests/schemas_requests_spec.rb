@@ -42,6 +42,18 @@ RSpec.describe "/schemas", type: :request do
 
       expect(assigns(:activities)).not_to be_nil
     end
+
+    it "assigns stakeholder" do
+      get schema_url(schema)
+
+      expect(assigns(:stakeholder).class).to eq(Stakeholder)
+    end
+
+    it "assigns stakeholders" do
+      get schema_url(schema)
+
+      expect(assigns(:stakeholders)).to match_array([])
+    end
   end
 
   describe "GET /new" do

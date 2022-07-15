@@ -51,4 +51,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
   } catch (error) {
     console.log(error)
   }
+
+  try {
+    const element = document.querySelector("#new_stakeholder");
+
+    element.addEventListener("ajax:success", (event) => {
+      const [_data, _status, xhr] = event.detail;
+      var elem = document.querySelector('#new-stakeholder')
+      elem.setAttribute("disabled", null)
+
+      var elem = document.getElementsByClassName('stakeholder-count')[0]
+      var previousValue = parseInt(elem.innerText)
+      elem.innerText = previousValue + 1
+
+      var text = document.createTextNode("You are now listed as a stakeholder.");
+      var tag = document.createElement("p");
+      tag.setAttribute("id", "add-stakeholder-alert");
+      tag.appendChild(text);
+
+      var elem = document.getElementById('add-stakeholder');
+      elem.appendChild(tag);
+    });
+    element.addEventListener("ajax:error", () => {
+      var text = document.createTextNode("There was an error, please try again.");
+      var tag = document.createElement("p");
+      tag.setAttribute("id", "add-stakeholder-error");
+      tag.appendChild(text);
+
+      if (document.getElementById('add-stakeholder-error') == null) {
+        var elem = document.querySelector('#add-stakeholder');
+        elem.appendChild(tag);
+      }
+    });
+  } catch (error) {
+    console.log(error)
+  }
 });

@@ -114,8 +114,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_121843) do
   create_table "stakeholders", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "schema_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["schema_id"], name: "index_stakeholders_on_schema_id"
     t.index ["user_id"], name: "index_stakeholders_on_user_id"
   end
