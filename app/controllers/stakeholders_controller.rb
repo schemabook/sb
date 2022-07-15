@@ -4,8 +4,10 @@ class StakeholdersController < ApplicationController
 
     if @stakeholder.save
       flash.now[:message] = "You have been added as a stakeholder"
+      render json: @stakeholder, status: :ok
     else
       flash.now[:alert] = "Could not be added as a stakeholder, please try again"
+      render json: @stakeholder, status: :internal_server_error
     end
   end
 

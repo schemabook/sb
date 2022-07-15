@@ -1,4 +1,6 @@
 class Stakeholder < ApplicationRecord
-  validates :user_id, presence: true
-  validates :schema_id, presence: true, uniqueness: { scope: :user_id }
+  belongs_to :user
+  belongs_to :schema
+
+  validates :schema_id, uniqueness: { scope: :user_id }
 end

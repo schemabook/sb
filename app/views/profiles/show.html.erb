@@ -91,6 +91,37 @@
         </div>
         <!-- end main area wrapper -->
 
+
+        <% if @stakeholdings.present? %>
+          <!-- main area wrapper -->
+          <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+            <!-- main area list -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
+              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                  <div class="ml-4 mt-2">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Stakeholdings
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4">
+                <ul id="team">
+                  <% @stakeholdings.each do |stakeholding| %>
+                    <li><%= link_to stakeholding.schema.name, schema_path(stakeholding.schema) %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+            <!-- end main area list -->
+
+          </div>
+          <!-- end main area wrapper -->
+        <% end %>
+
     </div>
   </div>
 </div>

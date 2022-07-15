@@ -17,22 +17,35 @@
               <li class="py-4">
                 <span class="text-gray-400">Created On:</span> <%= l @schema.created_at, format: :sample %>
               </li>
-              <li class="md:flex">
-                <div class="relative py-4">
-                  <span class="text-gray-400">Stakeholders:</span> 7
-                </div>
-                <div class="absolute right-0 py-2">
-                  <%= form_for @stakeholder, url: stakeholders_path(@stakeholder), html: { method: :post }, remote: true do |f| %>
-                    <%= f.hidden_field :user_id, value: current_user.id %>
-                    <%= f.hidden_field :schema_id, value: @schema.id %>
+              <li class="py-4">
 
-                    <button id="new-stakeholder" type="submit" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                      </svg>
-                    </button>
-                  <% end %>
-                </div>
+                <% if @stakeholder.persisted? %>
+                  <div class="w-full grid grid-rows-2 grid-flow-col">
+                    <div class="py-2">
+                      <span class="text-gray-400">Stakeholders:</span> <span class="stakeholder-count"><%= @stakeholders.size %></span>
+                    </div>
+                    <span class"text-teal-400">You are a <%= link_to "stakeholder", user_profile_path(current_user), { class: "underline" } %></span>
+                  </div>
+                <% else %>
+                  <div id="add-stakeholder" class="w-full grid">
+                    <div class="py-2">
+                      <span class="text-gray-400">Stakeholders:</span> <span class="stakeholder-count"><%= @stakeholders.size %></span>
+                    </div>
+                    <div class="absolute right-0">
+                      <%= form_for @stakeholder, url: stakeholders_path(@stakeholder), html: { method: :post }, remote: true do |f| %>
+                        <%= f.hidden_field :user_id, value: current_user.id %>
+                        <%= f.hidden_field :schema_id, value: @schema.id %>
+
+                        <button id="new-stakeholder" type="submit" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                          </svg>
+                        </button>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
               </li>
               <li class="py-4">
                 <span class="text-gray-400">Version:</span> 3
@@ -48,6 +61,9 @@
 
   <div class="bg-white lg:min-w-0 lg:flex-1">
     <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+
+      <%= render 'shared/flashes' %>
+
       <!-- Start main area-->
       <div class="relative h-full" style="min-height: 36rem;">
 

@@ -5,10 +5,11 @@ class SchemasController < ApplicationController
   end
 
   def show
-    @schema      = current_user.team.schemas.where(id: params[:id]).first
-    @tab         = params[:tab] || @schema.format.to_s
-    @activities  = current_user.business.activity_log.for_schema(schema: @schema).limit(8).reverse
-    @stakeholder = Stakeholder.new
+    @schema       = current_user.team.schemas.where(id: params[:id]).first
+    @tab          = params[:tab] || @schema.format.to_s
+    @activities   = current_user.business.activity_log.for_schema(schema: @schema).limit(8).reverse
+    @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id)
+    @stakeholders = Stakeholder.where(schema_id: @schema.id)
   end
 
   def create
