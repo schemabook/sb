@@ -3,6 +3,8 @@ class StakeholdersController < ApplicationController
     @stakeholder = Stakeholder.new(stakeholder_params)
 
     if @stakeholder.save
+      Events::Stakeholders::Created.new(record: @stakeholder).publish
+
       flash.now[:message] = "You have been added as a stakeholder"
       render json: @stakeholder, status: :ok
     else

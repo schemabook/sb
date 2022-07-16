@@ -44,7 +44,7 @@ module Events
         {
           before: nil,
           after: {
-            id: @record.id,
+            id: @record.id
           },
           source: {
             version: EVENT_VERSION,
