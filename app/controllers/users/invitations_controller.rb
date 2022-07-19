@@ -1,11 +1,11 @@
 class Users::InvitationsController < Devise::InvitationsController
   def new
-    @activities = current_user.business.activity_log.for_invitations.limit(8).reverse
+    @activities = current_user.business.activity_log.for_invitations.limit(8)
     super
   end
 
   def edit
-    @activities = current_user.business.activity_log.for_invitations.limit(8).reverse
+    @activities = current_user.business.activity_log.for_invitations.limit(8)
     super
   end
 
