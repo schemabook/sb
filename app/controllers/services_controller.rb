@@ -8,18 +8,18 @@ class ServicesController < ApplicationController
 
   # GET /services/1 or /services/1.json
   def show
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8).reverse
+    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # GET /services/new
   def new
     @service    = Service.new
-    @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8).reverse
+    @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
   end
 
   # GET /services/1/edit
   def edit
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8).reverse
+    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # rubocop:disable Metrics/MethodLength

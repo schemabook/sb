@@ -12,18 +12,18 @@ class TeamsController < ApplicationController
   def show
     @teammates  = @team.users
     @schemas    = @team.schemas
-    @activities = current_user.business.activity_log.for_team(team: @team).limit(8).reverse
+    @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
   end
 
   # GET /teams/new
   def new
     @team       = Team.new
-    @activities = current_user.business.activity_log.for_teams.limit(8).reverse
+    @activities = current_user.business.activity_log.for_teams.limit(8)
   end
 
   # GET /teams/1/edit
   def edit
-    @activities = current_user.business.activity_log.for_team(team: @team).limit(8).reverse
+    @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
   end
 
   # rubocop:disable Metrics/MethodLength

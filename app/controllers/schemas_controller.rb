@@ -1,13 +1,13 @@
 class SchemasController < ApplicationController
   def new
     @schema     = Schema.new
-    @activities = current_user.business.activity_log.for_schema_new.limit(8).reverse
+    @activities = current_user.business.activity_log.for_schema_new.limit(8)
   end
 
   def show
     @schema       = current_user.team.schemas.where(id: params[:id]).first
     @tab          = params[:tab] || @schema.format.to_s
-    @activities   = current_user.business.activity_log.for_schema(schema: @schema).limit(8).reverse
+    @activities   = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
     @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id)
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
   end
