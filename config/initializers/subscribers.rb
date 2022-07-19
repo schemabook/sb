@@ -18,4 +18,7 @@ Rails.application.reloader.to_prepare do
 
   # Team created
   Subscribers::Teams::Created::Activity.new
+
+  # Stakeholder created
+  Subscribers::Stakeholders::Created::Activity.new
 end
