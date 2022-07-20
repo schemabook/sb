@@ -29,7 +29,8 @@ module Subscribers
             title: "Became Stakeholder",
             detail: "Established for #{stakeholder.schema.name}",
             resource_id: stakeholder.user.id,
-            resource_class: stakeholder.user.class.to_s
+            resource_class: stakeholder.user.class.to_s,
+            user_only: true
           )
         end
 
