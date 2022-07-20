@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_121843) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_122904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,8 +51,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_121843) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "activity_log_id"
+    t.boolean "user_only", default: false
     t.index ["activity_log_id"], name: "index_activities_on_activity_log_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
+    t.index ["user_only"], name: "index_activities_on_user_only"
   end
 
   create_table "activity_logs", force: :cascade do |t|
@@ -114,8 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_121843) do
   create_table "stakeholders", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "schema_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["schema_id"], name: "index_stakeholders_on_schema_id"
     t.index ["user_id"], name: "index_stakeholders_on_user_id"
   end
