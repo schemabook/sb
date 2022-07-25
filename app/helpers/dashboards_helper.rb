@@ -7,7 +7,7 @@ module DashboardsHelper
     "#{activity.title} #{resource_link}".html_safe
   end
 
-  def small_avatar(user, add_styles=nil)
+  def small_avatar(user, add_styles = nil)
     size = 5
     styles = "inline-block h-#{size} w-#{size} rounded-full ring-2 ring-white "
     styles += add_styles
@@ -26,7 +26,7 @@ module DashboardsHelper
     results = ""
     stakeholders.each_with_index do |stakeholder, index|
       add_styles = ""
-      add_styles += "-ml-1" if index > 0
+      add_styles += "-ml-1" if index.positive?
 
       results += small_avatar(stakeholder.user, add_styles)
     end

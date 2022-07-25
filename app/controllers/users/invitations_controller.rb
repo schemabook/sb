@@ -4,10 +4,6 @@ class Users::InvitationsController < Devise::InvitationsController
     super
   end
 
-  def edit
-    super
-  end
-
   private
 
   # This is called when creating invitation.
