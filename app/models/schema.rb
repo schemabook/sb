@@ -1,7 +1,8 @@
 class Schema < ApplicationRecord
-  has_one_attached :raw_body
-
   attr_accessor :file_type
+
+  has_one_attached :raw_body
+  has_many :stakeholders
 
   belongs_to :team
   belongs_to :service, optional: true
