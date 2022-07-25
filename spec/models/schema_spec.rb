@@ -11,6 +11,8 @@ RSpec.describe Schema, type: :model do
   it { should belong_to :team }
   it { should belong_to(:service).optional }
 
+  it { should have_many :stakeholders }
+
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of(:name).scoped_to(:service_id) }
 
