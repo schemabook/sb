@@ -17,8 +17,8 @@ gem 'psych', '> 4'
 gem 'webpacker', '~> 5.0'
 # Use tailwind CSS framework
 gem "tailwindcss-rails", "~> 2.0.10"
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# hotwire
+gem "hotwire-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Devise for Authentication
@@ -26,7 +26,7 @@ gem 'devise'
 # Use Devise invitable for inviting team members
 gem 'devise_invitable', '~> 2.0.6'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
