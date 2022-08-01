@@ -1,0 +1,34 @@
+<div class="flex items-start space-x-4">
+  <div class="flex-shrink-0">
+    <%= avatar(current_user, size: 10) %>
+  </div>
+  <div class="min-w-0 flex-1">
+    <%= form_with model: [@schema, @comment], class: "relative" do |form| %>
+      <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+        <%= form.label :body, for: "comment", class: "sr-only", value: "Add your comment" %>
+        <%= form.text_area :body, rows: 3,  class: "block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm", placeholder: "Add your comment" %>
+        <%= form.hidden_field :schema_id, value: @schema.id %>
+
+        <!-- Spacer element to match the height of the toolbar -->
+        <div class="py-2" aria-hidden="true">
+          <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+          <div class="py-px">
+            <div class="h-9"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-between">
+        <div class="flex items-center space-x-5">
+        </div>
+        <div class="flex-shrink-0">
+          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">Post</button>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-4">
+      <%= render 'shared/flashes' %>
+    </div>
+  </div>
+</div>
