@@ -54,6 +54,18 @@ RSpec.describe "/schemas", type: :request do
 
       expect(assigns(:stakeholders)).to match_array([])
     end
+
+    it "assigns a comment" do
+      get schema_url(schema)
+
+      expect(assigns(:comment).class).to eq(Comment)
+    end
+
+    it "assigns comments" do
+      get schema_url(schema)
+
+      expect(assigns(:comments)).to match_array([])
+    end
   end
 
   describe "GET /new" do
