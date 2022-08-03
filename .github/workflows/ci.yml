@@ -80,6 +80,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.6.0
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
       - name: Find yarn cache location
         id: yarn-cache
