@@ -1,0 +1,5 @@
+<ul role="list" class="ml-10 divide-y divide-gray-200">
+  <% @comments.each do |comment| %>
+    <%= render partial: 'comment', locals: {comment: comment} %>
+  <% end %>
+</ul>

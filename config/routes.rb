@@ -42,5 +42,7 @@ Rails.application.routes.draw do
   resources :teams, except: :index
   resources :businesses
   resources :services
-  resources :schemas
+  resources :schemas do
+    resources :comments
+  end
 end
