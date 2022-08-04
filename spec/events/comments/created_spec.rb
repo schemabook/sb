@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Events::Comments::Created do
   let(:comment) { create(:comment, :with_user, :with_schema) }
 
-  subject { described_class.new(comment: comment, user: comment.user) }
+  subject { described_class.new(comment:, user: comment.user) }
 
   it "defines an event name" do
     expect(subject.class::EVENT_NAME).not_to be_nil

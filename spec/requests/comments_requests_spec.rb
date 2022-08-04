@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "/schemas/:id/comments", type: :request do
   let(:user)   { create(:user, :admin) }
   let(:schema) { create(:schema, :with_team, :with_format_and_body) }
-  let(:comment) { build(:comment, schema: schema, user: user) }
+  let(:comment) { build(:comment, schema:, user:) }
 
   let(:valid_attributes) {
     { "body" => "this is a comment", "schema_id" => schema.id, "user_id" => user.id }
@@ -46,7 +46,7 @@ RSpec.describe "/schemas/:id/comments", type: :request do
         }.not_to change(Comment, :count)
       end
 
-      it "redirects to the schema page with a message "do
+      it "redirects to the schema page with a message" do
         post schema_comments_path(schema), params: { comment: invalid_attributes }
 
         expect(flash[:alert]).to be_present
