@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params.merge(user_id: current_user.id))
 
     if @comment.save
-      #Events::Comments::Created.new(record: @comment, user: current_user).publish
+      Events::Comments::Created.new(record: @comment, user: current_user).publish
 
       flash[:notice] = "Comment was addedd"
     else
