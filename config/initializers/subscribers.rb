@@ -21,4 +21,7 @@ Rails.application.reloader.to_prepare do
 
   # Stakeholder created
   Subscribers::Stakeholders::Created::Activity.new
+
+  # Comment created
+  Subscribers::Comments::Created::ActivityLog.new
 end
