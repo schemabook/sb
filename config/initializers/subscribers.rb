@@ -5,7 +5,7 @@ Rails.application.reloader.to_prepare do
   Subscribers::Businesses::Created::ActivityLog.new
 
   # Businesses updated
-  Subscribers::Businesses::Updated::ActivityLog.new
+  Subscribers::Businesses::Updated::Activity.new
 
   # Services created
   Subscribers::Services::Created::Activity.new
@@ -14,7 +14,7 @@ Rails.application.reloader.to_prepare do
   Subscribers::Schemas::Created::Activity.new
 
   # Invitation created
-  Subscribers::Invitations::Created::ActivityLog.new
+  Subscribers::Invitations::Created::Activity.new
 
   # Team created
   Subscribers::Teams::Created::Activity.new
@@ -23,5 +23,5 @@ Rails.application.reloader.to_prepare do
   Subscribers::Stakeholders::Created::Activity.new
 
   # Comment created
-  Subscribers::Comments::Created::ActivityLog.new
+  Subscribers::Comments::Created::Activity.new
 end

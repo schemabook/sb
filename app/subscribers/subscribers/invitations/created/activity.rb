@@ -1,7 +1,7 @@
 module Subscribers
   module Invitations
     module Created
-      class ActivityLog
+      class Activity
         include Subscribers::Subscriber
 
         EVENT_NAME = Events::Invitations::Created::EVENT_NAME

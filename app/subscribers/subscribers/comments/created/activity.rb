@@ -1,7 +1,7 @@
 module Subscribers
   module Comments
     module Created
-      class ActivityLog
+      class Activity
         include Subscribers::Subscriber
 
         EVENT_NAME = Events::Comments::Created::EVENT_NAME

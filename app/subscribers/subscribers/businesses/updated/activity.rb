@@ -1,7 +1,7 @@
 module Subscribers
   module Businesses
     module Updated
-      class ActivityLog
+      class Activity
         include Subscribers::Subscriber
 
         EVENT_NAME = Events::Businesses::Updated::EVENT_NAME
@@ -15,7 +15,7 @@ module Subscribers
           payload  = JSON.parse(event.payload.to_json, object_class: OpenStruct)
           business = Business.find(payload.after.id)
           user     = User.find(payload.after.actor_id)
-          log      = ::ActivityLog.create(business:)
+          log      = ::ActivityLog.first_or_create(business_id: user.business.id)
 
           Activity.create(
             activity_log: log,
