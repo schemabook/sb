@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Subscribers::Businesses::Updated::ActivityLog do
+RSpec.describe Subscribers::Comments::Created::Activity do
   subject { described_class.new }
 
   it "defines an event name" do
-    expect(subject.class::EVENT_NAME).to eq(Events::Businesses::Updated::EVENT_NAME)
+    expect(subject.class::EVENT_NAME).to eq(Events::Comments::Created::EVENT_NAME)
   end
 
   it "subscribes when instantiated" do
@@ -14,11 +14,10 @@ RSpec.describe Subscribers::Businesses::Updated::ActivityLog do
   end
 
   describe "#process" do
-    let(:business) { create(:business) }
-    let(:user)     { create(:user) }
+    let(:comment) { create(:comment, :with_user, :with_schema) }
 
     it "persists an ActivityLog object" do
-      payload    = Events::Businesses::Updated.new(business:, user:).payload
+      payload    = Events::Comments::Created.new(record: comment, user: comment.user).payload
       event_type = "foo"
       event      = ActiveSupport::Notifications::Event.new(
         event_type,
@@ -34,4 +33,3 @@ RSpec.describe Subscribers::Businesses::Updated::ActivityLog do
     end
   end
 end
-

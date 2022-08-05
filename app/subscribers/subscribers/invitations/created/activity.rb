@@ -1,7 +1,7 @@
 module Subscribers
   module Invitations
     module Created
-      class ActivityLog
+      class Activity
         include Subscribers::Subscriber
 
         EVENT_NAME = Events::Invitations::Created::EVENT_NAME
@@ -17,7 +17,7 @@ module Subscribers
           user     = User.find(payload.after.actor_id)
           log      = ::ActivityLog.first_or_create(business_id: user.business.id)
 
-          Activity.create(
+          ::Activity.create(
             activity_log: log,
             user:,
             title: "Invited Teammate",
