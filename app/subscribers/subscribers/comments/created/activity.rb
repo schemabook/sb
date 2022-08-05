@@ -17,7 +17,7 @@ module Subscribers
           user    = User.find(payload.after.actor_id)
           schema  = comment.schema
 
-          Activity.create(
+          ::Activity.create(
             activity_log: user.business.activity_log,
             user:,
             title: "Created Comment",

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Subscribers::Invitations::Created::ActivityLog do
+RSpec.describe Subscribers::Invitations::Created::Activity do
   subject { described_class.new }
 
   it "defines an event name" do
