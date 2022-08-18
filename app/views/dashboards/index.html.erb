@@ -42,7 +42,7 @@
             <ul class="divide-y divide-gray-200">
 
               <!-- list items -->
-              <% @schemas.each do |schema| %>
+              <% @sorted_schemas.each do |schema| %>
                 <%= render 'schema', schema: schema %>
               <% end %>
 

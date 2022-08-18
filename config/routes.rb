@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   # stakeholders
   post 'stakeholders', to: 'stakeholders#create'
 
+  # favorites
+  post 'favorites', to: 'favorites#create'
+  delete 'favorites', to: 'favorites#destroy'
+
   resources :teams, except: :index
   resources :businesses
   resources :services

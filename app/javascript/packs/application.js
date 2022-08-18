@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var elem = document.getElementById('add-stakeholder');
       elem.appendChild(tag);
     });
+
     element.addEventListener("ajax:error", () => {
       var text = document.createTextNode("There was an error, please try again.");
       var tag = document.createElement("p");

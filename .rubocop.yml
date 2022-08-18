@@ -170,3 +170,6 @@ Rails/I18nLocaleTexts:
 
 Style/OpenStructUse:
   Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
