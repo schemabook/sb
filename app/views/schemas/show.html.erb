@@ -101,7 +101,13 @@
 
           <!-- main area list -->
           <div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
-            <pre class="font-mono">
+            <div id="gutter" class="absolute -ml-4 border-r-1">
+              <% @schema.body.lines.count.times do |count| %>
+                <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
+              <% end %>
+            </div>
+
+            <pre class="font-mono ml-4">
 <%= @schema.body %>
             </pre>
 
