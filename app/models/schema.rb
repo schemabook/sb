@@ -4,6 +4,7 @@ class Schema < ApplicationRecord
   has_one_attached :raw_body
   has_many :stakeholders
   has_many :comments
+  has_many :favorites
 
   belongs_to :team
   belongs_to :service, optional: true

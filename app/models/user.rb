@@ -8,6 +8,7 @@ class User < ApplicationRecord
   belongs_to :team
 
   has_one_attached :avatar
+  has_many :favorites
 
   # businesses are created during registration at the same time as users
   accepts_nested_attributes_for :business
