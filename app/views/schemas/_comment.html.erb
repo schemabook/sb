@@ -3,7 +3,7 @@
     <div class="min-w-0 flex-1">
       <p class="text-sm font-medium text-gray-900 truncate"><%= comment.user.name %></p>
     </div>
-    <time datetime="2021-01-27T16:35" class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500">1d ago</time>
+    <time datetime="<%= comment.updated_at %>" class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"><%= time_ago_in_words(comment.updated_at) %> ago</time>
   </div>
   <div class="mt-1">
     <p class="line-clamp-2 text-sm text-gray-600"><%= comment.body %></p>
