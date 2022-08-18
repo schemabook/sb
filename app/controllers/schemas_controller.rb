@@ -8,7 +8,7 @@ class SchemasController < ApplicationController
     @schema       = current_user.team.schemas.where(id: params[:id]).first
     @tab          = params[:tab] || @schema.format.to_s
     @activities   = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
-    @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id)
+    @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
     @comment      = Comment.new(schema_id: @schema.id)
     @comments     = @schema.comments.order(created_at: :desc)
