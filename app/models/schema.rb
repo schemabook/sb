@@ -37,14 +37,7 @@ class Schema < ApplicationRecord
   def body_format
     return true if body.nil?
 
-    validator = format.validator
-
-    if validator.constantize.validate(body)
-      true
-    else
-      errors.add :body, "is not valid #{file_type}"
-
-      false
-    end
+    validator = format.validator.constantize
+    validator.validate(body, self)
   end
 end
