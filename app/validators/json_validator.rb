@@ -2,10 +2,10 @@ class JsonValidator
   DRAFT = "draft4"
 
   def self.validate(body, klass = nil)
-    self.errors(body)
+    errors(body)
     true
   rescue => e
-    klass.errors.add(:body, "is not valid JSON: #{e.message.split(":").last}") unless klass.nil?
+    klass&.errors&.add(:body, "is not valid JSON: #{e.message.split(':').last}")
 
     false
   end
