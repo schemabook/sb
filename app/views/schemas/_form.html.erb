@@ -13,6 +13,12 @@
       <% if @schema.errors.any? %>
         <div id="error_explanation" class="mt-4">
 
+          <% if @schema&.format&.json? %>
+            <p class="mt-1 text-sm text-red-900">
+              Schemabook currently validates against <%= JsonValidator::DRAFT %> of JSON Schema.
+            </p>
+          <% end %>
+
           <p class="mt-1 text-sm text-red-900">
             <%= pluralize(@schema.errors.count, "error") %> prohibited this schema from being saved:
           </p>

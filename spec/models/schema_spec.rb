@@ -33,10 +33,10 @@ RSpec.describe Schema, type: :model do
 
     context "with invalid body content" do
       it "returns false" do
-        subject.body = "foo"
+        subject.body = "{"
 
         expect(subject.send(:body_format)).to be(false)
-        expect(subject.errors.messages[:body].include?("is not valid json")).to be(true)
+        expect(subject.errors.messages[:body].first).to match(/is not valid JSON/)
       end
     end
   end
