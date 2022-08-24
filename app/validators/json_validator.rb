@@ -1,4 +1,6 @@
 class JsonValidator
+  DRAFT = "draft4"
+
   def self.validate(body, klass = nil)
     self.errors(body)
     true
@@ -9,7 +11,7 @@ class JsonValidator
   end
 
   def self.errors(body)
-    metaschema = JSON::Validator.validator_for_name("draft4").metaschema
+    metaschema = JSON::Validator.validator_for_name(DRAFT).metaschema
     JSON::Validator.validate(metaschema, JSON.parse(body))
   end
 end
