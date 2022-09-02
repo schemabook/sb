@@ -61,4 +61,23 @@ RSpec.describe SchemaFormatter do
       end
     end
   end
+
+  describe "#as_csv" do
+    context "when body format is json" do
+      before do
+        expect(schema.format.json?).to be_truthy
+      end
+
+      context "when the JSON can be converted" do
+        let(:json)   { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
+        let(:schema) { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+
+        it "returns the body in avro format" do
+          csv = subject.as_csv
+
+          expect(csv).to eq("name,type\ntitle,string\n")
+        end
+      end
+    end
+  end
 end

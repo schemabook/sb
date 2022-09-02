@@ -23,3 +23,11 @@ a.button {
 a:has(> button) {
   text-decoration-line: none;
 }
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}

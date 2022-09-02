@@ -50,6 +50,11 @@
               <li class="py-4">
                 <span class="text-gray-400">Version:</span> 3 (FPO)
               </li>
+              <% if @schema.description.present? %>
+              <li class="py-4">
+                <span class="text-gray-400">Description:</span> <%= @schema.description %>
+              </li>
+              <% end %>
             </ul>
           </div>
 
@@ -84,7 +89,8 @@
                   <a href="/schemas/<%= @schema.id %>?tab=json" class="<%= @tab == 'json' ? highlight : 'border-transparent' %> text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                     JSON
                   </a>
-                  <a href="/schemas/<%= @schema.id %>?tab=avro" class="<%= @tab == 'avro' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                  <a href="/schemas/<%= @schema.id %>?tab=avro" class="has-tooltip <%= @tab == 'avro' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <span class='tooltip rounded shadow-lg p-1 bg-gray-100 text-grey-500 -mt-8'>Avro is a compact and efficient binary file format displayed as JSON</span>
                     Avro
                   </a>
                   <a href="/schemas/<%= @schema.id %>?tab=csv" class="<%= @tab == 'csv' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
@@ -115,21 +121,29 @@
 
             <% if @tab == 'avro' %>
               <div id="gutter" class="absolute -ml-4 border-r-1">
-                <% @schema.as_avro.lines.count.times do |count| %>
+                <% JSON.pretty_generate(JSON.parse(SchemaFormatter.new(schema: @schema).as_avro)).lines.count.times do |count| %>
                   <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
                 <% end %>
               </div>
 
               <pre class="font-mono ml-4">
-<%= @schema.as_avro %>
+<%= JSON.pretty_generate(JSON.parse(SchemaFormatter.new(schema: @schema).as_avro)) %>
               </pre>
             <% end %>
 
+            <% if @tab == 'csv' %>
+              <div id="gutter" class="absolute -ml-4 border-r-1">
+                <% SchemaFormatter.new(schema: @schema).as_csv.lines.count.times do |count| %>
+                  <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
+                <% end %>
+              </div>
+
+              <pre class="font-mono ml-4">
+<%= SchemaFormatter.new(schema: @schema).as_csv %>
+              </pre>
+            <% end %>
 
             <% if @tab == 'info' %>
-            <p class="py-2">
-              <%= @schema.description %>
-            </p>
             <div class="pb-5 border-b border-gray-200">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 Endpoints
