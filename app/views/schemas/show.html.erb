@@ -101,15 +101,30 @@
 
           <!-- main area list -->
           <div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
-            <div id="gutter" class="absolute -ml-4 border-r-1">
-              <% @schema.body.lines.count.times do |count| %>
-                <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
-              <% end %>
-            </div>
+            <% if @tab == 'json' %>
+              <div id="gutter" class="absolute -ml-4 border-r-1">
+                <% @schema.body.lines.count.times do |count| %>
+                  <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
+                <% end %>
+              </div>
 
-            <pre class="font-mono ml-4">
+              <pre class="font-mono ml-4">
 <%= @schema.body %>
-            </pre>
+              </pre>
+            <% end %>
+
+            <% if @tab == 'avro' %>
+              <div id="gutter" class="absolute -ml-4 border-r-1">
+                <% @schema.as_avro.lines.count.times do |count| %>
+                  <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
+                <% end %>
+              </div>
+
+              <pre class="font-mono ml-4">
+<%= @schema.as_avro %>
+              </pre>
+            <% end %>
+
 
             <% if @tab == 'info' %>
             <p class="py-2">

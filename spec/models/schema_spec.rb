@@ -24,19 +24,21 @@ RSpec.describe Schema, type: :model do
     end
   end
 
-  describe "#body_format" do
-    context "with valid body content" do
-      it "returns true" do
-        expect(subject.send(:body_format)).to be(true)
+  context "private" do
+    describe "#body_format" do
+      context "with valid body content" do
+        it "returns true" do
+          expect(subject.send(:body_format)).to be(true)
+        end
       end
-    end
 
-    context "with invalid body content" do
-      it "returns false" do
-        subject.body = "{"
+      context "with invalid body content" do
+        it "returns false" do
+          subject.body = "{"
 
-        expect(subject.send(:body_format)).to be(false)
-        expect(subject.errors.messages[:body].first).to match(/is not valid JSON/)
+          expect(subject.send(:body_format)).to be(false)
+          expect(subject.errors.messages[:body].first).to match(/is not valid JSON/)
+        end
       end
     end
   end
