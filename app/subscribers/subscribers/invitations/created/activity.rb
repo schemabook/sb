@@ -10,7 +10,6 @@ module Subscribers
           subscribe
         end
 
-        # rubocop:disable Metrics/MethodLength
         def process(event:)
           payload  = JSON.parse(event.payload.to_json, object_class: OpenStruct)
           teammate = User.find(payload.after.id)
@@ -26,7 +25,6 @@ module Subscribers
             resource_class: teammate.class.to_s
           )
         end
-        # rubocop:enable Metrics/MethodLength
       end
     end
   end

@@ -11,7 +11,7 @@ RSpec.describe JsonValidator do
     end
 
     context "with invalid json" do
-      let(:body) { 'foo' }
+      let(:body) { '' }
 
       it "returns false" do
         expect(described_class.validate(body)).to be(false)

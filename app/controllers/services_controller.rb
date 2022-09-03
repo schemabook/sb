@@ -22,7 +22,6 @@ class ServicesController < ApplicationController
     @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
-  # rubocop:disable Metrics/MethodLength
   # POST /services or /services.json
   def create
     @service = Service.new(service_params.merge({ team_id: current_user.team.id, created_by: current_user.id }))
@@ -39,7 +38,6 @@ class ServicesController < ApplicationController
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /services/1 or /services/1.json
   def update

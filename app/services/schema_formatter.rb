@@ -1,0 +1,87 @@
+class SchemaFormatter
+  class ConversionError < StandardError; end
+
+  attr_reader :schema
+
+  def initialize(schema:)
+    @schema = schema
+  end
+
+  def as_json
+    return schema.body if schema.format.json?
+  end
+
+  def as_avro
+    case schema.format.to_s
+    when "avro"
+      schema.body
+    when "json"
+      json_to_avro
+    end
+  end
+
+  def as_csv
+    case schema.format.to_s
+    when "json"
+      json_to_csv
+    end
+  end
+
+  private
+
+  def json_to_avro
+    begin
+      Avro::Schema.parse(schema.body).to_json
+    rescue => e
+      raise ConversionError, "JSON can't be formatted as Avro: #{e.message}"
+    end
+  end
+
+  # TODO: update to support nesting
+  def json_to_csv
+    headers = csv_headers
+    finalrow = csv_finalrow(headers)
+
+    csv_string(headers, finalrow)
+  end
+
+  def csv_headers
+    headers = []
+
+    JSON.parse(schema.body).each do |h|
+      next unless json_hash?(h)
+
+      element = h.last.first
+
+      element.each_key { |key| headers << key }
+    end
+
+    headers.compact
+  end
+
+  def csv_finalrow(headers)
+    finalrow = []
+
+    JSON.parse(schema.body).each do |h|
+      next unless json_hash?(h)
+
+      final = {}
+      headers.each { |key2| final[key2] = h.last.first[key2] }
+      finalrow << final
+    end
+
+    finalrow
+  end
+
+  def json_hash?(element)
+    element&.last.is_a?(Array) || element&.last&.first.is_a?(Hash)
+  end
+
+  def csv_string(headers, finalrow)
+    CSV.generate do |csv|
+      csv << headers.compact.uniq
+
+      finalrow.each { |deal| csv << deal.values }
+    end
+  end
+end
