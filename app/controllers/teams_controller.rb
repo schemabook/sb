@@ -26,7 +26,6 @@ class TeamsController < ApplicationController
     @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
   end
 
-  # rubocop:disable Metrics/MethodLength
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params.merge(business_id: current_user.business.id))
@@ -43,7 +42,6 @@ class TeamsController < ApplicationController
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update

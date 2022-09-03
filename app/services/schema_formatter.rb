@@ -9,7 +9,6 @@ class SchemaFormatter
 
   def as_json
     return schema.body if schema.format.json?
-
   end
 
   def as_avro
@@ -34,43 +33,55 @@ class SchemaFormatter
     begin
       Avro::Schema.parse(schema.body).to_json
     rescue => e
-      raise ConversionError.new("JSON can't be formatted as Avro: #{e.message}")
+      raise ConversionError, "JSON can't be formatted as Avro: #{e.message}"
     end
   end
 
   # TODO: update to support nesting
   def json_to_csv
-    json     = JSON.parse(schema.body)
-    headers  = []
-    finalrow = []
+    headers = csv_headers
+    finalrow = csv_finalrow(headers)
 
-    json.each do |h|
-      next unless h&.last.is_a?(Array)
-      next unless h&.last.first.is_a?(Hash)
+    csv_string(headers, finalrow)
+  end
 
-      h.last.first.keys.each do |key|
-        headers << key
-      end
+  def csv_headers
+    headers = []
+
+    JSON.parse(schema.body).each do |h|
+      next unless json_hash?(h)
+
+      element = h.last.first
+
+      element.each_key { |key| headers << key }
     end
 
-    json.each do |h|
-      next unless h&.last.is_a?(Array)
-      next unless h&.last.first.is_a?(Hash)
+    headers.compact
+  end
+
+  def csv_finalrow(headers)
+    finalrow = []
+
+    JSON.parse(schema.body).each do |h|
+      next unless json_hash?(h)
 
       final = {}
-      headers.compact.each do |key2|
-        final[key2] = h.last.first[key2]
-      end
-
+      headers.each { |key2| final[key2] = h.last.first[key2] }
       finalrow << final
     end
 
-    csv_string = CSV.generate do |csv|
+    finalrow
+  end
+
+  def json_hash?(element)
+    element&.last.is_a?(Array) || element&.last&.first.is_a?(Hash)
+  end
+
+  def csv_string(headers, finalrow)
+    CSV.generate do |csv|
       csv << headers.compact.uniq
 
-      finalrow.each do |deal|
-        csv << deal.values
-      end
+      finalrow.each { |deal| csv << deal.values }
     end
   end
 end
