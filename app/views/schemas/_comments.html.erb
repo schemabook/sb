@@ -1,5 +1,16 @@
-<ul role="list" class="ml-10 divide-y divide-gray-200">
-  <% @comments.each do |comment| %>
-    <%= render partial: 'comment', locals: {comment: comment} %>
-  <% end %>
-</ul>
+<!-- main area comments section -->
+<div class="mb-8 relative inset-0 bg-white">
+  <div class="pb-5 border-b border-gray-200">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      Comments
+    </h3>
+  </div>
+
+  <div class="p-4">
+    <%= render partial: 'comment_form' %>
+  </div>
+
+  <div class="p-4">
+    <%= render partial: 'comments_list' %>
+  </div>
+</div>

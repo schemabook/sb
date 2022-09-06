@@ -20,7 +20,7 @@
               <%= render partial: 'stakeholders' %>
             </li>
             <li class="py-4">
-              <span class="text-gray-400">Version:</span> 3 (FPO)
+              <span class="text-gray-400">Version:</span> 1
             </li>
             <% if @schema.description.present? %>
               <li class="py-4">
@@ -33,6 +33,24 @@
       </div>
     </div>
     <!-- End left column area -->
+
+    <div class="absolute pl-1 bottom-0 h-24 w-full">
+      <div class="relative w-full">
+        <ul>
+          <li class="py-2">
+            <a href="<%= business_path(current_user.business) %>" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+              Account Settings
+            </a>
+          </li>
+
+          <li class="py-1">
+            <a href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+              Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 </div>

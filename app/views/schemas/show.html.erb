@@ -8,6 +8,10 @@
       <!-- Start main area-->
       <div class="relative h-full" style="min-height: 36rem;">
 
+        <div class="mt-4">
+          <%= render 'shared/flashes' %>
+        </div>
+
         <!-- header -->
         <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
           <h3 class="text-lg leading-6 font-medium text-gray-600">
@@ -27,46 +31,14 @@
             </div>
           </div>
 
-          <!-- main area list -->
-          <div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
-            <% if @tab == 'json' %>
-              <%= render partial: 'json' %>
-            <% end %>
-
-            <% if @tab == 'avro' %>
-              <%= render partial: 'avro' %>
-            <% end %>
-
-            <% if @tab == 'csv' %>
-              <%= render partial: 'csv' %>
-            <% end %>
-
-            <% if @tab == 'info' %>
-              <%= render partial: 'info' %>
-            <% end %>
-          </div>
-          <!-- end main area list -->
+          <%= render partial: 'tab_content' %>
         </div>
 
-        <!-- main area comments section -->
-        <div class="mb-8 relative inset-0 bg-white">
-          <div class="pb-5 border-b border-gray-200">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Comments
-            </h3>
-          </div>
-
-          <div class="p-4">
-            <%= render partial: 'comment_form' %>
-          </div>
-
-          <div class="p-4">
-            <%= render partial: 'comments' %>
-          </div>
-        </div>
+        <%= render partial: 'comments' %>
 
       </div>
       <!-- End main area -->
+
     </div>
   </div>
 </div>
