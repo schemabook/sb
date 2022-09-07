@@ -7,10 +7,7 @@ class AvroPresenter
 
   def content
     if @schema.format.json?
-      avro = SchemaFormatter.new(schema: @schema).as_avro
-      json = JSON.parse(avro) # avro is presented as JSON
-
-      JSON.pretty_generate(json)
+      from_json
     else
       # TODO: if the original format was not json, convert it using the SchemaFormatter
       @schema.body
@@ -19,5 +16,16 @@ class AvroPresenter
 
   def content_length
     content.lines.count
+  end
+
+  def from_json
+    begin
+      avro = SchemaFormatter.new(schema: @schema).as_avro
+      json = JSON.parse(avro) # avro is presented as JSON
+
+      JSON.pretty_generate(json)
+    rescue => e
+      return e.message
+    end
   end
 end
