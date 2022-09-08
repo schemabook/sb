@@ -1,0 +1,9 @@
+<div id="gutter" class="absolute -ml-4 border-r-1">
+  <% @json_presenter.content_length.times do |count| %>
+    <div class="bg-gray-100 text-right text-gray-400"><%= count + 1 %></div>
+  <% end %>
+</div>
+
+<pre class="font-mono ml-4">
+<%= @json_presenter.content %>
+</pre>

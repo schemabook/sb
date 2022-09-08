@@ -33,16 +33,20 @@ class SchemaFormatter
     begin
       Avro::Schema.parse(schema.body).to_json
     rescue => e
-      raise ConversionError, "JSON can't be formatted as Avro: #{e.message}"
+      raise ConversionError, "The JSON definition can't be converted to Avro - #{e.message}"
     end
   end
 
   # TODO: update to support nesting
   def json_to_csv
-    headers = csv_headers
-    finalrow = csv_finalrow(headers)
+    begin
+      headers  = csv_headers
+      finalrow = csv_finalrow(headers)
 
-    csv_string(headers, finalrow)
+      csv_string(headers, finalrow)
+    rescue
+      raise ConversionError, "The JSON can't be converted to CSV due to lack of properties and types defined"
+    end
   end
 
   def csv_headers

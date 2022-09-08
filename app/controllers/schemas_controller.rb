@@ -12,6 +12,8 @@ class SchemasController < ApplicationController
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
     @comment      = Comment.new(schema_id: @schema.id)
     @comments     = @schema.comments.order(created_at: :desc)
+
+    load_presenters
   end
 
   def create
@@ -38,5 +40,11 @@ class SchemasController < ApplicationController
 
   def schema_params
     params.require(:schema).permit(:name, :service_id, :file_type, :body, :description).merge(team_id: current_user.team.id)
+  end
+
+  def load_presenters
+    @json_presenter = JsonPresenter.new(@schema)
+    @avro_presenter = AvroPresenter.new(@schema)
+    @csv_presenter  = CsvPresenter.new(@schema)
   end
 end

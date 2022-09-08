@@ -1,0 +1,19 @@
+<!-- main area list -->
+<div id="tab-content" class="tabcontent bg-gray-100 inset-0 p-6 shadow sm:rounded-md">
+  <% if @tab == 'json' %>
+    <%= render partial: 'json' %>
+  <% end %>
+
+  <% if @tab == 'avro' %>
+    <%= render partial: 'avro' %>
+  <% end %>
+
+  <% if @tab == 'csv' %>
+    <%= render partial: 'csv' %>
+  <% end %>
+
+  <% if @tab == 'info' %>
+    <%= render partial: 'info' %>
+  <% end %>
+</div>
+<!-- end main area list -->

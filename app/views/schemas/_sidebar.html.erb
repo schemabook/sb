@@ -1,0 +1,56 @@
+<div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+  <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+
+    <!-- Start left column area -->
+    <div class="h-full relative" style="min-height: 12rem;">
+      <div class="absolute inset-0 text-gray-700">
+        <h4 class="text-lg leading-6 font-medium text-gray-600">
+          Details
+        </h4>
+
+        <div>
+          <ul class="divide-y divide-gray-200">
+            <li class="py-4">
+              <span class="text-gray-400">Team:</span> <%= link_to @schema.team.name, team_path(@schema.team) %>
+            </li>
+            <li class="py-4">
+              <span class="text-gray-400">Created On:</span> <%= l @schema.created_at, format: :sample %>
+            </li>
+            <li class="py-4">
+              <%= render partial: 'stakeholders' %>
+            </li>
+            <li class="py-4">
+              <span class="text-gray-400">Version:</span> 1
+            </li>
+            <% if @schema.description.present? %>
+              <li class="py-4">
+                <span class="text-gray-400">Description:</span> <%= @schema.description %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <!-- End left column area -->
+
+    <div class="absolute pl-1 bottom-0 h-24 w-full">
+      <div class="relative w-full">
+        <ul>
+          <li class="py-2">
+            <a href="<%= business_path(current_user.business) %>" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+              Account Settings
+            </a>
+          </li>
+
+          <li class="py-1">
+            <a href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete" class="btn text-base font-medium text-gray-300 hover:text-gray-300">
+              Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
