@@ -6,12 +6,8 @@ class AvroPresenter
   end
 
   def content
-    if @schema.format.json?
-      from_json
-    else
-      # TODO: if the original format was not json, convert it using the SchemaFormatter
-      @schema.body
-    end
+    from_json if @schema.format.json?
+    # TODO: if the original format was not json, convert it using the SchemaFormatter
   end
 
   def content_length

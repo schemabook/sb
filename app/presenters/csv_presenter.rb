@@ -7,7 +7,7 @@ class CsvPresenter
 
   def content
     if @schema.format.json?
-      from_json.blank? ? "The JSON definition can't be converted to CSV" : from_json
+      from_json.presence || "The JSON definition can't be converted to CSV"
     else
       # TODO: if original format was not json, convert it using the SchemaFormatter
       @schema.body

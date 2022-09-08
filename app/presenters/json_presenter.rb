@@ -6,13 +6,11 @@ class JsonPresenter
   end
 
   def content
-    if @schema.format.json?
-      json = JSON.parse(@schema.body)
+    return unless @schema.format.json?
 
-      JSON.pretty_generate(json)
-    else
-      # TODO: if format was originally something else, convert it using the SchemaFormatter
-    end
+    json = JSON.parse(@schema.body)
+    JSON.pretty_generate(json)
+    # TODO: if format was originally something else, convert it using the SchemaFormatter
   end
 
   def content_length

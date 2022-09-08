@@ -44,7 +44,7 @@ class SchemaFormatter
       finalrow = csv_finalrow(headers)
 
       csv_string(headers, finalrow)
-    rescue => e
+    rescue
       raise ConversionError, "The JSON can't be converted to CSV due to lack of properties and types defined"
     end
   end
