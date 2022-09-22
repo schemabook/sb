@@ -1,20 +1,21 @@
 class SchemaFormatter
   class ConversionError < StandardError; end
 
-  attr_reader :schema
+  attr_reader :schema, :version
 
-  def initialize(schema:)
-    @schema = schema
+  def initialize(schema:, version:)
+    @schema  = schema
+    @version = version
   end
 
   def as_json
-    return schema.body if schema.format.json?
+    return version.body if schema.format.json?
   end
 
   def as_avro
     case schema.format.to_s
     when "avro"
-      schema.body
+      version.body
     when "json"
       json_to_avro
     end
@@ -31,7 +32,7 @@ class SchemaFormatter
 
   def json_to_avro
     begin
-      Avro::Schema.parse(schema.body).to_json
+      Avro::Schema.parse(version.body).to_json
     rescue => e
       raise ConversionError, "The JSON definition can't be converted to Avro - #{e.message}"
     end
@@ -52,7 +53,7 @@ class SchemaFormatter
   def csv_headers
     headers = []
 
-    JSON.parse(schema.body).each do |h|
+    JSON.parse(version.body).each do |h|
       next unless json_hash?(h)
 
       element = h.last.first
@@ -66,7 +67,7 @@ class SchemaFormatter
   def csv_finalrow(headers)
     finalrow = []
 
-    JSON.parse(schema.body).each do |h|
+    JSON.parse(version.body).each do |h|
       next unless json_hash?(h)
 
       final = {}

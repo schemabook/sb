@@ -32,7 +32,7 @@ RSpec.describe "StakeholdersController", type: :request do
     end
 
     context "if stakeholder can be saved" do
-      subject { post stakeholders_path, params: { stakeholder: { user_id: user.id, schema_id: create(:schema, :with_team, :with_format_and_body).id } } }
+      subject { post stakeholders_path, params: { stakeholder: { user_id: user.id, schema_id: create(:schema, :with_team, :with_format).id } } }
 
       it "sets a flash message" do
         subject

@@ -16,7 +16,8 @@ RSpec.describe "/schemas", type: :request do
   let(:user)    { create(:user, :admin) }
   let(:service) { create(:service, team: user.team, created_by: user.id) }
   let(:format)  { create(:format) }
-  let(:schema)  { create(:schema, format:, team: user.team, name: "schema", file_type: "json", body: "[1]", service_id: service.id) }
+  let(:schema)  { create(:schema, format:, team: user.team, name: "schema", service_id: service.id) }
+  let!(:version) { create(:version, schema:, body: "{}") }
 
   let(:valid_attributes) {
     { "name" => "schema 1", "file_type" => "json", team_id: user.team_id, body: '[1]' }

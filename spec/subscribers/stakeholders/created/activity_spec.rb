@@ -17,7 +17,7 @@ RSpec.describe Subscribers::Stakeholders::Created::Activity do
     let(:format)  { create(:format, file_type: :json) }
     let(:json)    { '{"foo": {"bar": 1}}' }
     let(:user)    { create(:user) }
-    let(:schema)  { create(:schema, :with_format_and_body, team: user.team) }
+    let(:schema)  { create(:schema, :with_format, team: user.team) }
     let(:stakeholder) { create(:stakeholder, user_id: user.id, schema_id: schema.id) }
 
     it "persists an Activity object" do

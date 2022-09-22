@@ -61,7 +61,7 @@ RSpec.describe Activity, type: :model do
     end
 
     context "with activities for schemas" do
-      let!(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
+      let!(:schema)   { create(:schema, :with_format, team: user.team) }
       let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do
@@ -78,7 +78,7 @@ RSpec.describe Activity, type: :model do
     end
 
     context "without activities for schemas" do
-      let!(:schema) { create(:schema, :with_format_and_body, team: user.team) }
+      let!(:schema) { create(:schema, :with_format, team: user.team) }
 
       it "returns an empty array" do
         expect(described_class.for_team(user.team)).to match_array([])
@@ -104,7 +104,7 @@ RSpec.describe Activity, type: :model do
 
   describe "self.for_schema" do
     context "with activities for schema" do
-      let(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
+      let(:schema)   { create(:schema, :with_format, team: user.team) }
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do
@@ -113,7 +113,7 @@ RSpec.describe Activity, type: :model do
     end
 
     context "without activities for schema" do
-      let(:schema) { create(:schema, :with_format_and_body, team: user.team) }
+      let(:schema) { create(:schema, :with_format, team: user.team) }
 
       it "returns an empty array" do
         expect(described_class.for_schema(schema)).to match_array([])
@@ -123,7 +123,7 @@ RSpec.describe Activity, type: :model do
 
   describe "self.for_schema_new" do
     context "with activities for schemas" do
-      let(:schema)   { create(:schema, :with_format_and_body, team: user.team) }
+      let(:schema)   { create(:schema, :with_format, team: user.team) }
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do

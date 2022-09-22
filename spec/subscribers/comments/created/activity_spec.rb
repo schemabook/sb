@@ -14,7 +14,7 @@ RSpec.describe Subscribers::Comments::Created::Activity do
   end
 
   describe "#process" do
-    let(:comment) { create(:comment, :with_user, :with_schema) }
+    let(:comment) { create(:comment, :with_user, :with_version) }
 
     it "persists an ActivityLog object" do
       payload    = Events::Comments::Created.new(record: comment, user: comment.user).payload

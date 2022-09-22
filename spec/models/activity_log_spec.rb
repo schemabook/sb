@@ -35,7 +35,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:user)      { create(:user) }
     let!(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }
     let!(:service2)  { create(:service, team: user.team, name: "bar", created_by: user.id) }
-    let!(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+    let!(:schema)    { create(:schema, :with_format, team: user.team) }
     let!(:activity)  { create(:activity, activity_log: subject, user:, resource_class: 'Service', resource_id: service.id) }
     let!(:activity2) { create(:activity, activity_log: subject, user:, resource_class: 'Service', resource_id: service2.id) }
     let!(:activity3) { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
@@ -61,7 +61,7 @@ RSpec.describe ActivityLog, type: :model do
   describe "for_schema" do
     let!(:user)      { create(:user) }
     let!(:service)   { create(:service, team: user.team, name: "foo", created_by: user.id) }
-    let!(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+    let!(:schema)    { create(:schema, :with_format, team: user.team) }
     let!(:activity)  { create(:activity, activity_log: subject, user:, resource_class: 'Service', resource_id: service.id) }
     let!(:activity2) { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
 
@@ -72,7 +72,7 @@ RSpec.describe ActivityLog, type: :model do
 
   describe "for_schema_new" do
     let!(:user)      { create(:user) }
-    let!(:schema)    { create(:schema, :with_format_and_body, team: user.team) }
+    let!(:schema)    { create(:schema, :with_format, team: user.team) }
     let!(:activity)  { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
 
     it "should return all schema activities" do

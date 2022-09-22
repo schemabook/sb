@@ -17,7 +17,7 @@ RSpec.describe Subscribers::Schemas::Created::Activity do
     let(:format) { create(:format, file_type: :json) }
     let(:json)   { '{"foo": {"bar": 1}}' }
     let(:user)   { create(:user) }
-    let(:schema) { create(:schema, :with_team, name: "foo", file_type: "json", body: json, format:) }
+    let(:schema) { create(:schema, :with_team, name: "foo", format:) }
 
     it "persists an Activity object" do
       payload    = Events::Schemas::Created.new(record: schema, user:).payload
