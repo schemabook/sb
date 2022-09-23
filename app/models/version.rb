@@ -6,6 +6,9 @@ class Version < ApplicationRecord
 
   validate :body_format
 
+  delegate :name, to: :schema
+  delegate :format, to: :schema
+
   def body=(value)
     @body = value
 
@@ -20,20 +23,20 @@ class Version < ApplicationRecord
     @body ||= raw_body.try(:blob).try(:download)
   end
 
-  private
-
+  # example: my-schema+v1.json
   def filename
-    # example: my-schema+v1.json
     version_id = new_record? ? 1 : id
-    # TODO: inject these attrs
-    "#{schema.name.gsub(' ', '-')}+v#{version_id}.#{schema.format.file_type}"
+    name       = self.name.gsub(' ', '-')
+    file_type  = self.format.file_type
+
+    "#{name}+v#{version_id}.#{file_type}"
   end
 
   def body_format
     return true if body.nil?
-    return true if schema.nil?
+    return true if self.format.nil?
 
-    validator = schema.format.validator.constantize
+    validator = self.format.validator.constantize
     validator.validate(body, self)
   end
 end
