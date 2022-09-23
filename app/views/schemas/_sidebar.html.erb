@@ -13,14 +13,22 @@
             <li class="py-4">
               <span class="text-gray-400">Team:</span> <%= link_to @schema.team.name, team_path(@schema.team) %>
             </li>
+            <% if @schema.service %>
             <li class="py-4">
-              <span class="text-gray-400">Created On:</span> <%= l @schema.created_at, format: :sample %>
+              <span class="text-gray-400">Service:</span> <%= link_to @schema.service.name, service_path(@schema.service) %>
+            </li>
+            <% end %>
+            <li class="py-4">
+              <span class="text-gray-400">Created:</span> <%= l @schema.created_at, format: :sample %>
+            </li>
+            <li class="py-4">
+              <span class="text-gray-400">Updated:</span> <%= l @schema.updated_at, format: :sample %>
             </li>
             <li class="py-4">
               <%= render partial: 'stakeholders' %>
             </li>
             <li class="py-4">
-              <span class="text-gray-400">Version:</span> 1
+              <%= render partial: 'versions' %>
             </li>
             <% if @schema.description.present? %>
               <li class="py-4">

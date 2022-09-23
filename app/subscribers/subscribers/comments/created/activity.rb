@@ -14,15 +14,15 @@ module Subscribers
           payload = JSON.parse(event.payload.to_json, object_class: OpenStruct)
           comment = Comment.find(payload.after.id)
           user    = User.find(payload.after.actor_id)
-          schema  = comment.schema
+          version = comment.version
 
           ::Activity.create(
             activity_log: user.business.activity_log,
             user:,
             title: "Created Comment",
-            detail: "Commented on #{schema.name}",
-            resource_id: schema.id,
-            resource_class: schema.class.to_s
+            detail: "Commented on #{version.schema.name} version #{version.id}",
+            resource_id: version.id,
+            resource_class: version.class.to_s
           )
         end
       end

@@ -1,8 +1,9 @@
 class CsvPresenter
-  attr_reader :schema
+  attr_reader :schema, :version
 
-  def initialize(schema)
+  def initialize(schema, version)
     @schema = schema
+    @version = version
   end
 
   def content
@@ -10,7 +11,7 @@ class CsvPresenter
       from_json.presence || "The JSON definition can't be converted to CSV"
     else
       # TODO: if original format was not json, convert it using the SchemaFormatter
-      @schema.body
+      @version.body
     end
   end
 
@@ -20,7 +21,7 @@ class CsvPresenter
 
   def from_json
     begin
-      SchemaFormatter.new(schema: @schema).as_csv
+      SchemaFormatter.new(schema: @schema, version: @version).as_csv
     rescue => e
       return e.message
     end

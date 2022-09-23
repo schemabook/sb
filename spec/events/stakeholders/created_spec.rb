@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Events::Stakeholders::Created do
   let(:user)   { create(:user) }
-  let(:schema) { create(:schema, :with_format_and_body, team: user.team) }
+  let(:schema) { create(:schema, :with_format, team: user.team) }
   let(:stakeholder) { create(:stakeholder, user_id: user.id, schema_id: schema.id) }
 
   subject { described_class.new(record: stakeholder) }

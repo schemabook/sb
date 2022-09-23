@@ -6,8 +6,8 @@ FactoryBot.define do
       user { create(:user) }
     end
 
-    trait :with_schema do
-      schema { create(:schema, :with_team, :with_format_and_body) }
+    trait :with_version do
+      version { create(:version, :with_schema) }
     end
   end
 end

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   resources :businesses
   resources :services
   resources :schemas do
-    resources :comments
+    resources :versions do
+      resources :comments
+    end
   end
 end

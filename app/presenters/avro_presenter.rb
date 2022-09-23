@@ -1,8 +1,9 @@
 class AvroPresenter
-  attr_reader :schema
+  attr_reader :schema, :version
 
-  def initialize(schema)
+  def initialize(schema, version)
     @schema = schema
+    @version = version
   end
 
   def content
@@ -16,7 +17,7 @@ class AvroPresenter
 
   def from_json
     begin
-      avro = SchemaFormatter.new(schema: @schema).as_avro
+      avro = SchemaFormatter.new(schema: @schema, version: @version).as_avro
       json = JSON.parse(avro) # avro is presented as JSON
 
       JSON.pretty_generate(json)

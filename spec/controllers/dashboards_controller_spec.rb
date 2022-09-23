@@ -5,7 +5,7 @@ RSpec.describe DashboardsController, type: :controller do
   let!(:user)     { create(:user, business:) }
   let!(:activity) { create(:activity, activity_log: business.activity_log, user:) }
   let!(:team)     { create(:team, business:) }
-  let!(:schema)   { create(:schema, :with_format_and_body, team:) }
+  let!(:schema)   { create(:schema, :with_format, team:) }
 
   before do
     sign_in user

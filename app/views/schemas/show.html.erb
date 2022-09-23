@@ -15,10 +15,10 @@
         <!-- header -->
         <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
           <h3 class="text-lg leading-6 font-medium text-gray-600">
-            Schema: <%= @schema.name %> in <a href="<%= service_path(@schema.service) %>" class="text-teal-500"><%= @schema.service.name %></a>
+            Name: <%= @schema.name %>
           </h3>
           <div class="text-md text-gray-400 mt-3 sm:mt-0 sm:ml-4">
-            <span class="text-gray-400">Last Updated:</span> <%= l @schema.updated_at, format: :sample %>
+            <span class="text-gray-400">Version:</span> <%= @version.index %>
           </div>
         </div>
 

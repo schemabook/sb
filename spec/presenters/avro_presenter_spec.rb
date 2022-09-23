@@ -5,14 +5,15 @@ RSpec.describe AvroPresenter do
   let(:team)     { create(:team, business:) }
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
-  let(:schema)   { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+  let(:schema)   { create(:schema, name: "foo", team:, format:) }
+  let(:version)  { create(:version, schema:, body: json) }
 
-  subject { described_class.new(schema) }
+  subject { described_class.new(schema, version) }
 
   describe "#content" do
     context "when original format is json" do
       it "returns the avro version pretty formatted" do
-        avro     = SchemaFormatter.new(schema:).as_avro
+        avro     = SchemaFormatter.new(schema:, version:).as_avro
         expected = JSON.pretty_generate(JSON.parse(avro))
 
         expect(subject.content).to eq(expected)

@@ -1,17 +1,17 @@
 <nav class="-mb-px flex space-x-8" aria-label="Tabs">
   <% highlight = 'border-teal-500' %>
-  <a href="/schemas/<%= @schema.id %>?tab=json" class="<%= @tab == 'json' ? highlight : 'border-transparent' %> text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+  <a href="/schemas/<%= @schema.id %>?tab=json<%= "&version=#{params[:version]}" if params[:version] %>" class="<%= @tab == 'json' ? highlight : 'border-transparent' %> text-teal-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
     JSON
   </a>
-  <a href="/schemas/<%= @schema.id %>?tab=avro" class="has-tooltip <%= @tab == 'avro' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+  <a href="/schemas/<%= @schema.id %>?tab=avro<%= "&version=#{params[:version]}" if params[:version] %>" class="has-tooltip <%= @tab == 'avro' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
     <span class='tooltip rounded shadow-lg p-1 bg-gray-100 text-grey-500 -mt-8'>Avro is a compact and efficient binary file format displayed as JSON</span>
     Avro
   </a>
-  <a href="/schemas/<%= @schema.id %>?tab=csv" class="<%= @tab == 'csv' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+  <a href="/schemas/<%= @schema.id %>?tab=csv<%= "&version=#{params[:version]}" if params[:version] %>" class="<%= @tab == 'csv' ? highlight : 'border-transparent' %> text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
     CSV
   </a>
 
-  <a href="/schemas/<%= @schema.id %>?tab=info" class="<%= @tab == 'info' ? highlight : 'border-transparent' %> md:absolute md:right-8 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+  <a href="/schemas/<%= @schema.id %>?tab=info<%= "&version=#{params[:version]}" if params[:version] %>" class="<%= @tab == 'info' ? highlight : 'border-transparent' %> md:absolute md:right-8 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
     General Information
   </a>
 </nav>

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Events::Comments::Created do
-  let(:comment) { create(:comment, :with_user, :with_schema) }
+  let(:comment) { create(:comment, :with_user, :with_version) }
 
   subject { described_class.new(record: comment, user: comment.user) }
 

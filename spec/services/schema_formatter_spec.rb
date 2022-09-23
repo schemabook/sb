@@ -5,9 +5,14 @@ RSpec.describe SchemaFormatter do
   let(:team)     { create(:team, business:) }
   let(:format)   { create(:format, file_type: :json) }
   let(:json)     { '{"foo": {"bar": 1}}' }
-  let(:schema)   { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+  let(:schema)   { create(:schema, name: "foo", team:, format:) }
+  let(:version)  { create(:version, schema:) }
 
-  subject { described_class.new(schema:) }
+  subject { described_class.new(schema:, version:) }
+
+  before do
+    version.body = json
+  end
 
   describe "#as_json" do
     context "when body format is json" do
@@ -20,8 +25,7 @@ RSpec.describe SchemaFormatter do
   describe "#as_avro" do
     context "when body format is json" do
       context "when the JSON can be converted" do
-        let(:json)   { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
-        let(:schema) { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+        let(:json) { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
 
         it "returns the body in avro format" do
           avro = subject.as_avro
@@ -32,8 +36,7 @@ RSpec.describe SchemaFormatter do
 
       context "when the JSON can't be converted" do
         context "when a type is missing" do
-          let(:json)   { '{"foo": {"bar": 1}}' }
-          let(:schema) { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+          let(:json) { '{"foo": {"bar": 1}}' }
 
           it "raises an exception" do
             expect {
@@ -44,8 +47,7 @@ RSpec.describe SchemaFormatter do
 
         context "when an attribute type is not known" do
           # type should be string not String
-          let(:json)   { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "String" }]}' }
-          let(:schema) { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+          let(:json) { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "String" }]}' }
 
           it "raises an exception around the schema type now known" do
             expect {
@@ -60,8 +62,7 @@ RSpec.describe SchemaFormatter do
   describe "#as_csv" do
     context "when body format is json" do
       context "when the JSON can be converted" do
-        let(:json)   { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
-        let(:schema) { create(:schema, name: "foo", file_type: "json", body: json, team:, format:) }
+        let(:json) { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
 
         it "returns the body in avro format" do
           csv = subject.as_csv

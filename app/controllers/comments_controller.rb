@@ -10,12 +10,13 @@ class CommentsController < ApplicationController
       flash[:alert] = "Comment could not be added"
     end
 
-    redirect_to schema_path(@comment.schema)
+    redirect_to schema_path(@comment.version.schema, version: @comment.version.index)
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id, :schema_id, :body)
+    # NOTE: use version id versus index
+    params.require(:comment).permit(:user_id, :version_id, :body)
   end
 end

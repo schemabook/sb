@@ -8,25 +8,8 @@ FactoryBot.define do
       team { create(:team, :with_business) }
     end
 
-    trait :with_format_and_body do
-      file_type { "json" }
-      format    { create(:format, file_type: :json) }
-      body do
-        '{
-          "type": "record",
-          "name": "User",
-          "fields": [
-            {
-              "name": "username",
-              "type": "string"
-            },
-            {
-              "name": "age",
-              "type": "int"
-            }
-          ]
-        }'.to_json
-      end
+    trait :with_format do
+      format { create(:format, file_type: :json) }
     end
   end
 end

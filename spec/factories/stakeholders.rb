@@ -5,7 +5,7 @@ FactoryBot.define do
     end
 
     trait :with_schema do
-      schema { create(:schema, :with_format_and_body, team: create(:team)) }
+      schema { create(:schema, :with_format, team: create(:team)) }
     end
   end
 end
