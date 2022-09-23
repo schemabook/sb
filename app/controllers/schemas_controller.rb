@@ -11,12 +11,12 @@ class SchemasController < ApplicationController
     @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
 
-    version_id    = params[:version_id] || @schema.versions.last.id
+    version_id    = params[:version] || @schema.versions.last.id
     @version      = @schema.versions.find version_id
 
     # TODO: figure out how versions are going to work on show
-    @comment      = Comment.new(version_id: @schema.versions.last.id)
-    @comments     = @schema.versions.last.comments.order(created_at: :desc)
+    @comment      = Comment.new(version_id:)
+    @comments     = @version.comments.order(created_at: :desc)
 
     load_presenters
   end

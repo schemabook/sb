@@ -23,13 +23,17 @@ class Version < ApplicationRecord
     @body ||= raw_body.try(:blob).try(:download)
   end
 
+  # TODO: persist
+  def version_index
+    schema.versions.count + 1
+  end
+
   # example: my-schema+v1.json
   def filename
-    version_id = new_record? ? 1 : id
     name       = self.name.gsub(' ', '-')
     file_type  = self.format.file_type
 
-    "#{name}+v#{version_id}.#{file_type}"
+    "#{name}+v#{version_index}.#{file_type}"
   end
 
   def body_format
