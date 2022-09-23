@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       flash[:alert] = "Comment could not be added"
     end
 
-    redirect_to schema_path(@comment.version.schema, version: @comment.version.id)
+    redirect_to schema_path(@comment.version.schema, version: @comment.version.index)
   end
 
   private

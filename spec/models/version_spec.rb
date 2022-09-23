@@ -7,9 +7,19 @@ RSpec.describe Version, type: :model do
   let(:json)     { '{"foo": {"bar": 1}}' }
   let(:schema)   { create(:schema, name: "foo", team:, format:) }
 
-  subject { described_class.create(schema:, body: json) }
+  subject { described_class.create(schema:) }
+
+  it { should have_many :comments }
+  it { should belong_to :schema }
+
+  it { should delegate_method(:name).to(:schema).allow_nil }
+  it { should delegate_method(:format).to(:schema).allow_nil }
 
   describe "#body" do
+    before do
+      subject.body = json
+    end
+
     it "converts string to file and attaches" do
       expect(subject.raw_body.blob.download).to eq(json)
       expect(subject.raw_body.filename.to_s).to eq("foo+v1.json")

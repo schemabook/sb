@@ -6,8 +6,12 @@ class Version < ApplicationRecord
 
   validate :body_format
 
-  delegate :name, to: :schema
-  delegate :format, to: :schema
+  delegate :name, to: :schema, allow_nil: true
+  delegate :format, to: :schema, allow_nil: true
+
+  before_create do
+    self.index = schema.versions.count + 1
+  end
 
   def body=(value)
     @body = value
@@ -23,17 +27,12 @@ class Version < ApplicationRecord
     @body ||= raw_body.try(:blob).try(:download)
   end
 
-  # TODO: persist
-  def version_index
-    schema.versions.count + 1
-  end
-
   # example: my-schema+v1.json
   def filename
     name       = self.name.gsub(' ', '-')
     file_type  = self.format.file_type
 
-    "#{name}+v#{version_index}.#{file_type}"
+    "#{name}+v#{self.index}.#{file_type}"
   end
 
   def body_format

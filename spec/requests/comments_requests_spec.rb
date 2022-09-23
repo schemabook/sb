@@ -36,7 +36,7 @@ RSpec.describe "/schemas/:id/comments", type: :request do
         post schema_version_comments_path(schema, version), params: { comment: valid_attributes }
 
         expect(flash[:notice]).to be_present
-        expect(response).to redirect_to(schema_url(comment.version.schema, version: version.id))
+        expect(response).to redirect_to(schema_url(comment.version.schema, version: version.index))
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe "/schemas/:id/comments", type: :request do
         post schema_version_comments_path(schema, version), params: { comment: invalid_attributes }
 
         expect(flash[:alert]).to be_present
-        expect(response).to redirect_to(schema_url(comment.version.schema, version: version.id))
+        expect(response).to redirect_to(schema_url(comment.version.schema, version: version.index))
       end
     end
   end
