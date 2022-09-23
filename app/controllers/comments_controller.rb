@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
+    # NOTE: use version id versus index
     params.require(:comment).permit(:user_id, :version_id, :body)
   end
 end

@@ -56,6 +56,12 @@ RSpec.describe "/schemas", type: :request do
       expect(assigns(:stakeholders)).to match_array([])
     end
 
+    it "assigns a version" do
+      get schema_url(schema)
+
+      expect(assigns(:version).class).to eq(Version)
+    end
+
     it "assigns a comment" do
       get schema_url(schema)
 
@@ -66,6 +72,14 @@ RSpec.describe "/schemas", type: :request do
       get schema_url(schema)
 
       expect(assigns(:comments)).to match_array([])
+    end
+
+    it "assigns the presenters" do
+      get schema_url(schema)
+
+      expect(assigns(:json_presenter).class).to eq(JsonPresenter)
+      expect(assigns(:csv_presenter).class).to eq(CsvPresenter)
+      expect(assigns(:avro_presenter).class).to eq(AvroPresenter)
     end
   end
 
