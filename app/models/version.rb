@@ -32,7 +32,7 @@ class Version < ApplicationRecord
     name       = self.name.gsub(' ', '-')
     file_type  = self.format.file_type
 
-    "#{name}+v#{self.index}.#{file_type}"
+    "#{name}+v#{index}.#{file_type}"
   end
 
   def body_format
