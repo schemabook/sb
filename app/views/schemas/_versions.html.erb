@@ -13,8 +13,10 @@
     </a>
   </div>
   <% end %>
+  <% if @schema.versions.count > 1 %>
   <div class="py-2">
     <span class="text-gray-400 text-sm italic">
     View General Information for previous versions</span>
   </div>
+  <% end %>
 </div>
