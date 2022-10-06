@@ -8,7 +8,7 @@ class Activity < ApplicationRecord
   scope :for_user, ->(user_id) { where(user_id:) }
   scope :for_service, ->(service_id) { where(resource_class: 'Service', resource_id: service_id) }
   scope :for_teams, -> { where(resource_class: 'Team') }
-  scope :for_schema, ->(schema) { where(resource_class: 'Schema', resource_id: schema.id) }
+  scope :for_schema, ->(schema) { where(resource_class: 'Schema', resource_id: schema.id).or(where(resource_class: 'Version', resource_id: schema.versions.pluck(:id))) }
   scope :for_schema_new, -> { where(resource_class: 'Schema') }
   scope :for_business, ->(business) { where(resource_class: 'Business', resource_id: business.id) }
   scope :for_invitations, -> { where(title: "Invited Teammate") }
