@@ -119,6 +119,20 @@ RSpec.describe Activity, type: :model do
         expect(described_class.for_schema(schema)).to match_array([])
       end
     end
+
+    context "with activities for associated versions" do
+      let(:schema)   { create(:schema, :with_format, team: user.team) }
+      let(:version)  { create(:version, schema:) }
+      let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Version, resource_id: version.id) }
+
+      before do
+        schema.versions << version
+      end
+
+      it "returns the activities" do
+        expect(described_class.for_schema(schema)).to match_array([activity])
+      end
+    end
   end
 
   describe "self.for_schema_new" do

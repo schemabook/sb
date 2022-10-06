@@ -19,8 +19,8 @@ module Subscribers
           ::Activity.create(
             activity_log: user.business.activity_log,
             user:,
-            title: "Created Comment",
-            detail: "Commented on #{version.schema.name} version #{version.id}",
+            title: "Comment Created",
+            detail: "Created comment #{comment.id} on #{version.schema.name} version #{version.id}",
             resource_id: version.id,
             resource_class: version.class.to_s
           )

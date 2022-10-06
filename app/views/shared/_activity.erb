@@ -8,8 +8,9 @@
         <h3 class="flex-1 text-sm"><%= activity.user.display_name %></h3>
         <p class="text-sm text-gray-500"><%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago</p>
       </div>
+      <!-- display information based on type of resource -->
       <h3 class="text-sm font-medium"><%= activity_title(activity) %></h3>
-      <p class="text-sm text-gray-500"><%= truncate(activity.detail, length: 30) %></p>
+      <p class="text-sm text-gray-500"><%= activity_content(activity) %></p>
     </div>
   </div>
 </li>

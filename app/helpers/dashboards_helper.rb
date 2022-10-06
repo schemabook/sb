@@ -1,11 +1,41 @@
 module DashboardsHelper
   def activity_title(activity)
-    resource      = activity.resource
-    path          = resource.is_a?(Version) ? schema_path(resource.schema) : polymorphic_path(resource)
-    path        ||= resource.is_a?(User) ? user_profile_path(resource) : polymorphic_path(resource)
-    resource_link = link_to(truncate(resource.name, length: 30), path, { class: 'text-sm text-cyan-600' })
+    resource = activity.resource
 
-    "#{activity.title} #{resource_link}".html_safe
+    case resource.class.to_s
+    when "Version"
+      "#{activity.title} on #{resource_link(activity)}".html_safe
+    else
+      "#{activity.title} #{resource_link(activity)}".html_safe
+    end
+  end
+
+  def resource_link(activity)
+    resource = activity.resource
+
+    path = case resource.class.to_s
+           when "Version"
+             schema_path(resource.schema, { version: resource.index })
+           when "User"
+             user_profile_path(resource)
+           else
+             polymorphic_path(resource)
+           end
+
+    link_to(truncate(resource.name, length: 30), path, { class: 'text-sm text-cyan-600' })
+  end
+
+  def activity_content(activity)
+    user = activity.user
+
+    detail = case activity.title
+             when "Created Comment" || "Comment Created"
+               "by #{user.display_name}"
+             else
+               truncate(activity.detail, length: 30)
+             end
+
+    detail.html_safe
   end
 
   def small_avatar(user, add_styles = nil)
