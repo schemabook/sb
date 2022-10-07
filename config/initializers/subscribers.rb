@@ -3,6 +3,7 @@ Rails.application.reloader.to_prepare do
 
   # Businesses created
   Subscribers::Businesses::Created::ActivityLog.new
+  Subscribers::Businesses::Created::WelcomeEmail.new
 
   # Businesses updated
   Subscribers::Businesses::Updated::Activity.new
