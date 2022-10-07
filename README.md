@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+All that should be needed is:
 
-* Ruby version
+`git clone`
 
-* System dependencies
+`bundle`
 
-* Configuration
+`rails db:create`
+`rails db:migrate`
 
-* Database creation
+`bundle exec rspec`
 
-* Database initialization
+`./bin/dev`
 
-* How to run the test suite
+## Emails
 
-* Services (job queues, cache servers, search engines, etc.)
+Generate a mailer, and style to match:
 
-* Deployment instructions
-
-* ...
+http://localhost:3000/rails/mailers/user/welcome_email.html?locale=en
