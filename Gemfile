@@ -52,6 +52,11 @@ gem 'csv'
 # for avatars
 gem 'image_processing'
 
+# telemetry through Honeycomb
+gem 'opentelemetry-sdk'
+gem 'opentelemetry-exporter-otlp'
+gem 'opentelemetry-instrumentation-all'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem 'rspec-rails', '~> 4.0.2'
