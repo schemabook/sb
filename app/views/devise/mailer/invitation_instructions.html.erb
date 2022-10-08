@@ -70,7 +70,7 @@
       <p><%= t("devise.mailer.invitation_instructions.someone_invited_you") %></p>
 
       <% link = accept_invitation_url(@resource, invitation_token: @token) %>
-      <p><%= link_to t("devise.mailer.invitation_instructions.accept"), link %></p>
+      <p><%= link_to t("devise.mailer.invitation_instructions.accept"), link, style: "border:0;margin:0;padding:0;color:#0891B2!important;font-weight:bold;text-decoration:none"%></p>
 
       <% if @resource.invitation_due_at %>
         <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
