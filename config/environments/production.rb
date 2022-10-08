@@ -68,7 +68,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: ENV.fetch("MAILGUN_API_KEY"),
-    domain: 'schemabook.com'
+    domain: 'mg.schemabook.com'
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
