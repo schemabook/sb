@@ -3,6 +3,6 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @url  = 'http://www.schemabook.com/users/sign_in'
 
-    mail(to: @user.email, subject: 'Welcome to Schemabook')
+    mail(to: @user.email, from: 'stakeholder@schemabook.com', subject: 'Welcome to Schemabook')
   end
 end
