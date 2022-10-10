@@ -13,7 +13,7 @@
       <div class="relative px-3 w-full">
         <ul>
           <li class="text-gray-800">
-            <%= link_to current_user.display_name, user_profile_path(current_user) %>
+            <%= link_to truncate(current_user.display_name, length: 20), user_profile_path(current_user) %>
           </li>
           <li class="text-gray-800">
             <i><%= link_to current_user.team.name, team_path(current_user.team) %></i>
