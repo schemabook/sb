@@ -10,6 +10,7 @@ Rails.application.reloader.to_prepare do
 
   # Services created
   Subscribers::Services::Created::Activity.new
+  Subscribers::Services::Created::EmailTeammates.new
 
   # Schemas created
   Subscribers::Schemas::Created::Activity.new
