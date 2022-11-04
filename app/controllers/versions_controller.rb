@@ -19,6 +19,8 @@ class VersionsController < ApplicationController
     if @version.save
       @version.body = version_params[:body]
 
+      Events::Versions::Created.new(record: @version, user: current_user).publish
+
       flash[:notice] = "Version #{@schema.versions.count} was created"
       redirect_to schema_path(@schema)
     else

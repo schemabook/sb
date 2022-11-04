@@ -59,6 +59,12 @@ RSpec.describe "Versions", type: :request do
         }.to change(Version, :count)
       end
 
+      it "should broadcast an event" do
+        expect_any_instance_of(Events::Versions::Created).to receive(:publish)
+
+        subject
+      end
+
       it "should redirect to the schema path" do
         subject
 
