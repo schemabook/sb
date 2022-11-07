@@ -9,6 +9,7 @@ class VersionsController < ApplicationController
     @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     @schema = Schema.find params[:schema_id]
 
@@ -17,7 +18,7 @@ class VersionsController < ApplicationController
 
     @version = Version.new(schema: @schema)
     if @version.save
-      @version.body = version_params[:body]
+      @version.body = version_params[:body] # this is a save for activestorage
 
       Events::Versions::Created.new(record: @version, user: current_user).publish
 
@@ -28,6 +29,7 @@ class VersionsController < ApplicationController
       render :new
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 

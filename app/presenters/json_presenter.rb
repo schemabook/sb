@@ -7,7 +7,7 @@ class JsonPresenter
   end
 
   def content
-    return unless @schema.format.json?
+    return unless @schema.format.json? || @version.body.nil?
 
     json = JSON.parse(@version.body)
     JSON.pretty_generate(json)
