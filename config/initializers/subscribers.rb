@@ -26,4 +26,8 @@ Rails.application.reloader.to_prepare do
 
   # Comment created
   Subscribers::Comments::Created::Activity.new
+
+  # Version created
+  Subscribers::Versions::Created::Activity.new
+  Subscribers::Versions::Created::EmailStakeholders.new
 end

@@ -17,8 +17,8 @@ RSpec.describe Subscribers::Versions::Created::EmailStakeholders do
     let(:format) { create(:format, file_type: :json) }
     let(:user)   { create(:user) }
     let(:schema) { create(:schema, :with_team, name: "foo", format:) }
-    let(:version) { create(:version, schema: schema) }
-    let(:stakeholder) { create(:stakeholder, schema: schema, user: create(:user, email: "stakeholder@example.com")) }
+    let(:version) { create(:version, schema:) }
+    let(:stakeholder) { create(:stakeholder, schema:, user: create(:user, email: "stakeholder@example.com")) }
 
     before do
       schema.stakeholders << stakeholder

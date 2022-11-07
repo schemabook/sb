@@ -22,8 +22,8 @@ class UserMailer < ApplicationMailer
     @user      = params[:user]
     @version   = params[:version]
     @schema    = @version.schema
-    @stakeholders = @schema.stakeholders - [@user]
     @url       = "http://www.schemabook.com/schema/#{@schema.id}"
+    @stakeholders = @schema.stakeholders - [@user]
 
     @stakeholders.each do |stakeholder|
       mail(to: stakeholder.user.email, from: 'stakeholder@schemabook.com', subject: 'New Schema Version Created')

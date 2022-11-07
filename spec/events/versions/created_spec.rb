@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Events::Versions::Created do
   let(:format)   { create(:format, file_type: :json) }
   let(:schema)   { create(:schema, :with_team, name: "foo", format:) }
-  let(:version)  { create(:version, schema: schema) }
+  let(:version)  { create(:version, schema:) }
 
   subject { described_class.new(record: version) }
 

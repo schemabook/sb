@@ -17,7 +17,7 @@ RSpec.describe Subscribers::Versions::Created::Activity do
     let(:format) { create(:format, file_type: :json) }
     let(:user)   { create(:user) }
     let(:schema) { create(:schema, :with_team, name: "foo", format:) }
-    let(:version) { create(:version, schema: schema) }
+    let(:version) { create(:version, schema:) }
 
     it "persists an Activity object" do
       payload    = Events::Versions::Created.new(record: version, user:).payload
