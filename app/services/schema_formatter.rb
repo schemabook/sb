@@ -42,9 +42,9 @@ class SchemaFormatter
   def json_to_csv
     begin
       headers  = csv_headers
-      finalrow = csv_finalrow(headers)
+      rows     = csv_rows(headers)
 
-      csv_string(headers, finalrow)
+      csv_string(headers, rows)
     rescue
       raise ConversionError, "The JSON can't be converted to CSV due to lack of properties and types defined"
     end
@@ -64,18 +64,26 @@ class SchemaFormatter
     headers.compact
   end
 
-  def csv_finalrow(headers)
-    finalrow = []
+  def csv_rows(headers)
+    rows = []
 
     JSON.parse(version.body).each do |h|
       next unless json_hash?(h)
 
-      final = {}
-      headers.each { |key2| final[key2] = h.last.first[key2] }
-      finalrow << final
+      fields = Array.wrap(h.last)
+
+      fields.each do |field|
+        row = {}
+
+        headers.each do |key|
+          row[key] = field.fetch(key)
+        end
+
+        rows << row
+      end
     end
 
-    finalrow
+    rows
   end
 
   def json_hash?(element)
