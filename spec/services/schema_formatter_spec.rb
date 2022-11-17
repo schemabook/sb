@@ -64,7 +64,7 @@ RSpec.describe SchemaFormatter do
       context "when the JSON can be converted with a single field" do
         let(:json) { '{"type": "record", "name": "book", "fields": [{ "name": "title", "type": "string" }]}' }
 
-        it "returns the body in avro format" do
+        it "returns the body in csv format" do
           csv = subject.as_csv
 
           expect(csv).to eq("name,type\ntitle,string\n")
@@ -74,10 +74,40 @@ RSpec.describe SchemaFormatter do
       context "when the JSON can be converted with mulitple fields" do
         let(:json) { '{"type": "record", "name": "book", "fields": [{ "name": "title", "type": "string" }, { "name": "author", "type": "string" }]}' }
 
-        it "returns the body in avro format" do
+        it "returns the body in csv format" do
           csv = subject.as_csv
 
           expect(csv).to eq("name,type\ntitle,string\nauthor,string\n")
+        end
+      end
+
+      context "when the JSON can be converted with mulitple fields with different types" do
+        let(:json) do
+          '{
+              "type": "record",
+              "name": "book",
+              "fields": [
+                {
+                  "name": "title",
+                  "type": "string"
+                },
+                {
+                  "name": "author",
+                  "type": "string",
+                  "required": "boolean"
+                },
+                {
+                  "name": "pages",
+                  "type": "integer"
+                }
+              ]
+          }'
+        end
+
+        it "returns the body in csv format" do
+          csv = subject.as_csv
+
+          expect(csv).to eq("name,type,required\ntitle,string,\"\"\nauthor,string,boolean\npages,integer,\"\"\n")
         end
       end
     end

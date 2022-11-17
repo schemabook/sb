@@ -38,7 +38,7 @@ class SchemaFormatter
     end
   end
 
-  # TODO: update to support nesting
+  # TODO: update to support nesting, currently assumes a root level list of attributes/fields
   def json_to_csv
     begin
       headers  = csv_headers
@@ -56,14 +56,18 @@ class SchemaFormatter
     JSON.parse(version.body).each do |h|
       next unless json_hash?(h)
 
-      element = h.last.first
-
-      element.each_key { |key| headers << key }
+      fields = Array.wrap(h.last)
+      fields.each do |field|
+        field.each_key do |key|
+          headers << key
+        end
+      end
     end
 
-    headers.compact
+    headers.uniq.compact
   end
 
+  # rubocop:disable Metrics/MethodLength
   def csv_rows(headers)
     rows = []
 
@@ -76,7 +80,7 @@ class SchemaFormatter
         row = {}
 
         headers.each do |key|
-          row[key] = field.fetch(key)
+          row[key] = field.fetch(key, "") # blank string if not found
         end
 
         rows << row
@@ -85,6 +89,7 @@ class SchemaFormatter
 
     rows
   end
+  # rubocop:enable Metrics/MethodLength
 
   def json_hash?(element)
     element&.last.is_a?(Array) || element&.last&.first.is_a?(Hash)
