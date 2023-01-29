@@ -5,47 +5,31 @@
   </div>
   <div class="border-t border-gray-200">
     <dl>
-      <div class="bg-gray-50 px-4 py-5">
+      <div class="bg-gray-50 px-10 py-10">
         <dt class="text-sm font-medium text-gray-500">Administrators</dt>
         <dd class="mt-1 text-sm text-gray-900">
           <% if current_user.admin? %>
-            You are an administrator. You have the ability to edit the account settings (in the 
-            lower left corner). You also have the ability to create teams, define services, and 
-            publish schemas. You can also identify yourself as a stakeholder of someone else's 
-            schema.
+            You are an administrator. You have the ability to edit the <%= link_to "account settings", business_path(current_user.business) %> (in the 
+            lower left corner). Account settings allow you to manage the teams, users and general 
+            account settings like payment info. You also have the ability to create teams, 
+            define services, and publish schemas. You can also identify yourself as a 
+            stakeholder on schemas created by other teams.
           <% else %>
             You are a stakeholder. You have the ability to publish schemas and define yourself as 
-            a stakeholder of schemas.
+            a stakeholder of schemas. Managing teams requires an Administrator.
           <% end %>
         </dd>
-      </div>
-      <div class="bg-white px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Account Settings</dt>
-        <dd class="mt-1 text-sm text-gray-900">
-          <% if current_user.admin? %>
-            You are an administrator. You have the ability to edit the account settings (in the 
-            lower left corner). Account settings allow you to manage the teams, users and general 
-            account settings like payment info.
-          <% else %>
-            You are a stakeholder. Stakeholders don't have the ability to edit the account settings. 
-            However, you can still create services and invite teamates.
-          <% end %>
-        </dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Teams</dt>
+        <dt class="mt-8 text-sm font-medium text-gray-500">Teams</dt>
         <dd class="mt-1 text-sm text-gray-900">
           <% if current_user.admin? %>
             You are an administrator. You have the ability to manage the teams for your organization. 
             Users are assigned to teams. Teams manage services and schemas. 
           <% else %>
-            You are a stakeholder. Stakeholders don't have the ability to create or edit teams. 
+            Stakeholders don't have the ability to create or edit teams. That requires an Administrator.  
             However, you can still create services and invite teamates.
           <% end %>
         </dd>
-      </div>
-      <div class="bg-white px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Teammates</dt>
+        <dt class="mt-8 text-sm font-medium text-gray-500">Teammates</dt>
         <dd class="mt-1 text-sm text-gray-900">
           <% if current_user.admin? %>
             You are an administrator. You have the ability to organize teammates into teams. 
@@ -54,53 +38,37 @@
             teammate will automatically be placed in the team of the stakeholder that sent the 
             invitation.
           <% else %>
-            You are a stakeholder. Stakeholders have the ability to edit teamates. 
+            You are a stakeholder. Stakeholders do not have the ability to edit teamates. 
             However, you can still create services and invite teamates. If the invitation is 
             accepted, the new teammate will automatically be placed in the team of the stakeholder 
             that sent the invitation.
           <% end %>
         </dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Services</dt>
+        <dt class="mt-8 text-sm font-medium text-gray-500">Services</dt>
         <dd class="mt-1 text-sm text-gray-900">
           Services represent the various parts of your system where schemas can be defined. If you 
           have a data warehouse, it has schemas. If you run an Elasticsearch cluster, it has schemas. 
           If you have an iOS app that broadcasts events, it has schemas. You get the idea.
-          <br />
-          <br />
           Schemas should, but don't always have to, belong to services. Any teammate can create a 
           Service for their team. Their team is then assigned ownership of the Service. Other teams 
           will then know who to contact about the Service and its Schemas.
         </dd>
-      </div>
-      <div class="bg-white px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Schemas</dt>
+        <dt class="mt-8 text-sm font-medium text-gray-500">Schemas</dt>
         <dd class="mt-1 text-sm text-gray-900">
           Schemas represent the definition of data. They form the basis of a data contract. Anyone 
           can create a Schema. Anyone can define themselves as a Stakeholder of any Schema.
-          <br />
-          <br />
           Schemas are defined in an original format and then automatically converted into other 
           formats. This allows teams and services to work in the format that makes the most sense 
-          for them.
-          <br />
-          <br />
-          Schemas can be updated by any team member that owns the Schema. Any Stakeholder can 
+          for them. Schemas can be updated by any team member that owns the Schema. Any Stakeholder can 
           comment on a Schema. All teammates and Stakeholders will be alerted when a modification 
           is made to a Schema. This keeps everyone on the same page.
         </dd>
-      </div>
-      <div class="bg-gray-50 px-4 py-5">
-        <dt class="text-sm font-medium text-gray-500">Activity Feeds</dt>
+        <dt class="mt-8 text-sm font-medium text-gray-500">Activity Feeds</dt>
         <dd class="mt-1 text-sm text-gray-900">
           To the right, is the Activity Feed. Activity Feeds are context aware. Here on the Dashboard 
           is the global feed. This keeps all Stakeholders aware of the goings on throughout the 
-          Organization.
-          <br />
-          <br />
-          While viewing a specific Schema, the Activity Feed will only contain items relevant to that 
-          Schema. This provides all Stakeholders an easy way to stay updated.
+          Organization. While viewing a specific Schema, the Activity Feed will only contain items 
+          relevant to that Schema. This provides all Stakeholders an easy way to stay updated.
         </dd>
       </div>
     </dl>
