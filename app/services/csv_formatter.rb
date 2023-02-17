@@ -13,7 +13,7 @@ class CsvFormatter
   end
 
   def to_json
-    str = headers.blank? ? version.body : headers
+    str = headers.presence || version.body
 
     CSV.parse(str, col_sep: delimiter).to_json
   end
@@ -32,15 +32,16 @@ class CsvFormatter
   def headers
     return "" unless version.body.match?(/\\n/)
 
-    version.body.match(/(^.*)\\n/)[0].gsub("\\n","")
+    version.body.match(/(^.*)\\n/)[0].gsub("\\n", "")
   end
 
   def delimiter
     version.body.match(/\W/)[0]
   end
 
+  # rubocop:disable Metrics/MethodLength
   def json_string
-    str = headers.blank? ? version.body : headers
+    str = headers.presence || version.body
 
     # split on a dynamic delimiter
     fields = str.split(delimiter)
@@ -63,4 +64,5 @@ class CsvFormatter
 
     return json.to_json
   end
+  # rubocop:enable Metrics/MethodLength
 end

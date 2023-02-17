@@ -27,7 +27,7 @@ RSpec.describe JsonPresenter do
         let(:version)  { create(:version, schema:, body: avro) }
 
         it "returns the body as pretty printed JSON string" do
-          expect(JSON).to receive(:pretty_generate).and_return(json)
+          allow(JSON).to receive(:pretty_generate).and_return(json)
 
           expect(subject.content).to eq(json)
         end
@@ -35,7 +35,7 @@ RSpec.describe JsonPresenter do
 
       context "when not convertible to json" do
         it "returns an error messasge string" do
-          expect_any_instance_of(SchemaFormatter).to receive(:as_json).and_raise(JsonFormatter::ConversionError)
+          allow_any_instance_of(SchemaFormatter).to receive(:as_json).and_raise(JsonFormatter::ConversionError)
 
           expect(subject.content).to match(/can not be converted to JSON/)
         end

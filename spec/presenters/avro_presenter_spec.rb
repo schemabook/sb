@@ -22,7 +22,7 @@ RSpec.describe AvroPresenter do
 
     context "when original format is not avro" do
       it "returns the body as an Avro JSON string" do
-        expect_any_instance_of(SchemaFormatter).to receive(:as_avro).and_return("{}")
+        allow_any_instance_of(SchemaFormatter).to receive(:as_avro).and_return("{}")
 
         expect(subject.content).to eq("{\n}")
       end
@@ -30,7 +30,7 @@ RSpec.describe AvroPresenter do
 
     context "when original format can not be converted to avro" do
       it "returns an error messasge string" do
-        expect_any_instance_of(SchemaFormatter).to receive(:as_avro).and_raise(AvroFormatter::ConversionError)
+        allow_any_instance_of(SchemaFormatter).to receive(:as_avro).and_raise(AvroFormatter::ConversionError)
 
         expect(subject.content).to match(/can not be converted to Avro/)
       end

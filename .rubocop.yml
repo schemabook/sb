@@ -174,3 +174,9 @@ Style/OpenStructUse:
 
 RSpec/EmptyExampleGroup:
   Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+Lint/ToJSON:
+  Enabled: false

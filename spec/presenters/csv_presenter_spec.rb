@@ -31,7 +31,7 @@ RSpec.describe CsvPresenter do
 
       context "when not convertible to csv" do
         it "returns an error messasge string" do
-          expect_any_instance_of(SchemaFormatter).to receive(:as_csv).and_raise(CsvFormatter::ConversionError)
+          allow_any_instance_of(SchemaFormatter).to receive(:as_csv).and_raise(CsvFormatter::ConversionError)
 
           expect(subject.content).to match(/can not be converted to CSV/)
         end

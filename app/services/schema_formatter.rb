@@ -2,9 +2,9 @@ class SchemaFormatter
   class ConversionError < StandardError; end
 
   FORMATTERS = {
-    :json => JsonFormatter,
-    :csv => CsvFormatter,
-    :avro => AvroFormatter
+    json: JsonFormatter,
+    csv: CsvFormatter,
+    avro: AvroFormatter
   }
 
   attr_reader :schema, :version
