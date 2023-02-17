@@ -3,43 +3,45 @@ require 'rails_helper'
 RSpec.describe CsvPresenter do
   let(:business) { create(:business) }
   let(:team)     { create(:team, business:) }
-  let(:format)   { create(:format, file_type: :json) }
-  let(:json)     { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
+  let(:format)   { create(:format, file_type: :csv) }
+  let(:csv)      { build(:csv).to_s }
   let(:schema)   { create(:schema, name: "foo", team:, format:) }
-  let(:version)  { create(:version, schema:, body: json) }
+  let(:version)  { create(:version, schema:, body: csv) }
 
   subject { described_class.new(schema, version) }
 
   describe "#content" do
-    context "when original format is json" do
-      it "returns the csv version" do
-        expected = SchemaFormatter.new(schema:, version:).as_csv
-
-        expect(subject.content).to eq(expected)
-      end
-
-      context "when the json can't be converted to csv" do
-        let(:json) { '{}' }
-
-        it "returns an error message" do
-          expected = "The JSON definition can't be converted to CSV"
-
-          expect(subject.content).to match(expected)
-        end
+    context "when original format is csv" do
+      it "returns the csv body" do
+        expect(subject.content).to eq(csv)
       end
     end
 
-    context "when original format is not json" do
-      it "returns the body as JSON" do
-        pending("need to implement conversions from other formats in SchemaFormatter")
-        raise "this is a temporary failure"
+    context "when original format is not csv" do
+      context "when convertible to csv" do
+        let(:format)   { create(:format, file_type: :avro) }
+        let(:avro)     { build(:avro).to_s }
+        let(:schema)   { create(:schema, name: "foo", team:, format:) }
+        let(:version)  { create(:version, schema:, body: avro) }
+
+        it "returns the body as a CSV string" do
+          expect(subject.content).to eq("name,type\nfirst_name,string\nlast_name,string\nage,int\n")
+        end
+      end
+
+      context "when not convertible to csv" do
+        it "returns an error messasge string" do
+          allow_any_instance_of(SchemaFormatter).to receive(:as_csv).and_raise(CsvFormatter::ConversionError)
+
+          expect(subject.content).to match(/can not be converted to CSV/)
+        end
       end
     end
   end
 
   describe "#content_length" do
     it "returns the line counts of the content" do
-      expect(subject.content_length).to eq(2)
+      expect(subject.content_length).to eq(1)
     end
   end
 end

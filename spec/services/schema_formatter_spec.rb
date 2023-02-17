@@ -3,112 +3,52 @@ require 'rails_helper'
 RSpec.describe SchemaFormatter do
   let(:business) { create(:business) }
   let(:team)     { create(:team, business:) }
-  let(:format)   { create(:format, file_type: :json) }
-  let(:json)     { '{"foo": {"bar": 1}}' }
   let(:schema)   { create(:schema, name: "foo", team:, format:) }
   let(:version)  { create(:version, schema:) }
 
   subject { described_class.new(schema:, version:) }
 
-  before do
-    version.body = json
-  end
+  context "when format is json" do
+    let(:format) { create(:format, file_type: :json) }
+    let(:json)   { build(:json).to_s }
 
-  describe "#as_json" do
-    context "when body format is json" do
-      it "returns the body in json format" do
-        expect(subject.as_json).to eq(json)
+    describe "#as_json" do
+      it "calls the appropriate formatter class" do
+        version.body = json
+
+        expect_any_instance_of(JsonFormatter).to receive(:to_json)
+
+        subject.as_json
       end
     end
   end
 
-  describe "#as_avro" do
-    context "when body format is json" do
-      context "when the JSON can be converted" do
-        let(:json) { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "string" }]}' }
+  context "when format is csv" do
+    let(:format) { create(:format, file_type: :csv) }
+    let(:csv)    { build(:csv).to_s }
 
-        it "returns the body in avro format" do
-          avro = subject.as_avro
+    describe "#as_csv" do
+      it "calls the appropriate formatter class" do
+        version.body = csv
 
-          expect(JSON.parse(avro.as_json).keys).to include("fields")
-        end
-      end
+        expect_any_instance_of(CsvFormatter).to receive(:to_csv)
 
-      context "when the JSON can't be converted" do
-        context "when a type is missing" do
-          let(:json) { '{"foo": {"bar": 1}}' }
-
-          it "raises an exception" do
-            expect {
-              subject.as_avro
-            }.to raise_error(SchemaFormatter::ConversionError, /No "type" property/)
-          end
-        end
-
-        context "when an attribute type is not known" do
-          # type should be string not String
-          let(:json) { '{"type": "record", "name":"book", "fields": [{ "name": "title", "type": "String" }]}' }
-
-          it "raises an exception around the schema type now known" do
-            expect {
-              subject.as_avro
-            }.to raise_error(SchemaFormatter::ConversionError, /"String" is not a schema we know about/)
-          end
-        end
+        subject.as_csv
       end
     end
   end
 
-  describe "#as_csv" do
-    context "when body format is json" do
-      context "when the JSON can be converted with a single field" do
-        let(:json) { '{"type": "record", "name": "book", "fields": [{ "name": "title", "type": "string" }]}' }
+  context "when format is avro" do
+    let(:format) { create(:format, file_type: :avro) }
+    let(:avro)   { build(:avro).to_s }
 
-        it "returns the body in csv format" do
-          csv = subject.as_csv
+    describe "#as_avro" do
+      it "calls the appropriate formatter class" do
+        version.body = avro
 
-          expect(csv).to eq("name,type\ntitle,string\n")
-        end
-      end
+        expect_any_instance_of(AvroFormatter).to receive(:to_avro)
 
-      context "when the JSON can be converted with mulitple fields" do
-        let(:json) { '{"type": "record", "name": "book", "fields": [{ "name": "title", "type": "string" }, { "name": "author", "type": "string" }]}' }
-
-        it "returns the body in csv format" do
-          csv = subject.as_csv
-
-          expect(csv).to eq("name,type\ntitle,string\nauthor,string\n")
-        end
-      end
-
-      context "when the JSON can be converted with mulitple fields with different types" do
-        let(:json) do
-          '{
-              "type": "record",
-              "name": "book",
-              "fields": [
-                {
-                  "name": "title",
-                  "type": "string"
-                },
-                {
-                  "name": "author",
-                  "type": "string",
-                  "required": "boolean"
-                },
-                {
-                  "name": "pages",
-                  "type": "integer"
-                }
-              ]
-          }'
-        end
-
-        it "returns the body in csv format" do
-          csv = subject.as_csv
-
-          expect(csv).to eq("name,type,required\ntitle,string,\"\"\nauthor,string,boolean\npages,integer,\"\"\n")
-        end
+        subject.as_avro
       end
     end
   end

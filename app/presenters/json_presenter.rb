@@ -7,11 +7,14 @@ class JsonPresenter
   end
 
   def content
-    return unless @schema.format.json? || @version.body.nil?
+    begin
+      formatted_content = SchemaFormatter.new(schema:, version:).as_json
 
-    json = JSON.parse(@version.body)
-    JSON.pretty_generate(json)
-    # TODO: if format was originally something else, convert it using the SchemaFormatter
+      json = JSON.parse(formatted_content)
+      JSON.pretty_generate(json)
+    rescue
+      "Original format can not be converted to JSON"
+    end
   end
 
   def content_length
