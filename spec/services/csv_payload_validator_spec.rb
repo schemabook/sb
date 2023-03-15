@@ -18,7 +18,7 @@ RSpec.describe CsvPayloadValidator do
   describe "#valid?" do
     context "with a valid payload" do
       it "returns true" do
-        expect(subject.valid?).to eq(true)
+        expect(subject.valid?).to be true
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe CsvPayloadValidator do
       let(:payload) { "foo" }
 
       it "returns false" do
-        expect(subject.valid?).to eq(false)
+        expect(subject.valid?).to be false
       end
     end
   end

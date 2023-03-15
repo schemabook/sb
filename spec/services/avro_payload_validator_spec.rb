@@ -7,13 +7,7 @@ RSpec.describe AvroPayloadValidator do
   let(:avro)     { build(:avro).to_s }
   let(:schema)   { create(:schema, name: "foo", team:, format:) }
   let(:version)  { create(:version, schema:) }
-  let(:payload)  do
-    {
-      first_name: "Steve",
-      last_name: "Jobs",
-      age: 68
-    }.to_s
-  end
+  let(:payload)  { '{"first_name":"Steve","last_name":"Jobs","age": 68}' }
 
   subject { described_class.new(schema: JSON.parse(schema.versions.last.body.to_json), payload:) }
 
@@ -24,7 +18,7 @@ RSpec.describe AvroPayloadValidator do
   describe "#valid?" do
     context "with a valid payload" do
       it "returns true" do
-        expect(subject.valid?).to eq(true)
+        expect(subject.valid?).to be true
       end
     end
 
@@ -32,7 +26,7 @@ RSpec.describe AvroPayloadValidator do
       let(:payload) { "{}" }
 
       it "returns false" do
-        expect(subject.valid?).to eq(false)
+        expect(subject.valid?).to be false
       end
     end
   end

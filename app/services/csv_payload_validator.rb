@@ -13,7 +13,7 @@ class CsvPayloadValidator
       csv = CSV.parse(headers_and_body, headers: true)
 
       # NOTE: a nil means something didn't align between the headers and the rows
-      !csv.to_a.flatten.any?(nil)
+      csv.to_a.flatten.none?(nil)
     rescue
       false
     end

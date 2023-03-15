@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative "../../app/controllers/validations_controller.rb"
+require_relative "../../app/controllers/validations_controller"
 
 RSpec.describe ValidationsController, type: :request do
   describe "#create" do
@@ -8,21 +8,17 @@ RSpec.describe ValidationsController, type: :request do
     let(:format)   { create(:format, file_type: :json) }
     let(:json)     { build(:json, :with_types).to_s }
     let(:schema)   { create(:schema, name: "foo", team:, format:) }
-    let!(:version)  { create(:version, schema:) }
-    let(:payload)  do
-      {
-        title: "Harry Potter"
-      }.to_s
-    end
+    let!(:version) { create(:version, schema:) }
+    let(:payload)  { '{"title":"harry potter"}' }
 
     before do
       version.body = json
     end
 
     it "should return a 200" do
-      post "/schemas/#{schema.public_id}/validations", params: { payload: payload }
+      post "/schemas/#{schema.public_id}/validations", params: { payload: }
 
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
     end
 
     context "with an invalid payload" do
@@ -33,9 +29,9 @@ RSpec.describe ValidationsController, type: :request do
       end
 
       it "should return a 422" do
-        post "/schemas/#{schema.public_id}/validations", params: { payload: payload }
+        post "/schemas/#{schema.public_id}/validations", params: { payload: }
 
-        expect(response.status).to eq(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
