@@ -57,6 +57,9 @@ gem 'opentelemetry-exporter-otlp'
 gem 'opentelemetry-instrumentation-all'
 gem 'opentelemetry-sdk'
 
+# nanoid generator for schema slugs
+gem 'nanoid'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem 'rspec-rails', '~> 4.0.2'

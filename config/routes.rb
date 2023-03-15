@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :businesses
   resources :services
   resources :schemas do
+    resources :validations, only: :create
     resources :versions do
       resources :comments
     end

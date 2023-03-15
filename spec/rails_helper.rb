@@ -65,6 +65,9 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # include url helpers in RSpec requests
+  config.include Rails.application.routes.url_helpers, type: :request
+
   # include devise helpers in feature and request specs
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request

@@ -1,4 +1,6 @@
 class Schema < ApplicationRecord
+  include PublicIdGenerator
+
   has_many :stakeholders
   has_many :favorites
   has_many :versions
