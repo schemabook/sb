@@ -11,7 +11,7 @@
     </svg>
 
     <p class="text-gray-500">
-    <span class="text-black">Validation endpoint:</span> POST https://schemabook.com/schemas/:uuid/validate
+    <span class="text-black">Validation endpoint:</span> POST https://schemabook.com/schemas/<%= @schema.public_id %>/validate
     </p>
   </div>
 
@@ -21,7 +21,7 @@
     </svg>
 
     <p class="text-gray-500">
-    <span class="text-black">CDN URI:</span> GET https://schemabook.cloudflare.com/schemas/:uuid
+    <span class="text-black">CDN URI:</span> GET https://schemabook.cloudflare.com/schemas/<%= @schema.public_id %>
     </p>
   </div>
 </div>
