@@ -50,9 +50,27 @@
 <div class="p-4">
   <div class="flex text-sm font-medium text-cyan-600 truncate">
     <ul id="stakeholders">
+    <% if @schema.stakeholders.empty? %>
+      <li class="text-black">None</li>
+    <% else %>
     <% @schema.stakeholders.each do |stakeholder| %>
       <li class="text-black"><%= link_to "#{stakeholder.display_name}", user_profile_path(stakeholder.user) %></li>
+      <% end %>
     <% end %>
   </div>
 </div>
+
+<div class="mt-6 pb-1">
+  <h3 class="text-lg leading-6 font-medium text-gray-900">
+    Production data
+  </h3>
+</div>
+
+<div class="p-4">
+  <div class="flex text-sm font-medium text-cyan-600 truncate">
+    <span class="text-black"><%= @schema.production.to_s.capitalize %></span>
+  </div>
+</div>
+
+
 

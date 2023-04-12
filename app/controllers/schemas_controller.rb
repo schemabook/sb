@@ -1,21 +1,21 @@
 class SchemasController < ApplicationController
   def new
-    @schema     = Schema.new
+    @schema = Schema.new
     @activities = current_user.business.activity_log.for_schema_new.limit(8)
   end
 
   def show
-    @schema       = current_user.team.schemas.where(id: params[:id]).first
-    @tab          = params[:tab] || @schema.format.to_s
-    @activities   = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
-    @stakeholder  = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
+    @schema = current_user.team.schemas.where(id: params[:id]).first
+    @tab = params[:tab] || @schema.format.to_s
+    @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
+    @stakeholder = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
 
     version_index = params[:version] || @schema.versions.last.index
-    @version      = @schema.versions.find_by(index: version_index)
+    @version = @schema.versions.find_by(index: version_index)
 
-    @comment      = Comment.new(version: @version)
-    @comments     = @version.comments.order(created_at: :desc)
+    @comment = Comment.new(version: @version)
+    @comments = @version.comments.order(created_at: :desc)
 
     load_presenters
   end
@@ -45,7 +45,7 @@ class SchemasController < ApplicationController
   end
 
   def schema_params
-    params.require(:schema).permit(:name, :service_id, :description).merge(team_id: current_user.team.id)
+    params.require(:schema).permit(:name, :service_id, :description, :production).merge(team_id: current_user.team.id)
   end
 
   def version_params
@@ -55,7 +55,7 @@ class SchemasController < ApplicationController
   def load_presenters
     @json_presenter = JsonPresenter.new(@schema, @version)
     @avro_presenter = AvroPresenter.new(@schema, @version)
-    @csv_presenter  = CsvPresenter.new(@schema, @version)
+    @csv_presenter = CsvPresenter.new(@schema, @version)
   end
 
   def create_version(schema:)
