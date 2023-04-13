@@ -7,7 +7,7 @@
           Schema Information
         </h3>
         <p class="mt-1 text-sm text-gray-500">
-        We'll give this schema a unique identifier. We validate against JSON Schema <%= JsonValidator::DRAFT %> currently.
+        We'll give this schema a unique identifier.
         </p>
       </div>
       <% if @schema.errors.any? %>
@@ -40,6 +40,17 @@
           </label>
           <div class="mt-1">
             <%= form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="first_name" class="block text-sm font-medium text-gray-700">
+            Production data*
+          </label>
+          <div class="mt-1">
+            <%= form.select :production, [true, false], {}, { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" } %>
           </div>
         </div>
       </div>
