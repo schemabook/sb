@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-  let menu = document.querySelector("#menu")
+function runOnStart() {
+	let menu = document.querySelector("#menu")
   menu.classList.add("hidden")
 
   let mainMenu = document.querySelector("#main-menu")
@@ -11,4 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.addEventListener('click', () => {
     menu.classList.add("hidden")
   })
-})
+}
+
+if(document.readyState !== 'loading') {
+  runOnStart();
+} else {
+  document.addEventListener('DOMContentLoaded', function () {
+    runOnStart()
+  });
+}
