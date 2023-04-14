@@ -18,7 +18,6 @@ RSpec.describe Subscribers::Comments::Created::Notifications do
     let(:user)    { create(:user) }
     let!(:teammate) { create(:user, team: comment.version.schema.team, email: 'admin2@example.com') }
 
-
     it "mails the team" do
       payload    = Events::Comments::Created.new(record: comment, user: comment.user).payload
       event_type = "foo"
