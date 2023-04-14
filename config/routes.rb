@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get "users", to: redirect("dashboards"), as: :user_root # creates user_root_path, used for after sign in path
   get "dashboards", to: "dashboards#index"
   get "documents", to: "documents#index"
+  get "supports", to: "supports#index"
 
   # profiles (user is the resource)
   get "profiles/:id/edit", to: "profiles#edit", as: :edit_user_profile
