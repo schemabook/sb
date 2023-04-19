@@ -1,8 +1,10 @@
 class Service < ApplicationRecord
+  UNPAID_LIMIT = 10
+
   belongs_to :team
   has_many :schemas
 
-  validates :name, presence: true, uniqueness: { scope: :team_id }
+  validates :name, presence: true, uniqueness: {scope: :team_id}
   validates :created_by, presence: true
 
   def creator
