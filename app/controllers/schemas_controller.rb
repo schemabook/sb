@@ -2,6 +2,11 @@ class SchemasController < ApplicationController
   def new
     @schema = Schema.new
     @activities = current_user.business.activity_log.for_schema_new.limit(8)
+
+    # flash message if business is unpaid and has 10 schemas
+    if !current_user.business.paid? && current_user.business.schemas.size >= Schema::UNPAID_LIMIT
+      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more schemas."
+    end
   end
 
   def show
@@ -24,7 +29,12 @@ class SchemasController < ApplicationController
     @format = Format.create(format_params)
     @schema = Schema.new(schema_params.merge(format_id: @format.id))
 
-    if @schema.save
+    if !current_user.business.paid? && current_user.business.schemas.size >= Schema::UNPAID_LIMIT
+      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more schemas."
+      @format.destroy
+
+      render :new
+    elsif @schema.save
       @version = create_version(schema: @schema)
 
       Events::Schemas::Created.new(record: @schema, user: current_user).publish

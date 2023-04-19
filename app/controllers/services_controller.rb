@@ -13,8 +13,13 @@ class ServicesController < ApplicationController
 
   # GET /services/new
   def new
-    @service    = Service.new
+    @service = Service.new
     @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
+
+    # flash message if business is unpaid and has 10 services
+    if !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
+      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
+    end
   end
 
   # GET /services/1/edit
@@ -24,17 +29,23 @@ class ServicesController < ApplicationController
 
   # POST /services or /services.json
   def create
-    @service = Service.new(service_params.merge({ team_id: current_user.team.id, created_by: current_user.id }))
+    if !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
+      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
 
-    respond_to do |format|
-      if @service.save
-        Events::Services::Created.new(record: @service, user: current_user).publish
+      render :new
+    else
+      @service = Service.new(service_params.merge({team_id: current_user.team.id, created_by: current_user.id}))
 
-        format.html { redirect_to @service, notice: "Service was successfully created." }
-        format.json { render :show, status: :created, location: @service }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @service.save
+          Events::Services::Created.new(record: @service, user: current_user).publish
+
+          format.html { redirect_to @service, notice: "Service was successfully created." }
+          format.json { render :show, status: :created, location: @service }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @service.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -65,7 +76,7 @@ class ServicesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_service
-    teams    = current_user.business.teams
+    teams = current_user.business.teams
     @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
   end
 
