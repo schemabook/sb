@@ -16,4 +16,10 @@ class Business < ApplicationRecord
 
     Schema.where(team_id: team_ids)
   end
+
+  def services
+    team_ids = teams.pluck(:id)
+
+    Service.where(team_id: team_ids)
+  end
 end
