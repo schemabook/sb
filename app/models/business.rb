@@ -10,4 +10,10 @@ class Business < ApplicationRecord
   def to_s
     name
   end
+
+  def schemas
+    team_ids = teams.pluck(:id)
+
+    Schema.where(team_id: team_ids)
+  end
 end
