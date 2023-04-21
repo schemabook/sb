@@ -34,6 +34,16 @@ RSpec.describe "Services", type: :request do
 
       expect(response).to be_successful
     end
+
+    it "flashes a message if unpaid and at limit" do
+      stub_const("Service::UNPAID_LIMIT", 1)
+      _service = create(:service, team: user.team, created_by: user.id)
+
+      get new_service_url
+
+      expect(flash[:alert]).to be_present
+      expect(flash[:alert]).to match(/You've reached the limits/)
+    end
   end
 
   describe "GET /edit" do
@@ -81,6 +91,21 @@ RSpec.describe "Services", type: :request do
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response).not_to be_successful
+      end
+    end
+
+    context "when unpaid and at limit" do
+      it "guards against new services being created" do
+        stub_const("Service::UNPAID_LIMIT", 1)
+        _service = create(:service, team: user.team, created_by: user.id)
+
+        expect {
+          post services_url, params: { service: { name: "foo" } }
+        }.not_to change(Service, :count)
+
+        expect(response).to have_http_status(:ok)
+        expect(flash[:alert]).to be_present
+        expect(flash[:alert]).to match(/You've reached the limits/)
       end
     end
   end

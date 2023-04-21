@@ -17,9 +17,7 @@ class ServicesController < ApplicationController
     @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
 
     # flash message if business is unpaid and has 10 services
-    if !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
-      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
-    end
+    flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services." if at_limit?
   end
 
   # GET /services/1/edit
@@ -28,8 +26,12 @@ class ServicesController < ApplicationController
   end
 
   # POST /services or /services.json
+  # rubocop:disable Metrics/MethodLength
   def create
-    if !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
+    if at_limit?
+      @service = Service.new
+      @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
+
       flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
 
       render :new
@@ -49,6 +51,7 @@ class ServicesController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /services/1 or /services/1.json
   def update
@@ -83,5 +86,9 @@ class ServicesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def service_params
     params.require(:service).permit(:name, :description, :created_by)
+  end
+
+  def at_limit?
+    !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
   end
 end

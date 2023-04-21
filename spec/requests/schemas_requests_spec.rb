@@ -95,6 +95,16 @@ RSpec.describe "/schemas", type: :request do
 
       expect(assigns(:activities)).not_to be_nil
     end
+
+    it "flashes a message if unpaid and at limit" do
+      stub_const("Schema::UNPAID_LIMIT", 1)
+      _schema = create(:schema, :with_format, team: user.team)
+
+      get new_schema_url
+
+      expect(flash[:alert]).to be_present
+      expect(flash[:alert]).to match(/You've reached the limits/)
+    end
   end
 
   describe "POST /create" do
@@ -145,6 +155,21 @@ RSpec.describe "/schemas", type: :request do
 
         expect(response).to be_successful
         expect(response).to render_template(:new)
+      end
+    end
+
+    context "when unpaid and at limit" do
+      it "guards against new services being created" do
+        stub_const("Schema::UNPAID_LIMIT", 1)
+        _schema = create(:schema, :with_format, team: user.team)
+
+        expect {
+          post schemas_url, params: { schema: valid_attributes }
+        }.not_to change(Schema, :count)
+
+        expect(response).to have_http_status(:ok)
+        expect(flash[:alert]).to be_present
+        expect(flash[:alert]).to match(/You've reached the limits/)
       end
     end
   end
