@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "/schemas/:id/comments", type: :request do
-  let(:user)   { create(:user, :admin) }
   let(:schema) { create(:schema, :with_team, :with_format) }
   let(:version) { create(:version, schema:) }
+  let(:user) { create(:user, :admin, business: schema.team.business) }
   let(:comment) { build(:comment, version:, user:) }
 
   let(:valid_attributes) {

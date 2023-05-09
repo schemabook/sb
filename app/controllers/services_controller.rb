@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: %i[show edit update destroy]
 
+  # TODO: scope to business
   # GET /services or /services.json
   def index
     @services = Service.all
@@ -20,6 +21,7 @@ class ServicesController < ApplicationController
     flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services." if at_limit?
   end
 
+  # TODO: scope to current user business
   # GET /services/1/edit
   def edit
     @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
@@ -77,6 +79,7 @@ class ServicesController < ApplicationController
 
   private
 
+  # TODO: use pluck instead of map
   # Use callbacks to share common setup or constraints between actions.
   def set_service
     teams = current_user.business.teams

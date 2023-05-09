@@ -19,4 +19,8 @@ class CommentsController < ApplicationController
     # NOTE: use version id versus index
     params.require(:comment).permit(:user_id, :version_id, :body)
   end
+
+  def valid_version_id?
+    current_user.business.schemas.include?(@comment.version.schema)
+  end
 end

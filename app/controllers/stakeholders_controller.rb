@@ -1,4 +1,5 @@
 class StakeholdersController < ApplicationController
+  # TODO: ensure the schema belongs to business
   def create
     @stakeholder = Stakeholder.new(stakeholder_params)
 

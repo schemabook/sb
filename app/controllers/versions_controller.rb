@@ -5,10 +5,11 @@ class VersionsController < ApplicationController
     redirect_to schema_path(@schema) unless @schema.team.users.include?(current_user)
     return unless @schema.team.users.include?(current_user)
 
-    @version    = Version.new(schema: @schema)
+    @version = Version.new(schema: @schema)
     @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
   end
 
+  # TODO: ensure schema belongs to current user's business
   # rubocop:disable Metrics/MethodLength
   def create
     @schema = Schema.find params[:schema_id]

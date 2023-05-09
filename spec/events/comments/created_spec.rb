@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Events::Comments::Created do
-  let(:comment) { create(:comment, :with_user, :with_version) }
+  let(:comment) { create(:comment, :with_user_and_version) }
 
   subject { described_class.new(record: comment, user: comment.user) }
 
@@ -107,7 +107,7 @@ RSpec.describe Events::Comments::Created do
     end
 
     it "includes the operation" do
-      expect(subject.payload[:op]).to eq('c')
+      expect(subject.payload[:op]).to eq("c")
     end
 
     it "includes the event timestamp" do

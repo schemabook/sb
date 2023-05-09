@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  # TODO: ensure schema belongs to current_user's company
   def create
     @favorite = Favorite.find_or_initialize_by(favorite_params)
 
@@ -11,6 +12,7 @@ class FavoritesController < ApplicationController
     redirect_to dashboards_path
   end
 
+  # TODO: scope to user's favorites
   def destroy
     @favorite = Favorite.find_by(favorite_params)
 

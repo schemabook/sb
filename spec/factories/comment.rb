@@ -9,5 +9,10 @@ FactoryBot.define do
     trait :with_version do
       version { create(:version, :with_schema) }
     end
+
+    trait :with_user_and_version do
+      version { create(:version, :with_schema) }
+      user { create(:user, business: version.schema.team.business) }
+    end
   end
 end

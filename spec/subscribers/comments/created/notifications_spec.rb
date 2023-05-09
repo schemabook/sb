@@ -14,8 +14,9 @@ RSpec.describe Subscribers::Comments::Created::Notifications do
   end
 
   describe "#process" do
-    let(:comment) { create(:comment, :with_user, :with_version) }
-    let(:user)    { create(:user) }
+    let(:version) { create(:version, :with_schema) }
+    let(:user)    { create(:user, business: version.schema.team.business) }
+    let(:comment) { create(:comment, user:, version:) }
     let!(:teammate) { create(:user, team: comment.version.schema.team, email: 'admin2@example.com') }
 
     it "mails the team" do

@@ -23,6 +23,7 @@ class SchemasController < ApplicationController
     load_presenters
   end
 
+  # TODO: ensure the params (service_id and team_id) are valid
   # rubocop:disable Metrics/MethodLength
   def create
     @format = Format.create(format_params)

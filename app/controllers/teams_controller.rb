@@ -4,20 +4,20 @@ class TeamsController < ApplicationController
 
   # NOTE: shown on the business#show page
   # GET /teams or /teams.json
-  #def index
+  # def index
   #  @teams = Team.all
-  #end
+  # end
 
   # GET /teams/1 or /teams/1.json
   def show
-    @teammates  = @team.users
-    @schemas    = @team.schemas
+    @teammates = @team.users
+    @schemas = @team.schemas
     @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
   end
 
   # GET /teams/new
   def new
-    @team       = Team.new
+    @team = Team.new
     @activities = current_user.business.activity_log.for_teams.limit(8)
   end
 
@@ -43,6 +43,7 @@ class TeamsController < ApplicationController
     end
   end
 
+  # TODO: remove the business id from the team params
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
     respond_to do |format|
