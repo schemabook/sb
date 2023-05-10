@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
 
   def show
-    @activities    = @user.business.activity_log.for_user(user_id: @user.id).limit(8)
+    @activities = @user.business.activity_log.for_user(user_id: @user.id).limit(8)
     @stakeholdings = Stakeholder.includes(:schema).where(user_id: @user.id)
   end
 
@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_user
-    @user = current_user.business.users.find(params[:id])
+    @user = current_user.business.users.find_by!(id: params[:id])
   end
 
   def profile_params
