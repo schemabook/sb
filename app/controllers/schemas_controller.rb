@@ -8,7 +8,7 @@ class SchemasController < ApplicationController
   end
 
   def show
-    @schema = current_user.team.schemas.find_by!(id: params[:id])
+    @schema = current_user.team.schemas.find(params[:id])
     @tab = params[:tab] || @schema.format.to_s
     @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
     @stakeholder = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
@@ -25,7 +25,8 @@ class SchemasController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def create
-    service = schema_params.key?(:service_id) && current_user.business.services.find_by!(id: schema_params[:service_id])
+    _service = schema_params.key?(:service_id) && current_user.business.services.find(schema_params[:service_id])
+
     @format = Format.create(format_params)
     @schema = Schema.new(schema_params.merge(format_id: @format.id))
 

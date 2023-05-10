@@ -1,10 +1,9 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: %i[show edit update destroy]
 
-  # TODO: scope to business
   # GET /services or /services.json
   def index
-    @services = Service.all
+    @services = current_user.business.services
   end
 
   # GET /services/1 or /services/1.json

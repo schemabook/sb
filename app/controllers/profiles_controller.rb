@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_user
-    @user = current_user.business.users.find_by!(id: params[:id])
+    @user = current_user.business.users.find(params[:id])
   end
 
   def profile_params
