@@ -43,7 +43,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # TODO: remove the business id from the team params
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
     respond_to do |format|
