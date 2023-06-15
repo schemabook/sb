@@ -1,5 +1,4 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy]
   before_action :require_admin, only: [:edit, :update, :destroy]
 
   def show
@@ -39,10 +38,6 @@ class BusinessesController < ApplicationController
   end
 
   private
-
-  def set_business
-    @business = current_user.business
-  end
 
   def business_params
     params.require(:business).permit(:name, :street_address, :city, :state, :postal, :country)

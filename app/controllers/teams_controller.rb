@@ -12,23 +12,23 @@ class TeamsController < ApplicationController
   def show
     @teammates = @team.users
     @schemas = @team.schemas
-    @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
+    @activities = @business.activity_log.for_team(team: @team).limit(8)
   end
 
   # GET /teams/new
   def new
     @team = Team.new
-    @activities = current_user.business.activity_log.for_teams.limit(8)
+    @activities = @business.activity_log.for_teams.limit(8)
   end
 
   # GET /teams/1/edit
   def edit
-    @activities = current_user.business.activity_log.for_team(team: @team).limit(8)
+    @activities = @business.activity_log.for_team(team: @team).limit(8)
   end
 
   # POST /teams or /teams.json
   def create
-    @team = Team.new(team_params.merge(business_id: current_user.business.id))
+    @team = Team.new(team_params.merge(business_id: @business.id))
 
     respond_to do |format|
       if @team.save
@@ -69,7 +69,7 @@ class TeamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_team
-    @team = Team.where(id: params[:id], business_id: current_user.business.id).first
+    @team = Team.where(id: params[:id], business_id: @business.id).first
   end
 
   # Only allow a list of trusted parameters through.

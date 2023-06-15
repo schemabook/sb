@@ -3,18 +3,18 @@ class ServicesController < ApplicationController
 
   # GET /services or /services.json
   def index
-    @services = current_user.business.services
+    @services = @business.services
   end
 
   # GET /services/1 or /services/1.json
   def show
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
+    @activities = @business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # GET /services/new
   def new
     @service = Service.new
-    @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
+    @activities = @business.activity_log.for_service_team(team: current_user.team).limit(8)
 
     # flash message if business is unpaid and has 10 services
     flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services." if at_limit?
@@ -23,7 +23,7 @@ class ServicesController < ApplicationController
   # TODO: scope to current user business
   # GET /services/1/edit
   def edit
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
+    @activities = @business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # POST /services or /services.json
@@ -31,7 +31,7 @@ class ServicesController < ApplicationController
   def create
     if at_limit?
       @service = Service.new
-      @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
+      @activities = @business.activity_log.for_service_team(team: current_user.team).limit(8)
 
       flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
 
@@ -81,7 +81,7 @@ class ServicesController < ApplicationController
   # TODO: use pluck instead of map
   # Use callbacks to share common setup or constraints between actions.
   def set_service
-    teams = current_user.business.teams
+    teams = @business.teams
     @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
   end
 
@@ -91,6 +91,6 @@ class ServicesController < ApplicationController
   end
 
   def at_limit?
-    !current_user.business.paid? && current_user.business.services.size >= Service::UNPAID_LIMIT
+    !@business.paid? && @business.services.size >= Service::UNPAID_LIMIT
   end
 end

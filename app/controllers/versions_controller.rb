@@ -1,17 +1,17 @@
 class VersionsController < ApplicationController
   def new
-    @schema = current_user.business.schemas.find(params[:schema_id])
+    @schema = @business.schemas.find(params[:schema_id])
 
     redirect_to schema_path(@schema) unless @schema.team.users.include?(current_user)
     return unless @schema.team.users.include?(current_user)
 
     @version = Version.new(schema: @schema)
-    @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
+    @activities = @business.activity_log.for_schema(schema: @schema).limit(8)
   end
 
   # rubocop:disable Metrics/MethodLength
   def create
-    @schema = current_user.business.schemas.find(params[:schema_id])
+    @schema = @business.schemas.find(params[:schema_id])
 
     redirect_to schema_path(@schema) unless @schema.team.users.include?(current_user)
     return unless @schema.team.users.include?(current_user)

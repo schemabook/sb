@@ -1,7 +1,7 @@
 class SchemasController < ApplicationController
   def new
     @schema = Schema.new
-    @activities = current_user.business.activity_log.for_schema_new.limit(8)
+    @activities = @business.activity_log.for_schema_new.limit(8)
 
     # flash message if business is unpaid and has 10 schemas
     flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more schemas." if at_limit?
@@ -10,7 +10,7 @@ class SchemasController < ApplicationController
   def show
     @schema = current_user.team.schemas.find(params[:id])
     @tab = params[:tab] || @schema.format.to_s
-    @activities = current_user.business.activity_log.for_schema(schema: @schema).limit(8)
+    @activities = @business.activity_log.for_schema(schema: @schema).limit(8)
     @stakeholder = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
     @stakeholders = Stakeholder.where(schema_id: @schema.id)
 
@@ -25,7 +25,7 @@ class SchemasController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def create
-    _service = schema_params.key?(:service_id) && current_user.business.services.find(schema_params[:service_id])
+    _service = schema_params.key?(:service_id) && @business.services.find(schema_params[:service_id])
 
     @format = Format.create(format_params)
     @schema = Schema.new(schema_params.merge(format_id: @format.id))
@@ -79,6 +79,6 @@ class SchemasController < ApplicationController
   end
 
   def at_limit?
-    !current_user.business.paid? && current_user.business.schemas.size >= Schema::UNPAID_LIMIT
+    !@business.paid? && @business.schemas.size >= Schema::UNPAID_LIMIT
   end
 end

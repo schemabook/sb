@@ -1,6 +1,6 @@
 class StakeholdersController < ApplicationController
   def create
-    _schema = current_user.business.schemas.find(stakeholder_params[:schema_id]) if stakeholder_params.key?(:schema_id)
+    _schema = @business.schemas.find(stakeholder_params[:schema_id]) if stakeholder_params.key?(:schema_id)
 
     @stakeholder = Stakeholder.new(stakeholder_params)
 

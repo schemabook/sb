@@ -21,6 +21,6 @@ class CommentsController < ApplicationController
   end
 
   def valid_version_id?
-    current_user.business.schemas.include?(@comment.version.schema)
+    @business.schemas.include?(@comment.version.schema)
   end
 end
