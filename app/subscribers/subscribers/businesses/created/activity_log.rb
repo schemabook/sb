@@ -20,7 +20,7 @@ module Subscribers
             activity_log: log,
             user:,
             title: "Created Business",
-            detail: "Establed account for #{business.name}",
+            detail: "Established account for #{business.name}",
             resource_id: business.id,
             resource_class: business.class.to_s
           )
