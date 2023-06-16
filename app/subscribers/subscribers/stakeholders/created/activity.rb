@@ -23,7 +23,7 @@ module Subscribers
         private
 
         def create_activity_for_user(log:, stakeholder:, user:)
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Became Stakeholder",
@@ -31,18 +31,18 @@ module Subscribers
             resource_id: stakeholder.user.id,
             resource_class: stakeholder.user.class.to_s,
             user_only: true
-          )
+          ).first_or_create
         end
 
         def create_activity_for_schema(log:, stakeholder:, user:)
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Created Stakeholder",
             detail: "Established for #{stakeholder.user.name}",
             resource_id: stakeholder.schema.id,
             resource_class: stakeholder.schema.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

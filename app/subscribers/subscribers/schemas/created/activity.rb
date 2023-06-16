@@ -22,14 +22,14 @@ module Subscribers
         private
 
         def create_activity(log:, schema:, user:)
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Created Schema",
             detail: "Created schema #{schema.name}",
             resource_id: schema.id,
             resource_class: schema.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

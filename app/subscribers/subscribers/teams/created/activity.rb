@@ -22,14 +22,14 @@ module Subscribers
         private
 
         def create_activity(log:, team:, user:)
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Created Team",
             detail: "Establisheded team #{team.name}",
             resource_id: team.id,
             resource_class: team.class.to_s
-          )
+          ).first_or_create
         end
       end
     end
