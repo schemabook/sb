@@ -23,7 +23,7 @@ module Subscribers
             detail: "Updated account settings for #{business.name}",
             resource_id: business.id,
             resource_class: business.class.to_s
-        ).first_or_create
+          ).first_or_create
         end
       end
     end
