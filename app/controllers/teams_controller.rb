@@ -69,7 +69,7 @@ class TeamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_team
-    @team = Team.where(id: params[:id], business_id: @business.id).first
+    @team = Team.where(public_id: params[:id], business_id: @business.id).first
   end
 
   # Only allow a list of trusted parameters through.

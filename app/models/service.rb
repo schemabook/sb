@@ -1,4 +1,6 @@
 class Service < ApplicationRecord
+  include PublicIdGenerator
+
   UNPAID_LIMIT = 10
 
   belongs_to :team

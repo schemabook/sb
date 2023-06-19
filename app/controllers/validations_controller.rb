@@ -4,7 +4,7 @@ class ValidationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    schema  = Schema.find_by!(public_id: params[:schema_id])
+    schema  = Schema.find_by!(public_id: params[:schema_public_id])
     payload = params[:payload]
 
     # validate

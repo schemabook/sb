@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   resources :teams, except: :index
   resources :businesses
   resources :services
-  resources :schemas do
+  resources :schemas, param: :public_id do
     resources :validations, only: :create
     resources :versions do
       resources :comments

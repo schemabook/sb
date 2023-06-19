@@ -1,4 +1,6 @@
 class Business < ApplicationRecord
+  include PublicIdGenerator
+
   has_many :users
   has_many :teams
 

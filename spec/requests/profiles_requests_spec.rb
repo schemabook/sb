@@ -73,7 +73,7 @@ RSpec.describe "Profiles", type: :request do
   describe "PATCH update" do
     context "when updating the associated team" do
       let(:new_team) { create(:team, business: user.business) }
-      let(:params)   { { id: user.id, user: { team_id: new_team.id } } }
+      let(:params)   { { id: user.public_id, user: { team_id: new_team.id } } }
 
       before do
         sign_in user
@@ -99,7 +99,7 @@ RSpec.describe "Profiles", type: :request do
       end
 
       context "with an invalid team id" do
-        let(:params)   { { id: user.id, user: { team_id: 999999999 } } }
+        let(:params)   { { id: user.public_id, user: { team_id: 999999999 } } }
 
         it "should" do
           patch patch_user_profile_path(params)

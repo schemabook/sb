@@ -82,7 +82,7 @@ class ServicesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_service
     teams = @business.teams
-    @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
+    @service = Service.where(public_id: params[:id], team_id: teams.map(&:id)).first
   end
 
   # Only allow a list of trusted parameters through.

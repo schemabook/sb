@@ -1,4 +1,6 @@
 class Team < ApplicationRecord
+  include PublicIdGenerator
+
   ADMIN_TEAM_NAME = "Administrators" # admin team created when business is created
 
   has_many :users
@@ -6,8 +8,8 @@ class Team < ApplicationRecord
   has_many :schemas
   belongs_to :business
 
-  validates :name, uniqueness: { scope: :business }
-  validates :administrators, uniqueness: { scope: :business }, allow_blank: true
+  validates :name, uniqueness: {scope: :business}
+  validates :administrators, uniqueness: {scope: :business}, allow_blank: true
 
   before_save do
     readonly! if !new_record? && administrators?

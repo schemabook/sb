@@ -1,6 +1,6 @@
 class VersionsController < ApplicationController
   def new
-    @schema = @business.schemas.find(params[:schema_id])
+    @schema = @business.schemas.find_by!(public_id: params[:schema_public_id])
 
     redirect_to schema_path(@schema) unless @schema.team.users.include?(current_user)
     return unless @schema.team.users.include?(current_user)
@@ -11,7 +11,7 @@ class VersionsController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def create
-    @schema = @business.schemas.find(params[:schema_id])
+    @schema = @business.schemas.find_by(public_id: params[:schema_public_id])
 
     redirect_to schema_path(@schema) unless @schema.team.users.include?(current_user)
     return unless @schema.team.users.include?(current_user)

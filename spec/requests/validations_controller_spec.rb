@@ -7,7 +7,7 @@ RSpec.describe ValidationsController, type: :request do
     let(:team)     { create(:team, business:) }
     let(:format)   { create(:format, file_type: :json) }
     let(:json)     { build(:json, :with_types).to_s }
-    let(:schema)   { create(:schema, name: "foo", team:, format:) }
+    let!(:schema) { create(:schema, name: "foo", team:, format:) }
     let!(:version) { create(:version, schema:) }
     let(:payload)  { '{"title":"harry potter"}' }
 

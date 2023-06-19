@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_132929) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_19_170434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,7 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_132929) do
     t.string "postal"
     t.string "country"
     t.boolean "paid", default: false, null: false
+    t.string "public_id"
     t.index ["name"], name: "index_businesses_on_name", unique: true
+    t.index ["public_id"], name: "index_businesses_on_public_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -128,7 +130,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_132929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "created_by"
+    t.string "public_id"
     t.index ["name", "team_id"], name: "index_services_on_name_and_team_id", unique: true
+    t.index ["public_id"], name: "index_services_on_public_id"
     t.index ["team_id"], name: "index_services_on_team_id"
   end
 
@@ -147,9 +151,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_132929) do
     t.datetime "updated_at", null: false
     t.bigint "business_id"
     t.boolean "administrators", default: false
+    t.string "public_id"
     t.index ["administrators"], name: "index_teams_on_administrators"
     t.index ["business_id"], name: "index_teams_on_business_id"
     t.index ["name", "business_id"], name: "index_teams_on_name_and_business_id", unique: true
+    t.index ["public_id"], name: "index_teams_on_public_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -172,10 +178,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_132929) do
     t.bigint "team_id"
     t.string "first_name"
     t.string "last_name"
+    t.string "public_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
+    t.index ["public_id"], name: "index_users_on_public_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
   end

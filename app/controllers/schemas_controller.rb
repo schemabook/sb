@@ -8,7 +8,7 @@ class SchemasController < ApplicationController
   end
 
   def show
-    @schema = current_user.team.schemas.find(params[:id])
+    @schema = current_user.team.schemas.find_by!(public_id: params[:public_id])
     @tab = params[:tab] || @schema.format.to_s
     @activities = @business.activity_log.for_schema(schema: @schema).limit(8)
     @stakeholder = Stakeholder.find_or_initialize_by(user_id: current_user.id, schema_id: @schema.id)
