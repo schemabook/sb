@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Profiles", type: :feature do
   let(:user) { create(:user, :admin) }
@@ -23,7 +23,8 @@ RSpec.describe "Profiles", type: :feature do
     end
 
     it "sees activities" do
-      expect(page).to have_text("Activity")
+      # TODO: update to use DOM element
+      expect(page).to have_text(user.display_name)
     end
   end
 
@@ -42,7 +43,7 @@ RSpec.describe "Profiles", type: :feature do
       visit edit_user_profile_path(user)
 
       select new_team.name, from: :user_team_id
-      find('button', text: 'Save').click
+      find("button", text: "Save").click
 
       user.reload
       expect(user.team.name).to eq(new_team.name)

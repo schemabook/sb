@@ -1,17 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Sign Up", type: :feature do
   def fills_in_form_basics
-    fill_in 'user_email', with: 'admin@example.com'
-    fill_in 'user_password', with: 'password'
-    fill_in 'user_password_confirmation', with: 'password'
+    fill_in "user_email", with: "admin@example.com"
+    fill_in "user_password", with: "password"
+    fill_in "user_password_confirmation", with: "password"
   end
 
   xit "User registers" do
     visit new_user_registration_path
 
     fills_in_form_basics
-    fill_in 'user_business', with: 'example'
+    fill_in "user_business", with: "example"
 
     click_button "Get started"
 
@@ -24,7 +24,7 @@ RSpec.describe "Sign Up", type: :feature do
     visit new_user_registration_path
 
     fills_in_form_basics
-    fill_in 'user_business', with: existing_business.name
+    fill_in "user_business", with: existing_business.name
 
     click_button "Get started"
 

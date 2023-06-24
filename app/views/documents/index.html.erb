@@ -15,16 +15,164 @@
 
         <!-- header -->
         <div class="pb-5 px-2">
-          <div class="w-full pb-5">
-            <h3 class="text-lg leading-6 font-medium text-gray-600">
-              Coming Soon
-            </h3>
-          </div>
           <div class="w-full">
-            <p>
-            We're still working on implementing our documentation system. We're going to 
-            include things like functionality, theory, API requests, etc. Keep an eye on this page!
-            </p>
+
+            <div class="bg-white">
+              <div class="max-w-7xl divide-y divide-gray-900/10 px-6 py-2 lg:px-8">
+                <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Documentation</h2>
+                <dl class="mt-10 space-y-8 divide-y divide-gray-900/10">
+
+                  <!-- start questions -->
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can stakeholders move to a different team?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Yes, anyone from the "adminstrators" team (found in the account settings) can move other stakeholders to any team.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can anyone define a schema or a service?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Yes, the schema or service created will be associated to the team of the stakeholder responsible for creation.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can anyone from a team edit their associated schemas and services?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Yes, all team members can edit schemas and services. We've seen instances where having a single "owner" of a schema or service becomes troublesome when that person leaves the company or transfers to a different team. Because of this, Schemabook places ownership on a team rather than an individual.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Do schemas have to be associated with a service?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      No, associating a schema to a service is optional. While developing a schema and contract, you may want to put off associating it with a service until the contract has been decided.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can all schemas be translated to other formats?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      No, not when using a format like JSON for the original definition. Because JSON can have nested structures there is no equivalent in CSV. When this happens we display a message letting stakeholders know the original definition format can not be translated.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I validate a payload against a schema?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Yes, in the "general information" tab of each schema is a link to the validation endpoint for the schema.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can anyone become a stakeholder of a schema?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Yes, anyone can identify themselves as a stakeholder of a schema and will be notified as new versions are created.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      What notifications are sent out?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      1) When a team member creates a new schema or service, the other team members are notified.
+                      <br />
+                      2) When a new version of a schema is created, all stakeholders are notified.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I search across schemas?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Coming soon.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I define a schema using a different format?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      More formats will be supported soon.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I define other attributes as part of my data contract?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Coming soon.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I make inline comments on schemas?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Coming soon.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+                    <dt class="text-base font-semibold leading-7 text-gray-900 lg:col-span-5">
+                      Can I define a webhook to be triggered when new schema versions are created?
+                    </dt>
+                    <dd class="mt-4 lg:col-span-7 lg:mt-0">
+                      <p class="text-base leading-7 text-gray-600">
+                      Coming soon.
+                      </p>
+                    </dd>
+                  </div>
+
+                  <!-- end questions -->
+                </dl>
+              </div>
+            </div>
+
           </div>
         </div>
        
@@ -34,8 +182,4 @@
   </div>
 </div>
 
-<div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-grey-200 xl:pr-8">
-  <div class="pl-6 py-6 lg:w-80">
-    <%= render partial: 'shared/activity_feed' %>
-  </div>
-</div>
+
