@@ -3,7 +3,7 @@
   <%= render partial: 'sidebar' %>
 
   <div class="bg-white lg:min-w-0 lg:flex-1">
-    <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+    <div class="h-full py-4 px-4 sm:px-6 lg:px-8">
 
       <!-- Start main area-->
       <div class="relative h-full" style="min-height: 36rem;">
@@ -14,9 +14,7 @@
 
         <!-- header -->
         <div class="pb-5 px-2 sm:flex sm:items-center sm:justify-between">
-          <h3 class="text-lg leading-6 font-medium text-gray-600">
-            Name: <%= @schema.name %>
-          </h3>
+          <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900"><%= @schema.name %></h2>
           <div class="text-md text-gray-400 mt-3 sm:mt-0 sm:ml-4">
             <span class="text-gray-400">Version:</span> <%= @version.index %>
           </div>
