@@ -4,13 +4,16 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+//import Turbolinks from "turbolinks"
+import * as Turbo from "@hotwired/turbo"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import { TabManager } from './tabManager'
 
 Rails.start()
-Turbolinks.start()
+//Turbolinks.start()
+Turbo.start()
+Turbo.session.drive = false
 ActiveStorage.start()
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -26,8 +29,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //  // TODO: alert on error to create tabs
   //}
 
+  console.log("trying");
+
   try {
     var elem = document.querySelector('.dismiss');
+    console.log(elem);
+
     elem.addEventListener('click', function() {
       var closestElement = elem.closest('.flash');
       closestElement.parentNode.removeChild(closestElement);

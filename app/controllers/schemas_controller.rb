@@ -35,14 +35,15 @@ class SchemasController < ApplicationController
       @format.destroy
 
       render :new
-    elsif @schema.save
-      @version = create_version(schema: @schema)
-
+    elsif @schema.save && (@version = create_version(schema: @schema))
       Events::Schemas::Created.new(record: @schema, user: current_user).publish
 
+      flash[:info] = "Schema has been saved"
       redirect_to schema_path(@schema)
     else
-      flash.now[:alert] = "Schema could not be saved"
+      flash[:alert] = "Schema could not be saved; body contents were not valid"
+
+      @schema.destroy if @schema.persisted?
       @format.destroy
 
       render :new
@@ -71,11 +72,19 @@ class SchemasController < ApplicationController
   end
 
   def create_version(schema:)
-    version = Version.create(version_params.merge(schema_id: schema.id).except(:body))
-    # TODO: make sure body isn't wrapped in quotes, maybe sanitize
+    # NOTE: this will fail if the body contents are not valid for the format selected
+    version = Version.new(version_params.merge(schema_id: schema.id).except(:body))
     version.body = version_params[:body]
 
-    version
+    if version.valid?
+      version.save
+
+      version
+    else
+      flash[:alert] = "The schema is not formatted correctly and could not be saved." unless version.valid?
+
+      false
+    end
   end
 
   def at_limit?
