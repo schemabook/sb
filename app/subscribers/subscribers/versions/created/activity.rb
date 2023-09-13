@@ -22,14 +22,14 @@ module Subscribers
         private
 
         def create_activity(log:, version:, user:)
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Created Version",
             detail: "Created version #{version.index} for #{version.schema.name}",
             resource_id: version.id,
             resource_class: version.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

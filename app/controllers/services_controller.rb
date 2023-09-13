@@ -3,41 +3,56 @@ class ServicesController < ApplicationController
 
   # GET /services or /services.json
   def index
-    @services = Service.all
+    @services = @business.services
   end
 
   # GET /services/1 or /services/1.json
   def show
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
+    @activities = @business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # GET /services/new
   def new
-    @service    = Service.new
-    @activities = current_user.business.activity_log.for_service_team(team: current_user.team).limit(8)
+    @service = Service.new
+    @activities = @business.activity_log.for_service_team(team: current_user.team).limit(8)
+
+    # flash message if business is unpaid and has 10 services
+    flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services." if at_limit?
   end
 
+  # TODO: scope to current user business
   # GET /services/1/edit
   def edit
-    @activities = current_user.business.activity_log.for_service(service_id: @service.id).limit(8)
+    @activities = @business.activity_log.for_service(service_id: @service.id).limit(8)
   end
 
   # POST /services or /services.json
+  # rubocop:disable Metrics/MethodLength
   def create
-    @service = Service.new(service_params.merge({ team_id: current_user.team.id, created_by: current_user.id }))
+    if at_limit?
+      @service = Service.new
+      @activities = @business.activity_log.for_service_team(team: current_user.team).limit(8)
 
-    respond_to do |format|
-      if @service.save
-        Events::Services::Created.new(record: @service, user: current_user).publish
+      flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more services."
 
-        format.html { redirect_to @service, notice: "Service was successfully created." }
-        format.json { render :show, status: :created, location: @service }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+      render :new
+    else
+      @service = Service.new(service_params.merge({team_id: current_user.team.id, created_by: current_user.id}))
+
+      respond_to do |format|
+        if @service.save
+          Events::Services::Created.new(record: @service, user: current_user).publish
+
+          format.html { redirect_to @service, notice: "Service was successfully created." }
+          format.json { render :show, status: :created, location: @service }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @service.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /services/1 or /services/1.json
   def update
@@ -63,14 +78,19 @@ class ServicesController < ApplicationController
 
   private
 
+  # TODO: use pluck instead of map
   # Use callbacks to share common setup or constraints between actions.
   def set_service
-    teams    = current_user.business.teams
-    @service = Service.where(id: params[:id], team_id: teams.map(&:id)).first
+    teams = @business.teams
+    @service = Service.where(public_id: params[:id], team_id: teams.map(&:id)).first
   end
 
   # Only allow a list of trusted parameters through.
   def service_params
     params.require(:service).permit(:name, :description, :created_by)
+  end
+
+  def at_limit?
+    !@business.paid? && @business.services.size >= Service::UNPAID_LIMIT
   end
 end

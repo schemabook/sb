@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorite.find_by(favorite_params)
+    @favorite = current_user.favorites.find_by(favorite_params)
 
     if @favorite.destroy
       flash[:notice] = "The schema has been unstarred"

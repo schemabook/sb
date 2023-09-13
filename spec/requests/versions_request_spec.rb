@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Versions", type: :request do
   let!(:business) { create(:business, :with_activity_log) }
   let!(:user)     { create(:user, business:) }
-  let!(:schema)   { create(:schema, :with_team, :with_format) }
+  let!(:schema)   { create(:schema, :with_format, team: user.team) }
 
   before do
     sign_in user
@@ -19,10 +19,12 @@ RSpec.describe "Versions", type: :request do
     end
 
     context "when the current user is not a member of the schema's team" do
-      it "should redirect back to the schema page" do
-        subject
+      let(:schema) { create(:schema, :with_team, :with_format) }
 
-        expect(response).to redirect_to(schema_path(schema))
+      it "should raise an error" do
+        expect {
+          subject
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 

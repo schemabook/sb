@@ -16,14 +16,14 @@ module Subscribers
           user     = User.find(payload.after.actor_id)
           log      = ::ActivityLog.first_or_create(business_id: user.business.id)
 
-          ::Activity.create(
+          ::Activity.where(
             activity_log: log,
             user:,
             title: "Invited Teammate",
             detail: "#{user.display_name} invited #{teammate.display_name}",
             resource_id: teammate.id,
             resource_class: teammate.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

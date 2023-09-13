@@ -16,14 +16,14 @@ module Subscribers
           user    = User.find(payload.after.actor_id)
           version = comment.version
 
-          ::Activity.create(
+          ::Activity.where(
             activity_log: user.business.activity_log,
             user:,
             title: "Comment Created",
             detail: "Created comment #{comment.id} on #{version.schema.name} version #{version.id}",
             resource_id: version.id,
             resource_class: version.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

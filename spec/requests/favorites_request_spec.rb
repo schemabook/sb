@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Favorites", type: :request do
   let!(:business) { create(:business, :with_activity_log) }
   let!(:user)     { create(:user, business:) }
-  let!(:schema)   { create(:schema, :with_team, :with_format) }
+  let!(:team)     { create(:team, business:) }
+  let!(:schema)   { create(:schema, :with_format, team:) }
 
   before do
     sign_in user

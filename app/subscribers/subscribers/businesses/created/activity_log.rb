@@ -16,14 +16,14 @@ module Subscribers
           user     = User.find(payload.after.actor_id)
           log      = ::ActivityLog.create(business:)
 
-          Activity.create(
+          Activity.where(
             activity_log: log,
             user:,
             title: "Created Business",
-            detail: "Establed account for #{business.name}",
+            detail: "Established account for #{business.name}",
             resource_id: business.id,
             resource_class: business.class.to_s
-          )
+          ).first_or_create
         end
       end
     end

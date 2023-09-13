@@ -32,4 +32,8 @@ module PublicIdGenerator
   def generate_public_id
     self.class.generate_nanoid(alphabet: PUBLIC_ID_ALPHABET)
   end
+
+  def to_param
+    public_id
+  end
 end

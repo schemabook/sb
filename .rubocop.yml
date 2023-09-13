@@ -180,3 +180,6 @@ RSpec/MessageSpies:
 
 Lint/ToJSON:
   Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
