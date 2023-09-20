@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  ### API routes
+  mount API::Root => "/"
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
