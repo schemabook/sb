@@ -3,8 +3,7 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
+  devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   belongs_to :business
   belongs_to :team
@@ -26,7 +25,7 @@ class User < ApplicationRecord
 
     "#{first_name} #{last_name}"
   end
-  alias_method :name, :display_name
+  alias name display_name
 
   def display_name_with_email
     str = ""
