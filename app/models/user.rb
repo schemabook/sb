@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   belongs_to :business
   belongs_to :team
@@ -19,12 +19,14 @@ class User < ApplicationRecord
 
   delegate :admin?, to: :team
 
+  before_create :generate_api_token
+
   def display_name
     return email if first_name.blank?
 
     "#{first_name} #{last_name}"
   end
-  alias name display_name
+  alias_method :name, :display_name
 
   def display_name_with_email
     str = ""
@@ -34,5 +36,9 @@ class User < ApplicationRecord
     str += "#{email}" unless first_name
 
     str
+  end
+
+  def generate_api_token
+    self.api_token = generate_public_id
   end
 end
