@@ -60,9 +60,14 @@ gem "opentelemetry-sdk"
 # nanoid generator for schema slugs
 gem "nanoid"
 
+# rswag gems for API docs
+gem 'rswag-api'
+gem 'rswag-ui'
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem "rspec-rails", "~> 4.0.2"
+  gem 'rswag-specs'
   # Use Pry bindings
   gem "pry"
   gem "pry-rails"
@@ -99,3 +104,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "grape"
+gem "grape-entity"
+

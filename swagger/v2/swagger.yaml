@@ -1,0 +1,13 @@
+---
+openapi: 3.0.1
+info:
+  title: API V2
+  version: v2
+  description: This is the second version of the Schemabook API
+servers:
+- url: "{protocol}://{defaultHost}"
+  variables:
+    protocol:
+      default: https
+    defaultHost:
+      default: www.schemabook.com
