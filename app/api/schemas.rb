@@ -16,7 +16,7 @@ class Schemas < API::Root
     end
 
     get do
-      schemas = @user&.business.schemas.all
+      schemas = @user&.business&.schemas&.all
 
       present schemas, with: Entities::SchemaEntity
     end
