@@ -11,11 +11,13 @@ module API
         unauthorized! unless request.headers["X-Api-Token"]
 
         token = request.headers["X-Api-Token"]
-        @user = User.where(api_token: token).first
+        @user = User.find_by(api_token: token)
+
+        unauthorized! unless @user
       end
 
       def unauthorized!
-        error!('Unauthorized', 401)
+        status 401
       end
     end
 

@@ -13,12 +13,57 @@ class Schemas < API::Root
       produces ['application/json']
       consumes ['application/json']
       tags ['schemas']
+      failure [
+        [400, "Bad Request", Entities::Error],
+        [401, "Unauthorized", Entities::Error],
+        [429, "Too Many Requests", Entities::Error]
+      ]
+      headers \
+        Authorization: {
+          description: "API token",
+          required: true
+        }
+
     end
 
+    # index
     get do
       schemas = @user&.business&.schemas&.all
 
       present schemas, with: Entities::SchemaEntity
+    end
+
+    namespace ":id" do
+      params do
+        requires :id, type: String, desc: "Schema ID"
+      end
+
+      desc "Schema attributes" do
+        detail "Version and data contract attributes of a schema"
+        entity Entities::SchemaEntity
+        nickname 'show'
+        produces ['application/json']
+        consumes ['application/json']
+        tags ['schemas']
+
+        failure [
+          [401, "Unauthorized", Entities::Error],
+          [403, "Forbidden", Entities::Error],
+          [404, "Not Found", Entities::Error],
+          [429, "Too Many Requests", Entities::Error]
+        ]
+        headers \
+          Authorization: {
+            description: "API token",
+            required: true
+          }
+      end
+
+      get "/" do
+        schema = @user&.business&.schemas&.find_by!(public_id: params[:id])
+
+        present schema, with: Entities::SchemaEntity
+      end
     end
   end
 end
