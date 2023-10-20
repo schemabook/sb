@@ -7,6 +7,9 @@ paths:
   "/api/schemas":
     get:
       summary: list schemas
+      tags:
+      - Schemas
+      description: Retrieves all schemas for the given user
       parameters:
       - name: x-api-token
         in: header
@@ -14,16 +17,51 @@ paths:
           type: string
       responses:
         '200':
-          description: successful
+          description: Successful
           content:
             application/json:
               example:
               - name: schema-1
                 description: lorem ipsum
-                public_id: umc8nfl6mtp5
+                id: cqe4a5u5qt0c
                 format:
                   name: json
-                created_at: '2023-10-12T13:51:04.555Z'
+                created_at: '2023-10-20T18:00:40.834Z'
+                production: false
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+  "/api/schemas/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: schema
+      tags:
+      - Schemas
+      description: Retrieves a specific schema by id
+      parameters:
+      - name: x-api-token
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                name: schema-3
+                description: lorem ipsum
+                id: rhfiprqfak8l
+                format:
+                  name: json
+                created_at: '2023-10-20T18:00:40.915Z'
                 production: false
 servers:
 - url: https://www.schemabook.com
