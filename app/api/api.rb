@@ -7,22 +7,23 @@ module API
 
     helpers do
       # clients will pass the header all lowercase (e.g. x-api-token), Rails capitalizes it
-      def authenticate
-        unauthorized! unless request.headers["X-Api-Token"]
+      def authenticate!
+        unauthorized unless request.headers["X-Api-Token"]
 
         token = request.headers["X-Api-Token"]
-        @user = User.find_by(api_token: token)
+        unauthorized if token.empty?
 
-        unauthorized! unless @user
+        @user = User.find_by(api_token: token)
+        unauthorized unless @user || @user.nil?
       end
 
-      def unauthorized!
-        status 401
+      def unauthorized
+        error!({ error: 'Unauthorized', status: 401}, 401)
       end
     end
 
     before do
-      authenticate
+      authenticate!
     end
 
     mount Schemas

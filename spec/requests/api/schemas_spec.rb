@@ -29,6 +29,67 @@ RSpec.describe 'api/schemas', type: :request do
         run_test!
       end
     end
+
+    post 'create schema' do
+      tags 'Schemas'
+      description 'Creates a formatted schema associated with a given service'
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :'x-api-token', in: :header, type: :string
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: {type: :string},
+          service_id: {type: :string},
+          production: {type: :boolean},
+          format: {type: :string},
+          body: {type: :string}
+        }
+      }
+
+      response(201, 'Successful') do
+        let(:name) { 'my_schema' }
+        let(:service_id) { create(:service, created_by: user.id, team: user.team).public_id }
+        let(:production) { 'false' }
+        let(:format) { 'json' }
+        let(:body) { '{"foo": {"bar": 1}}' }
+
+        let(:params) {
+          {
+            name:,
+            service_id:,
+            production:,
+            format:,
+            body:
+          }
+        }
+
+        run_test!
+      end
+
+      response(401, 'Unauthorized') do
+        let(:'x-api-token') { nil }
+
+        let(:name) { 'my_schema' }
+        let(:service_id) { create(:service, created_by: user.id, team: user.team).public_id }
+        let(:production) { 'false' }
+        let(:format) { 'json' }
+        let(:body) { '{"foo": {"bar": 1}}' }
+
+        let(:params) {
+          {
+            name:,
+            service_id:,
+            production:,
+            format:,
+            body:
+          }
+        }
+
+        run_test!
+      end
+    end
   end
 
   path '/api/schemas/{id}' do
@@ -50,11 +111,13 @@ RSpec.describe 'api/schemas', type: :request do
   end
 
   after do |example|
-    example.metadata[:response][:content] = {
-      'application/json' => {
-        example: JSON.parse(response.body, symbolize_names: true)
+    if example.metadata[:response][:status_code] == 200
+      example.metadata[:response][:content] = {
+        'application/json' => {
+          example: JSON.parse(response.body, symbolize_names: true)
+        }
       }
-    }
+    end
   end
 end
 # rubocop:enable RSpec/VariableName

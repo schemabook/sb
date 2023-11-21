@@ -18,21 +18,39 @@ paths:
       responses:
         '200':
           description: Successful
-          content:
-            application/json:
-              example:
-              - name: schema-1
-                description: lorem ipsum
-                id: cqe4a5u5qt0c
-                format:
-                  name: json
-                created_at: '2023-10-20T18:00:40.834Z'
-                production: false
         '401':
           description: Unauthorized
-          content:
-            application/json:
-              example:
+    post:
+      summary: create schema
+      tags:
+      - Schemas
+      description: Creates a formatted schema associated with a given service
+      parameters:
+      - name: x-api-token
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                service_id:
+                  type: string
+                production:
+                  type: boolean
+                format:
+                  type: string
+                body:
+                  type: string
   "/api/schemas/{id}":
     parameters:
     - name: id
@@ -53,15 +71,5 @@ paths:
       responses:
         '200':
           description: Successful
-          content:
-            application/json:
-              example:
-                name: schema-3
-                description: lorem ipsum
-                id: rhfiprqfak8l
-                format:
-                  name: json
-                created_at: '2023-10-20T18:00:40.915Z'
-                production: false
 servers:
 - url: https://www.schemabook.com
