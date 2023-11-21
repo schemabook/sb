@@ -15,6 +15,12 @@ All that should be needed is:
 
 `./bin/dev`
 
+try running this in a shell
+
+
+```brew install gh```
+
+
 ## Emails
 
 Generate a mailer, and style to match:

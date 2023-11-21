@@ -183,3 +183,6 @@ Lint/ToJSON:
 
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
