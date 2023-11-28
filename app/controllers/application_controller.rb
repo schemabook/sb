@@ -18,6 +18,19 @@ class ApplicationController < ActionController::Base
 
   def set_business
     @business = current_user&.business
+
+    return if !@business&.disabled? || !current_user
+
+    ### NOTE: this is a hack to temporarily prevent bots from signing into spam accounts
+
+    # log that a user tried to sign into a disabled business
+    logger.info "#{current_user.email} tried signing into disabled #{@business.name} account"
+
+    # sign user out if the business is disabled
+    sign_out current_user
+
+    # redirect to homepage
+    redirect_to :root
   end
 
   protected
