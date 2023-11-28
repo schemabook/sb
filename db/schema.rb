@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_175341) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_153543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_175341) do
     t.string "country"
     t.boolean "paid", default: false, null: false
     t.string "public_id"
+    t.boolean "disabled", default: false
+    t.index ["disabled"], name: "index_businesses_on_disabled"
     t.index ["name"], name: "index_businesses_on_name", unique: true
     t.index ["public_id"], name: "index_businesses_on_public_id"
   end
