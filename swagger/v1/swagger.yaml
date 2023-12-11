@@ -71,5 +71,21 @@ paths:
       responses:
         '200':
           description: Successful
+  "/api/services":
+    get:
+      summary: list services
+      tags:
+      - Services
+      description: Retrieves all services for the given user
+      parameters:
+      - name: x-api-token
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+        '401':
+          description: Unauthorized
 servers:
 - url: https://www.schemabook.com
