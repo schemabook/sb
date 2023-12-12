@@ -42,7 +42,7 @@ RSpec.describe 'api/services', type: :request do
 
     content = example.metadata[:response][:content] || {}
     example_spec = {
-      "application/json"=>{
+      'application/json': {
         examples: {
           test_example: {
             value: JSON.parse(response.body, symbolize_names: true)
