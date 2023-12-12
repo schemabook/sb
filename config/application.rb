@@ -18,5 +18,11 @@ module Schemabook
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Betterstack
+    unless Rails.env.test?
+      source_token = ENV.fetch("BETTERSTACK_TOKEN") # REDIS_URL is set in render admin
+      config.logger = Logtail::Logger.create_default_logger(source_token)
+    end
   end
 end
