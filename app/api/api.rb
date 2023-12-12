@@ -27,5 +27,6 @@ module API
     end
 
     mount Schemas
+    mount Services
   end
 end

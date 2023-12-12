@@ -118,6 +118,18 @@ RSpec.describe 'api/schemas', type: :request do
         }
       }
     end
+
+    content = example.metadata[:response][:content] || {}
+    example_spec = {
+      'application/json': {
+        examples: {
+          test_example: {
+            value: JSON.parse(response.body, symbolize_names: true)
+          }
+        }
+      }
+    }
+    example.metadata[:response][:content] = content.deep_merge(example_spec)
   end
 end
 # rubocop:enable RSpec/VariableName

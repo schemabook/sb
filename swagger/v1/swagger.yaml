@@ -18,8 +18,27 @@ paths:
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                  - name: schema-1
+                    description: lorem ipsum
+                    id: usbtj17msu4t
+                    format:
+                      name: json
+                    created_at: '2023-12-12T18:33:46.251Z'
+                    production: false
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    status: 401
+                    error: Unauthorized
     post:
       summary: create schema
       tags:
@@ -33,8 +52,27 @@ paths:
       responses:
         '201':
           description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    name: my_schema
+                    description:
+                    id: yxo30w9yobm8
+                    format:
+                      name: json
+                    created_at: '2023-12-12T18:33:46.400Z'
+                    production: false
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    status: 401
+                    error: Unauthorized
       requestBody:
         content:
           application/json:
@@ -71,5 +109,50 @@ paths:
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    name: schema-5
+                    description: lorem ipsum
+                    id: 1x81muy3k7pl
+                    format:
+                      name: json
+                    created_at: '2023-12-12T18:33:46.486Z'
+                    production: false
+  "/api/services":
+    get:
+      summary: list services
+      tags:
+      - Services
+      description: Retrieves all services for the given user
+      parameters:
+      - name: x-api-token
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                  - name: service-3
+                    description:
+                    id: 795l9juv6w77
+                    team_name: team-6
+                    created_at: '2023-12-12T18:33:46.524Z'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    status: 401
+                    error: Unauthorized
 servers:
 - url: https://www.schemabook.com
