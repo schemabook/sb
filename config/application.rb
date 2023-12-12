@@ -21,7 +21,7 @@ module Schemabook
 
     # Betterstack
     unless Rails.env.test?
-      source_token = ENV.fetch("BETTERSTACK_TOKEN") # REDIS_URL is set in render admin
+      source_token = ENV.fetch("BETTERSTACK_TOKEN")
       config.logger = Logtail::Logger.create_default_logger(source_token)
     end
   end
