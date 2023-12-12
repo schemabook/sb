@@ -12,4 +12,8 @@ class Service < ApplicationRecord
   def creator
     User.find created_by
   end
+
+  def team_name
+    team.name
+  end
 end
