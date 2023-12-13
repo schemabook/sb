@@ -20,9 +20,6 @@ module Schemabook
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Betterstack
-    unless Rails.env.test?
-      source_token = ENV.fetch("BETTERSTACK_TOKEN")
-      config.logger = Logtail::Logger.create_default_logger(source_token)
-    end
+    config.logger = Logtail::Logger.create_default_logger(ENV.fetch("BETTERSTACK_TOKEN"))
   end
 end
