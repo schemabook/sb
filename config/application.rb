@@ -22,7 +22,7 @@ module Schemabook
     # Betterstack
     unless Rails.env.test?
       http_device = Logtail::LogDevices::HTTP.new(ENV.fetch("BETTERSTACK_TOKEN"))
-      config.logger = Logtail::Logger.new(http_device) 
+      config.logger = Logtail::Logger.new(http_device)
     end
   end
 end
