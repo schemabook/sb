@@ -52,11 +52,6 @@ gem "csv"
 # for avatars
 gem "image_processing"
 
-# telemetry through Honeycomb
-gem "opentelemetry-exporter-otlp"
-gem "opentelemetry-instrumentation-all"
-gem "opentelemetry-sdk"
-
 # nanoid generator for schema slugs
 gem "nanoid"
 
