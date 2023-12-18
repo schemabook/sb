@@ -19,10 +19,7 @@ module Schemabook
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Betterstack
-    unless Rails.env.test?
-      http_device = Logtail::LogDevices::HTTP.new(ENV.fetch("BETTERSTACK_TOKEN"))
-      config.logger = Logtail::Logger.new(http_device)
-    end
+    config.log_tags = [:request_id]
+    config.log_level = :debug
   end
 end
