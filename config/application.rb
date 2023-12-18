@@ -20,7 +20,9 @@ module Schemabook
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Betterstack
-    http_device = Logtail::LogDevices::HTTP.new(ENV.fetch("BETTERSTACK_TOKEN"))
-    config.logger = Logtail::Logger.new(http_device) unless Rails.env.test?
+    unless Rails.env.test?
+      http_device = Logtail::LogDevices::HTTP.new(ENV.fetch("BETTERSTACK_TOKEN"))
+      config.logger = Logtail::Logger.new(http_device) 
+    end
   end
 end
