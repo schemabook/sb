@@ -15,14 +15,14 @@ All that should be needed is:
 
 `./bin/dev`
 
-try running this in a shell
-
-
-```brew install gh```
-
+`./bin/rails s` # for pry support
 
 ## Emails
 
 Generate a mailer, and style to match:
 
 http://localhost:3000/rails/mailers/user/welcome_email.html?locale=en
+
+## Storage
+
+Production storage is on disk at Render
