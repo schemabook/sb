@@ -29,11 +29,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //  // TODO: alert on error to create tabs
   //}
 
-  console.log("trying");
-
   try {
     var elem = document.querySelector('.dismiss');
-    console.log(elem);
 
     elem.addEventListener('click', function() {
       var closestElement = elem.closest('.flash');
@@ -93,5 +90,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
   } catch (error) {
     console.log(error)
+  }
+});
+
+// Stripe
+// In production, this should check CSRF, and not pass the session ID.
+// The customer ID for the portal should be pulled from the
+// authenticated user on the server.
+document.addEventListener('DOMContentLoaded', async () => {
+  let searchParams = new URLSearchParams(window.location.search);
+  if (searchParams.has('session_id')) {
+    const session_id = searchParams.get('session_id');
+    document.getElementById('session-id').setAttribute('value', session_id);
   }
 });

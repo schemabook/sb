@@ -23,20 +23,65 @@
           </div>
         </div>
 
-
-        <!-- main area wrapper -->
+        <!-- business info area wrapper -->
         <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
-
           <!-- main area form -->
           <div class="p-6 bg-white shadow overflow-hidden sm:rounded-md">
             <%= render 'form' %>
           </div>
-          <!-- end main area list -->
+        </div>
+        <!-- end business info area -->
 
+        <% if Rails.env.development? %>
+        <!-- payment area -->
+        <div class="mt-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+          <div class="p-6 bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="space-y-8 divide-y divide-gray-200">
+              <div class="pt-0">
+                <div>
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Payment Information
+                  </h3>
+                  <p class="mt-1 text-sm text-gray-500">
+                    We use Stripe for all subscription billing.
+                  </p>
+                </div>
+                <div class="pt-0 product">
+                  <div>
+                    <h5>$200.00 / month</h5>
+                  </div>
+                </div>
+
+                <% if @business.subscribed? %>
+                <div class="pt-4 product">
+                  <div>
+                    <h5>Subscribed on: <%= @business.subscribed_at %></h5>
+                  </div>
+                </div>
+                <% else %>
+                <div class="pt-0">
+                  <div class="pt-5">
+                    <div class="flex justify-end">
+
+                    <form action="/checkouts" method="GET">
+                      <!-- Add a hidden field with the lookup_key of your Price -->
+                      <button id="checkout-and-portal-button" type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                      Subscribe
+                      </button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+
+              </div>
+            </div>
+          </div>
+          <% end %>
         </div>
       </div>
-      <!-- End main area -->
-    </div>
+      <!-- end payment area -->
+
   </div>
 </div>
 
