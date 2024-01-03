@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
     @service = params[:service]
     @team = @service.team
     @teammates = @team.users - [@user]
-    @url = "http://www.schemabook.com/services/#{@service.id}"
+    @url = "http://www.schemabook.com/services/#{@service.public_id}"
 
     @teammates.each do |mate|
       mail(to: mate.email, from: "stakeholder@schemabook.com", subject: "New Service Created")
@@ -28,7 +28,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @version = params[:version]
     @schema = @version.schema
-    @url = "http://www.schemabook.com/schema/#{@schema.id}"
+    @url = "http://www.schemabook.com/schemas/#{@schema.public_id}"
     @stakeholders = @schema.stakeholders - [@user]
 
     @stakeholders.each do |stakeholder|
@@ -42,7 +42,7 @@ class UserMailer < ApplicationMailer
     @schema = params[:schema]
     @version = params[:version]
     @team = params[:team]
-    @url = "http://www.schemabook.com/schema/#{@schema.id}?version=#{@version.index}"
+    @url = "http://www.schemabook.com/schemas/#{@schema.public_id}?version=#{@version.index}"
 
     @team.users.each do |member|
       mail(to: member.email, from: "notifications@schemabook.com", subject: "New Schema Comment")
