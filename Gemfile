@@ -106,3 +106,6 @@ gem "grape-entity"
 
 # betterstack
 gem "logtail-rails", "~> 0.2.6"
+
+# for payments
+gem "stripe", "~> 10.2"

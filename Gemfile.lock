@@ -366,6 +366,7 @@ GEM
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     stringio (3.0.2)
+    stripe (10.2.0)
     tailwindcss-rails (2.0.10-arm64-darwin)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.10-x86_64-linux)
@@ -453,6 +454,7 @@ DEPENDENCIES
   simplecov
   spring
   sprockets-rails
+  stripe (~> 10.2)
   tailwindcss-rails (~> 2.0.10)
   tzinfo-data
   web-console (>= 4.1.0)
