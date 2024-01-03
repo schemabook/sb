@@ -25,6 +25,7 @@ class Business < ApplicationRecord
     teams.pluck(:id)
   end
 
+  # TODO: hit the Stripe API to confirm payment
   def subscribed?
     !subscribed_at.nil? && DateTime.now < subscribed_at + 30.days
   end
