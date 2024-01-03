@@ -24,4 +24,8 @@ class Business < ApplicationRecord
   def team_ids
     teams.pluck(:id)
   end
+
+  def subscribed?
+    !subscribed_at.nil? && DateTime.now < subscribed_at + 30.days
+  end
 end
