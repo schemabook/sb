@@ -59,4 +59,9 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
+
+  get "checkouts", to: "checkouts#new"
+  post "checkouts", to: "checkouts#create"
+  get "checkouts/success", to: "checkouts#success"
+  get "checkouts/cancel", to: "checkouts#cancel"
 end
