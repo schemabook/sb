@@ -102,6 +102,7 @@ jobs:
           RAILS_ENV: test
           PGHOST: localhost
           PGUSER: schemabook
+          STRIPE_API_KEY: test
         run: |
           sudo apt-get -yqq install libpq-dev
           bundle install
