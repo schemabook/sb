@@ -12,6 +12,12 @@ class UserMailer < ApplicationMailer
     mail(to: "support@schemabook.com", from: "notifications@schemabook.com", subject: "Business Created")
   end
 
+  def payment_email
+    @business = params[:business]
+
+    mail(to: "support@schemabook.com", from: "notifications@schemabook.com", subject: "Business Payment")
+  end
+
   def new_service_email
     @user = params[:user]
     @service = params[:service]

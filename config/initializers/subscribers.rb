@@ -8,6 +8,7 @@ Rails.application.reloader.to_prepare do
 
   # Businesses updated
   Subscribers::Businesses::Updated::Activity.new
+  Subscribers::Businesses::Updated::PaymentEmail.new
 
   # Services created
   Subscribers::Services::Created::Activity.new

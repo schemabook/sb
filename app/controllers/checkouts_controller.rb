@@ -36,6 +36,8 @@ class CheckoutsController < ApplicationController
     @business.update(subscribed_at: DateTime.now) if params[:session_id] == @business.session_id
     # TODO: check the Stripe API in the future
 
+    Events::Businesses::Updated.new(business: @business, user: current_user).publish
+
     redirect_to edit_business_path(@business)
   end
 
