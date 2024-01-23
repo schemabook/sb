@@ -30,5 +30,38 @@ class Services < API::Root
 
       present services, with: Entities::ServiceEntity
     end
+
+    namespace ":id" do
+      params do
+        requires :id, type: String, desc: "Service ID"
+      end
+
+      desc "Service attributes" do
+        detail "Team and attributes of a service"
+        entity Entities::ServiceEntity
+        nickname 'show'
+        produces ['application/json']
+        consumes ['application/json']
+        tags ['services']
+
+        failure [
+          [401, "Unauthorized", Entities::Error],
+          [403, "Forbidden", Entities::Error],
+          [404, "Not Found", Entities::Error],
+          [429, "Too Many Requests", Entities::Error]
+        ]
+        headers \
+          Authorization: {
+            description: "API token",
+            required: true
+          }
+      end
+
+      get "/" do
+        service = @user&.business&.services&.find_by!(public_id: params[:id])
+
+        present service, with: Entities::ServiceEntity
+      end
+    end
   end
 end
