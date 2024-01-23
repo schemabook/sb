@@ -25,10 +25,10 @@ paths:
                   value:
                   - name: schema-1
                     description: lorem ipsum
-                    id: usbtj17msu4t
+                    id: 2cgt6jwzzlvs
                     format:
                       name: json
-                    created_at: '2023-12-12T18:33:46.251Z'
+                    created_at: '2024-01-23T17:00:37.881Z'
                     production: false
         '401':
           description: Unauthorized
@@ -59,10 +59,10 @@ paths:
                   value:
                     name: my_schema
                     description:
-                    id: yxo30w9yobm8
+                    id: i0x4xl96ouqp
                     format:
                       name: json
-                    created_at: '2023-12-12T18:33:46.400Z'
+                    created_at: '2024-01-23T17:00:38.034Z'
                     production: false
         '401':
           description: Unauthorized
@@ -116,10 +116,10 @@ paths:
                   value:
                     name: schema-5
                     description: lorem ipsum
-                    id: 1x81muy3k7pl
+                    id: tk2h8qnnnhf9
                     format:
                       name: json
-                    created_at: '2023-12-12T18:33:46.486Z'
+                    created_at: '2024-01-23T17:00:38.110Z'
                     production: false
   "/api/services":
     get:
@@ -142,9 +142,9 @@ paths:
                   value:
                   - name: service-3
                     description:
-                    id: 795l9juv6w77
+                    id: 74lj4nfg2l1x
                     team_name: team-6
-                    created_at: '2023-12-12T18:33:46.524Z'
+                    created_at: '2024-01-23T17:00:38.135Z'
         '401':
           description: Unauthorized
           content:
@@ -154,5 +154,35 @@ paths:
                   value:
                     status: 401
                     error: Unauthorized
+  "/api/services/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: service
+      tags:
+      - Services
+      description: Retrieves a specific service by id
+      parameters:
+      - name: x-api-token
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    name: service-5
+                    description:
+                    id: uiq4hagq3imw
+                    team_name: team-8
+                    created_at: '2024-01-23T17:00:38.173Z'
 servers:
 - url: https://www.schemabook.com

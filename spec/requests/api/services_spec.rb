@@ -31,6 +31,24 @@ RSpec.describe 'api/services', type: :request do
     end
   end
 
+  path '/api/services/{id}' do
+    parameter name: :id, in: :path, type: :string
+
+    let(:id) { service.public_id }
+
+    get('service') do
+      tags 'Services'
+      description 'Retrieves a specific service by id'
+      produces 'application/json'
+
+      parameter name: :'x-api-token', in: :header, type: :string
+
+      response(200, 'Successful') do
+        run_test!
+      end
+    end
+  end
+
   after do |example|
     if example.metadata[:response][:status_code] == 200
       example.metadata[:response][:content] = {
