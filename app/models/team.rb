@@ -10,15 +10,17 @@ class Team < ApplicationRecord
 
   validates :name, uniqueness: {scope: :business}
   validates :administrators, uniqueness: {scope: :business}, allow_blank: true
-  validates :email, length: { in: 5..64 }, format: { with: URI::MailTo::EMAIL_REGEXP,
-    message: "only valid email addresses" }, :allow_blank => true
-  validates :channel, length: { in: 2..64 }, :allow_blank => true
+  validates :email, length: { in: 5..64 }, format: {
+    with: URI::MailTo::EMAIL_REGEXP,
+    message: "only valid email addresses"
+  }, allow_blank: true
+  validates :channel, length: { in: 2..64 }, allow_blank: true
 
   def name=(val)
     if !new_record? && admin?
-      write_attribute(:name, ADMIN_TEAM_NAME) 
+      write_attribute(:name, ADMIN_TEAM_NAME)
     else
-      write_attribute(:name, val) 
+      write_attribute(:name, val)
     end
   end
 

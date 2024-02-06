@@ -35,10 +35,10 @@ RSpec.describe Team, type: :model do
         it "should be a valid email between 5 and 64 characters" do
           subject.email = "mkrisher@schemabook.com"
 
-          expect(subject.valid?).to eq(true)
+          expect(subject.valid?).to be(true)
 
           subject.email = "m"
-          expect(subject.valid?).to eq(false)
+          expect(subject.valid?).to be(false)
         end
       end
 
@@ -46,7 +46,7 @@ RSpec.describe Team, type: :model do
         it "should be considered valid" do
           subject.email = nil
 
-          expect(subject.valid?).to eq(true)
+          expect(subject.valid?).to be(true)
         end
       end
     end
@@ -55,10 +55,10 @@ RSpec.describe Team, type: :model do
       context "when present" do
         it "should be a valid string between 2 and 64 characters" do
           subject.channel = "team_red"
-          expect(subject.valid?).to eq(true)
+          expect(subject.valid?).to be(true)
 
           subject.channel = "m"
-          expect(subject.valid?).to eq(false)
+          expect(subject.valid?).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe Team, type: :model do
         it "should be considered valid" do
           subject.channel = nil
 
-          expect(subject.valid?).to eq(true)
+          expect(subject.valid?).to be(true)
         end
       end
     end
