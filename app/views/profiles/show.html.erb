@@ -23,38 +23,44 @@
           </div>
         </div>
 
+
         <!-- main area wrapper -->
-        <div class="relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
+        <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
           <!-- main area list -->
           <div class="bg-white shadow overflow-hidden sm:rounded-md">
+
             <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
               <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
                 <div class="ml-4 mt-2">
                   <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Info
+                    Information
                   </h3>
-                  <ul id="info">
-                    <li><%= @user.first_name %> <%= @user.last_name %></li>
-                    <li><%= @user.email %></li>
-                    <li>API Token: <%= @user.api_token %></li>
-                  </ul>
                 </div>
                 <div class="ml-4 mt-2 flex-shrink-0">
                   <% if current_user.admin? || current_user == @user %>
-                  <a href="<%= edit_user_profile_path(@user) %>">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                      Edit Info
-                    </button>
-                  </a>
+                    <a href="<%= edit_user_profile_path(@user) %>">
+                      <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        Edit Info
+                      </button>
+                    </a>
                   <% end %>
                 </div>
               </div>
+            </div>
+
+            <div class="p-4">
+              <ul id="info">
+                <li><%= @user.first_name %> <%= @user.last_name %></li>
+                <li><%= @user.email %></li>
+                <li>&nbsp;</li>
+                <li><div class="center"><div class="inline-block">API Token: </div><div class="pl-4 inline-block blur-sm hover:blur-none"><%= @user.api_token %></div></div></li>
+              </ul>
             </div>
           </div>
           <!-- end main area list -->
         </div>
         <!-- end main area wrapper -->
-
+        
         <!-- main area wrapper -->
         <div class="my-8 relative inset-0 border-2 border-gray-200 border-solid rounded-lg">
           <!-- main area list -->
