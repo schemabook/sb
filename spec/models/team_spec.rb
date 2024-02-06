@@ -29,18 +29,61 @@ RSpec.describe Team, type: :model do
       end
       # rubocop:enable Rails/SkipsModelValidations
     end
+
+    describe "email" do
+      context "when present" do
+        it "should be a valid email between 5 and 64 characters" do
+          subject.email = "mkrisher@schemabook.com"
+
+          expect(subject.valid?).to be(true)
+
+          subject.email = "m"
+          expect(subject.valid?).to be(false)
+        end
+      end
+
+      context "when not present" do
+        it "should be considered valid" do
+          subject.email = nil
+
+          expect(subject.valid?).to be(true)
+        end
+      end
+    end
+
+    describe "channel" do
+      context "when present" do
+        it "should be a valid string between 2 and 64 characters" do
+          subject.channel = "team_red"
+          expect(subject.valid?).to be(true)
+
+          subject.channel = "m"
+          expect(subject.valid?).to be(false)
+        end
+      end
+
+      context "when not present" do
+        it "should be considered valid" do
+          subject.channel = nil
+
+          expect(subject.valid?).to be(true)
+        end
+      end
+    end
+
   end
 
   context "callbacks" do
     context "before_save" do
       # rubocop:disable Rails/SkipsModelValidations
-      it "prevents the admin team from being mutated" do
+      it "prevents the admin team name from being mutated" do
         subject.update_column(:administrators, true)
 
         subject.name = "foo"
-        expect {
-          subject.save
-        }.to raise_error(StandardError, /readonly/i)
+        subject.save
+        subject.reload
+
+        expect(subject.name).to eq(Team::ADMIN_TEAM_NAME)
       end
       # rubocop:enable Rails/SkipsModelValidations
     end

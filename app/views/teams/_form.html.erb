@@ -27,7 +27,27 @@
             Name
           </label>
           <div class="mt-1">
-            <%= form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+            <% if @team.administrators? %>
+              <%= form.text_field :name, disabled: true, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+            <% else %>
+              <%= form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="sm:col-span-3">
+          <label for="first_name" class="block text-sm font-medium text-gray-700">
+            Contact Email
+          </label>
+          <div class="mt-1">
+            <%= form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          </div>
+        </div>
+        <div class="sm:col-span-3">
+          <label for="first_name" class="block text-sm font-medium text-gray-700">
+            Contact Channel
+          </label>
+          <div class="mt-1">
+            <%= form.text_field :channel, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
           </div>
         </div>
       </div>
