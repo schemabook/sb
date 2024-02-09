@@ -10,6 +10,8 @@ class Service < ApplicationRecord
   validates :created_by, presence: true
 
   delegate :name, to: :team, prefix: true
+  delegate :email, to: :team, prefix: true
+  delegate :channel, to: :team, prefix: true
 
   def creator
     User.find created_by
