@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.7.1"
+gem "rails", "~> 7.0.8"
 # Use postgres
 gem "pg"
 # Use Puma as the app server
@@ -13,12 +13,12 @@ gem "puma", "~> 5.6.4"
 gem "sprockets-rails"
 # Ruby 3.1 uses Psych 4 which changes how YAML is loaded
 gem "psych", "> 4"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "~> 5.0"
+# js build pipeline (uses webpack)
+gem 'jsbundling-rails'
 # Use tailwind CSS framework
 gem "tailwindcss-rails", "~> 2.0.10"
-# hotwire
-gem "hotwire-rails"
+# turbo
+gem "turbo-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
 # Use Devise for Authentication
