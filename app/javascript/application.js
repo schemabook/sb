@@ -4,21 +4,21 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-//import Turbolinks from "turbolinks"
-import * as Turbo from "@hotwired/turbo"
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "./channels"
 import { TabManager } from './packs/tabManager'
 
 Rails.start()
-//Turbolinks.start()
-Turbo.start()
-Turbo.session.drive = false
+Turbo.setFormMode("off")
+//Turbo.start()
+//Turbo.session.drive = false
 ActiveStorage.start()
 
 console.log("Schemabook, just say hello!")
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
   // provides close flash message functionality
   try {
     var elem = document.querySelector('.dismiss');
@@ -79,6 +79,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
       if (document.getElementById('add-stakeholder-error') == null) {
         var elem = document.querySelector('#add-stakeholder');
         elem.appendChild(tag);
+      }
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
+  // logic to show/hide sorting meny
+  try {
+    const element = document.querySelector("#sort_menu_button");
+
+    element.addEventListener("click", (event) => {
+      var elem = document.querySelector('#sort_menu')
+
+      if (elem.classList.contains("hidden")) {
+        elem.classList.remove("hidden");
+      } else {
+        elem.classList.add("hidden");
       }
     });
   } catch (error) {

@@ -21,5 +21,8 @@ module Schemabook
 
     config.log_tags = [:request_id]
     config.log_level = :debug
+
+    # don't preload everything via Turbo
+    config.action_view.preload_links_header = false
   end
 end
