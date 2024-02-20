@@ -6,27 +6,31 @@ class DashboardsController < ApplicationController
 
     @favorite = Favorite.new
     @favorites = current_user.favorites
-    
+
     schemas = favorite_schemas + @schemas.reject { |schema| @favorites.pluck(:schema_id).include?(schema.id) }
     @sorted_schemas = sort(schemas, sort_order)
   end
 
   private
 
+  # rubocop:disable Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity
   def sort(schemas, sort_order)
     case sort_order
     when "alphabetically"
-      schemas.sort_by { |schema| schema.name.downcase } 
+      schemas.sort_by { |schema| schema.name.downcase }
     when "chronologically"
-      schemas.sort_by { |schema| schema.created_at } 
+      schemas.sort_by { |schema| schema.created_at }
     when "services"
-      schemas.sort_by { |schema| schema.service&.name.nil? ? "" : schema.service&.name.downcase } 
+      schemas.sort_by { |schema| schema.service&.name.nil? ? "" : schema.service&.name&.downcase }
     when "stakeholder"
-      schemas.sort_by { |schema| schema.stakeholders.map(&:user_id).include?(@current_user.id) ? 0 : 1 } 
+      schemas.sort_by { |schema| schema.stakeholders.map(&:user_id).include?(@current_user.id) ? 0 : 1 }
     else
       schemas
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def sort_order
     params[:sort]
