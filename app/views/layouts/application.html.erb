@@ -3,9 +3,12 @@
   <head>
     <title>Schemabook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="font-src 'self' data:; img-src 'self' data:; default-src 'self' http://rsms.me/inter/font-files/">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline'; img-src 'self' https://*; child-src 'none'; style-src 'self' 'unsafe-inline' https://rsms.me/inter/; font-src 'self' https://rsms.me/inter/font-files/ data:; script-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com; frame-src 'self' https://js.stripe.com;" />
     <link rel="preconnect" href="https://rsms.me/">
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
