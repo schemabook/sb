@@ -2,13 +2,20 @@ class DashboardsController < ApplicationController
   def index
     @activities = @business.activity_log.activities.where(user_only: false).order(created_at: :desc).limit(8)
 
-    @schemas = @business.teams.flat_map { |t| t.schemas }
+    @schemas = Schema.where(team_id: @business.teams.pluck(:id)).page(page_param).per(20)
 
     @favorite = Favorite.new
     @favorites = current_user.favorites
 
     schemas = favorite_schemas + @schemas.reject { |schema| @favorites.pluck(:schema_id).include?(schema.id) }
     @sorted_schemas = sort(schemas, sort_order)
+
+    # for pagination
+    collection = Schema.where(team_id: @business.teams.pluck(:id)).page(page_param).per(20)
+    @total_pages = collection.total_pages
+    @current_page = collection.current_page
+    @next_page = collection.next_page
+    @previous_page = collection.prev_page
   end
 
   private
@@ -40,7 +47,11 @@ class DashboardsController < ApplicationController
     @favorites.map(&:schema)
   end
 
+  def page_param
+    params[:page]
+  end
+
   def dashboard_params
-    params.permit(:sort)
+    params.permit(:sort, :page)
   end
 end
