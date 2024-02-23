@@ -24,7 +24,7 @@ gem "jbuilder", "~> 2.7"
 # Use Devise for Authentication
 gem "devise"
 # Use Devise invitable for inviting team members
-gem "devise_invitable", "~> 2.0.6"
+gem "devise_invitable", "~> 2.0.9"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
@@ -58,6 +58,22 @@ gem "nanoid"
 # rswag gems for API docs
 gem 'rswag-api'
 gem 'rswag-ui'
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# API
+gem "grape"
+gem "grape-entity"
+
+# betterstack
+gem "logtail-rails", "~> 0.2.6"
+
+# for payments
+gem "stripe", "~> 10.2"
+
+# for pagination
+gem 'kaminari'
 
 group :development, :test do
   # Use rspec  instead of test-unit
@@ -96,16 +112,3 @@ group :test do
   # test coverage
   gem "simplecov", require: false
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# API
-gem "grape"
-gem "grape-entity"
-
-# betterstack
-gem "logtail-rails", "~> 0.2.6"
-
-# for payments
-gem "stripe", "~> 10.2"
