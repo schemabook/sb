@@ -30,7 +30,7 @@
                       <%= render partial: 'favorite', locals: {schema: schema} %>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <a href="/schemas/<%= schema.public_id %>"><%= schema.name %><a/>
+                      <a href="/schemas/<%= schema.public_id %>" data-turbo-frame="_top"><%= schema.name %><a/>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= schema.service&.name %></td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><time datetime="2020-01-07"><%= I18n.l(schema.updated_at, format: :long) %></time></td>
