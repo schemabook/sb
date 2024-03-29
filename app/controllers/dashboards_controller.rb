@@ -1,8 +1,11 @@
 class DashboardsController < ApplicationController
+  # rubocop:disable Metrics/MethodLength
   def index
     @activities = @business.activity_log.activities.where(user_only: false).order(created_at: :desc).limit(8)
 
-    @schemas = Schema.where(team_id: @business.teams.pluck(:id)).page(page_param).per(20)
+    sort_column = params[:sort] || "created_at"
+    sort_direction = params[:direction].presence_in(%w[asc desc]) || "desc"
+    @schemas = Schema.where(team_id: @business.teams.pluck(:id)).order("#{sort_column} #{sort_direction}").page(page_param).per(20)
 
     @favorite = Favorite.new
     @favorites = current_user.favorites
@@ -17,6 +20,7 @@ class DashboardsController < ApplicationController
     @next_page = collection.next_page
     @previous_page = collection.prev_page
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 
