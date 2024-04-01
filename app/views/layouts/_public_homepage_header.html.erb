@@ -35,13 +35,13 @@
       </div>
 
       <div class="hidden md:flex md:items-center md:space-x-6">
-        <% unless current_user %>
-          <a href="<%= new_user_session_path %>" class="text-base font-medium text-white hover:text-gray-300">
-            Sign in
+        <% if current_user %>
+          <a href="<%= dashboards_path %>" rel="nofollow" class="text-base font-medium text-white hover:text-gray-300">
+            Dashboard
           </a>
         <% else %>
-          <a href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete" class="text-base font-medium text-white hover:text-gray-300">
-            Log out
+          <a href="<%= new_user_session_path %>" class="text-base font-medium text-white hover:text-gray-300">
+            Sign in
           </a>
         <% end %>
         <a href="<%= new_user_registration_path %>" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
