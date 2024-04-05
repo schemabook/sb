@@ -131,6 +131,10 @@ GEM
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.26.1-arm64-darwin)
+      rake (>= 13)
+    google-protobuf (4.26.1-x86_64-linux)
+      rake (>= 13)
     grape (1.8.0)
       activesupport (>= 5)
       builder
@@ -233,6 +237,8 @@ GEM
     parser (3.1.2.0)
       ast (~> 2.4.1)
     pg (1.4.1)
+    pg_query (5.1.0)
+      google-protobuf (>= 3.22.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -435,6 +441,7 @@ DEPENDENCIES
   mailgun-ruby (~> 1.2.5)
   nanoid
   pg
+  pg_query
   pry
   pry-rails
   psych (> 4)
