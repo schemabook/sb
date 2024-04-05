@@ -2,13 +2,15 @@ class Format < ApplicationRecord
   enum file_type: {
     json: 0,
     avro: 1,
-    csv: 2
+    csv: 2,
+    sql: 3
   }
 
   VALIDATORS = {
     "json" => "JsonValidator",
     "avro" => "AvroValidator",
-    "csv" => "CsvValidator"
+    "csv" => "CsvValidator",
+    "sql" => "SqlValidator"
   }
 
   validates :file_type, presence: true
