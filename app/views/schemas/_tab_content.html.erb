@@ -12,6 +12,10 @@
     <%= render partial: 'csv' %>
   <% end %>
 
+  <% if @tab == 'sql' %>
+    <%= render partial: 'sql' %>
+  <% end %>
+
   <% if @tab == 'info' %>
     <%= render partial: 'info' %>
   <% end %>

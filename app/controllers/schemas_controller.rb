@@ -69,6 +69,7 @@ class SchemasController < ApplicationController
     @json_presenter = JsonPresenter.new(@schema, @version)
     @avro_presenter = AvroPresenter.new(@schema, @version)
     @csv_presenter = CsvPresenter.new(@schema, @version)
+    @sql_presenter = SqlPresenter.new(@schema, @version)
   end
 
   def create_version(schema:)

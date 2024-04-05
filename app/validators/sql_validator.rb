@@ -14,6 +14,6 @@ class SqlValidator
       true
     rescue => e
       raise e
-    end 
+    end
   end
 end

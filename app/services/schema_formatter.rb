@@ -4,7 +4,8 @@ class SchemaFormatter
   FORMATTERS = {
     json: JsonFormatter,
     csv: CsvFormatter,
-    avro: AvroFormatter
+    avro: AvroFormatter,
+    sql: SqlFormatter
   }
 
   attr_reader :schema, :version
@@ -28,5 +29,9 @@ class SchemaFormatter
 
   def as_avro
     formatter.to_avro
+  end
+
+  def as_sql
+    formatter.to_sql
   end
 end
