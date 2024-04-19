@@ -7,6 +7,8 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.8.1"
 # Use postgres
 gem "pg"
+# Use pg_query for SQL validation
+gem "pg_query"
 # Use Puma as the app server
 gem "puma", "~> 5.6.4"
 # Rails 7 declares optional dependency, app was started in v 6 and needs this
