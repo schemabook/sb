@@ -10,7 +10,7 @@ class SqlPresenter
     begin
       SchemaFormatter.new(schema: @schema, version: @version).as_sql
     rescue
-      return "Original format can not be converted to CSV"
+      return "Original format can not be converted to SQL"
     end
   end
 
