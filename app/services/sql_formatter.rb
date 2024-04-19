@@ -8,25 +8,22 @@ class SqlFormatter
     @version = version
   end
 
-  def to_csv
+  def to_csv #rubocop:disable Metrics/MethodLength
     begin
       body = @version.body
 
-      if body.match(/CREATE TABLE/)
-        first_paren = body.index("(")
-        last_paren = body.rindex(")")
+      raise ConversionError, "The SQL body can't reliably be converted to CSV because statement doesn't CREATE TABLE" unless body.match(/CREATE TABLE/)
 
-        raise ConversionError, "The SQL body can't reliably be converted to CSV because statement doesn't include () after CREATE TABLE" unless first_paren && last_paren
+      first_paren = body.index("(")
+      last_paren = body.rindex(")")
 
-        columns = body[first_paren + 1..last_paren - 1].strip
-        headers = csv_headers(columns)
-        rows    = csv_rows(headers)
+      raise ConversionError, "The SQL body can't reliably be converted to CSV because statement doesn't include () after CREATE TABLE" unless first_paren && last_paren
 
-        csv_string(headers, rows)
-      else
-        # NOTE: support UPDATE statements in the future
-        raise ConversionError, "The SQL body can't reliably be converted to CSV because statement doesn't CREATE TABLE"
-      end
+      columns = body[first_paren + 1..last_paren - 1].strip
+      headers = csv_headers(columns)
+      rows    = csv_rows
+
+      csv_string(headers, rows)
     rescue => e
       raise ConversionError, "The SQL can't be converted to CSV: #{e.message}"
     end
@@ -52,7 +49,7 @@ class SqlFormatter
     columns_arr = columns.split(",")
 
     columns_arr.each do |column|
-      title, data_type = column.split(" ")
+      title, _data_type = column.split
 
       headers << title
     end
@@ -60,17 +57,14 @@ class SqlFormatter
     headers.uniq.compact
   end
 
-  def csv_rows(headers)
-    rows = []
-
+  def csv_rows
     # TODO: support insert statements with data
-    rows
+    []
   end
 
-  def csv_string(headers, rows)
+  def csv_string(headers, _rows)
     CSV.generate do |csv|
       csv << headers.compact.uniq
     end
   end
-
 end
