@@ -25,8 +25,19 @@ class Business < ApplicationRecord
     teams.pluck(:id)
   end
 
-  # TODO: hit the Stripe API to confirm payment
   def subscribed?
-    !subscribed_at.nil? && DateTime.now < subscribed_at + 30.days
+    return false if subscribed_at.nil? # not subscribed ever
+
+    return true if DateTime.now < subscribed_at + 30.days # subscribed less than 30 days ago
+
+    return true if cancelled_at.nil? || cancelled_at < DateTime.now + 30.days # cancelled less than 30 days ago
+
+    return false
+  end
+
+  def cancelled?
+    return false if cancelled_at.nil?
+
+    return true
   end
 end

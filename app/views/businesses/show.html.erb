@@ -87,12 +87,22 @@
             </div>
 
             <div class="p-4">
+              <% if !@business.subscribed? %>
               <ul>
-                <li>Payment plans are not available yet but will be coming soon. Thank you for supporting what we are building.</li>
+                <li>Payment plans are now available allowing your organization to define more than <%= Schema::UNPAID_LIMIT %> schemas. Thank you for supporting what we are building.</li>
                 <li>&nbsp;</li>
                 <li><%= "You have creatd #{current_user.business.schemas.count} out of #{Schema::UNPAID_LIMIT} schemas" %></li>
                 <li><%= "You have creatd #{current_user.business.services.count} out of #{Service::UNPAID_LIMIT} services" %></li>
               </ul>
+            <% else %>
+              <p>
+              You are subscribed as of <%= @business.subscribed_at.to_date.to_s(:long) %> and have an unlimited number of schemas and users.
+              </p>
+              <br/>
+              <p>
+              Your next bill date is <%= (@business.subscribed_at.to_date + 30.days).to_s(:long) %>.
+              </p>
+            <% end %>
             </div>
           </div>
           <!-- end main area list -->
