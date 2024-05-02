@@ -99,9 +99,15 @@
               You are subscribed as of <%= @business.subscribed_at.to_date.to_s(:long) %> and have an unlimited number of schemas and users.
               </p>
               <br/>
-              <p>
-              Your next bill date is <%= (@business.subscribed_at.to_date + 30.days).to_s(:long) %>.
-              </p>
+              <% if @cancelled.nil? %>
+                <p>
+                Your next bill date is <%= @next_bill_date.to_s(:long) %>.
+                </p>
+              <% else %>
+                <p>
+                Your subscription was cancelled on: <%= @cancelled %>
+                </p>
+              <% end %>
             <% end %>
             </div>
           </div>
