@@ -7,11 +7,13 @@ class BusinessesController < ApplicationController
     @teams = Team.where(business_id: @business.id)
     @activities = @business.activity_log.for_business(business: @business).limit(8)
 
-    subscription = Stripe::Subscription.retrieve @business.subscription_id
+    if @business.subscription_id
+      subscription = Stripe::Subscription.retrieve @business.subscription_id
 
-    @cancelled = subscription[:ended_at].nil? ? nil : Time.at(subscription[:ended_at]).utc.to_date
-    @days_until_due = subscription[:days_until_due]
-    @next_bill_date = Time.zone.today + @days_until_due.to_i.days
+      @cancelled = subscription[:ended_at].nil? ? nil : Time.at(subscription[:ended_at]).utc.to_date
+      @days_until_due = subscription[:days_until_due]
+      @next_bill_date = Time.zone.today + @days_until_due.to_i.days
+    end
   end
 
   def edit
