@@ -3,6 +3,8 @@ class CheckoutsController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def new
+    return unless current_user.admin?
+
     prices = Stripe::Price.list(lookup_keys: ["subscription"], expand: ["data.product"])
 
     begin
@@ -33,16 +35,33 @@ class CheckoutsController < ApplicationController
   end
 
   def success
-    @business.update(subscribed_at: DateTime.now) if params[:session_id] == @business.session_id
-    # TODO: check the Stripe API in the future
+    return unless current_user.admin?
 
-    Events::Businesses::Updated.new(business: @business, user: current_user).publish
+    if params[:session_id] == @business.session_id
+      # get checkout session, with reference to customer
+      session = Stripe::Checkout::Session.retrieve params[:session_id]
+      customer = session[:customer]
+      subscription = session[:subscription]
+
+      @business.update(subscribed_at: DateTime.now, subscription_id: subscription, customer_id: customer)
+
+      Events::Businesses::Updated.new(business: @business, user: current_user).publish
+    else
+      Rails.logger.info "success endpoint hit without matching session for customer: #{@business.id}"
+    end
 
     redirect_to edit_business_path(@business)
   end
 
-  def cancel
-    @business.update(session_id: null)
+  def delete
+    return unless current_user.admin?
+
+    subscription = Stripe::Subscription.retrieve @business.subscription_id
+    subscription.cancel
+
+    @business.update(cancelled_at: DateTime.now)
+
+    Events::Businesses::Updated.new(business: @business, user: current_user).publish
 
     redirect_to edit_business_path(@business)
   end

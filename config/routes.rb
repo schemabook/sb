@@ -64,4 +64,5 @@ Rails.application.routes.draw do
   post "checkouts", to: "checkouts#create"
   get "checkouts/success", to: "checkouts#success"
   get "checkouts/cancel", to: "checkouts#cancel"
+  delete "checkouts/delete", to: "checkouts#delete"
 end
