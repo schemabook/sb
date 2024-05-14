@@ -13,7 +13,7 @@ class JsonPresenter
       json = JSON.parse(formatted_content)
       JSON.pretty_generate(json)
     rescue
-      "Original format can not be converted to JSON"
+      "Original format can not be converted to JSON at this time"
     end
   end
 

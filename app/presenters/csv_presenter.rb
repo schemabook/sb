@@ -10,7 +10,7 @@ class CsvPresenter
     begin
       SchemaFormatter.new(schema: @schema, version: @version).as_csv
     rescue
-      return "Original format can not be converted to CSV"
+      return "Original format can not be converted to CSV at this time"
     end
   end
 

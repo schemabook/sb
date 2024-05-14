@@ -13,7 +13,7 @@ class AvroPresenter
 
       JSON.pretty_generate(json)
     rescue
-      return "Original format can not be converted to Avro"
+      return "Original format can not be converted to Avro at this time"
     end
   end
 
