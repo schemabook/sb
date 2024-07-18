@@ -24,7 +24,7 @@ RSpec.describe Subscribers::Subscriber do
       end
 
       it "calls ActiveSupport::Notifications.subscribe with the EVENT_NAME" do
-        allow(ActiveSupport::Notifications).to receive(:subscribe).with(value)
+        expect(ActiveSupport::Notifications).to receive(:subscribe).with(value)
 
         subject.subscribe
       end

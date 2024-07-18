@@ -9,11 +9,7 @@ class SqlValidator
   end
 
   def self.errors(body)
-    begin
-      PgQuery.parse(body)
-      true
-    rescue => e
-      raise e
-    end
+    PgQuery.parse(body)
+    true
   end
 end

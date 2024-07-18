@@ -46,7 +46,7 @@ RSpec.describe CsvFormatter do
 
   describe "#to_avro" do
     let(:avro) do
-      '{"type_sym":"record","logical_type":null,"name":"schema","namespace":null,"doc":null,"aliases":null,"fullname":"schema","fields":[{"type":{"type_sym":"string","logical_type":null},"name":"foo","default":"no_default","order":null,"doc":null,"aliases":null},{"type":{"type_sym":"string","logical_type":null},"name":"bar","default":"no_default","order":null,"doc":null,"aliases":null},{"type":{"type_sym":"string","logical_type":null},"name":"baz","default":"no_default","order":null,"doc":null,"aliases":null}]}'
+      '{"type_sym":"record","logical_type":null,"type_adapter":null,"name":"schema","namespace":null,"doc":null,"aliases":null,"fullname":"schema","fields":[{"type":{"type_sym":"string","logical_type":null,"type_adapter":null},"name":"foo","default":"no_default","order":null,"doc":null,"aliases":null,"type_adapter":null},{"type":{"type_sym":"string","logical_type":null,"type_adapter":null},"name":"bar","default":"no_default","order":null,"doc":null,"aliases":null,"type_adapter":null},{"type":{"type_sym":"string","logical_type":null,"type_adapter":null},"name":"baz","default":"no_default","order":null,"doc":null,"aliases":null,"type_adapter":null}]}'
     end
 
     it "returns the body in avro format" do

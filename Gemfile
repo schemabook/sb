@@ -10,7 +10,7 @@ gem "pg"
 # Use pg_query for SQL validation
 gem "pg_query"
 # Use Puma as the app server
-gem "puma", "~> 5.6.4"
+gem "puma", ">= 6"
 # Rails 7 declares optional dependency, app was started in v 6 and needs this
 gem "sprockets-rails"
 # Ruby 3.1 uses Psych 4 which changes how YAML is loaded
@@ -79,7 +79,7 @@ gem 'kaminari'
 
 group :development, :test do
   # Use rspec  instead of test-unit
-  gem "rspec-rails", "~> 4.0.2"
+  gem "rspec-rails", "~> 6.1.1"
   gem 'rswag-specs'
   # Use Pry bindings
   gem "pry"
