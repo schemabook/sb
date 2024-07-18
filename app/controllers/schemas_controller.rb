@@ -1,12 +1,4 @@
 class SchemasController < ApplicationController
-  def new
-    @schema = Schema.new
-    @activities = @business.activity_log.for_schema_new.limit(8)
-
-    # flash message if business is unpaid and has 10 schemas
-    flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more schemas." if at_limit?
-  end
-
   def show
     @schema = current_user.team.schemas.find_by!(public_id: params[:public_id])
     @tab = params[:tab] || @schema.format.to_s
@@ -21,6 +13,14 @@ class SchemasController < ApplicationController
     @comments = @version.comments.order(created_at: :desc)
 
     load_presenters
+  end
+
+  def new
+    @schema = Schema.new
+    @activities = @business.activity_log.for_schema_new.limit(8)
+
+    # flash message if business is unpaid and has 10 schemas
+    flash[:alert] = "You've reached the limits of the free plan. Upgrade to a paid plan in your account settings to add more schemas." if at_limit?
   end
 
   # rubocop:disable Metrics/MethodLength

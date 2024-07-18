@@ -24,7 +24,7 @@ RSpec.describe "Profiles", type: :request do
     it "should assign stakeholdings" do
       subject
 
-      expect(assigns(:stakeholdings)).to match_array([])
+      expect(assigns(:stakeholdings)).to be_empty
     end
   end
 

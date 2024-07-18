@@ -41,7 +41,7 @@ RSpec.describe "/schemas", type: :request do
     it "assigns stakeholders" do
       get schema_url(schema)
 
-      expect(assigns(:stakeholders)).to match_array([])
+      expect(assigns(:stakeholders)).to be_empty
     end
 
     it "assigns a version" do
@@ -59,7 +59,7 @@ RSpec.describe "/schemas", type: :request do
     it "assigns comments" do
       get schema_url(schema)
 
-      expect(assigns(:comments)).to match_array([])
+      expect(assigns(:comments)).to be_empty
     end
 
     it "assigns the presenters" do

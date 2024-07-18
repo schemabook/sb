@@ -15,7 +15,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity2) { create(:activity, activity_log: subject, user: user2) }
 
     it "should return all activities for a given user" do
-      expect(subject.for_user(user_id: user.id)).to match_array([activity])
+      expect(subject.for_user(user_id: user.id)).to contain_exactly(activity)
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity2) { create(:activity, activity_log: subject, user: user2) }
 
     it "should return all activities for a given service" do
-      expect(subject.for_service(service_id: service.id)).to match_array([activity])
+      expect(subject.for_service(service_id: service.id)).to contain_exactly(activity)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity3) { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
 
     it "should return all activities for a given team" do
-      expect(subject.for_team(team: user.team)).to match_array([activity, activity2, activity3])
+      expect(subject.for_team(team: user.team)).to contain_exactly(activity, activity2, activity3)
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity2) { create(:activity, activity_log: subject, user: user2, resource_class: 'Team', resource_id: user2.team.id) }
 
     it "should return all activities for all teams" do
-      expect(subject.for_teams).to match_array([activity1, activity2])
+      expect(subject.for_teams).to contain_exactly(activity1, activity2)
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity2) { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
 
     it "should return all activities for a given schema" do
-      expect(subject.for_schema(schema:)).to match_array([activity2])
+      expect(subject.for_schema(schema:)).to contain_exactly(activity2)
     end
   end
 
@@ -76,7 +76,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity)  { create(:activity, activity_log: subject, user:, resource_class: 'Schema', resource_id: schema.id) }
 
     it "should return all schema activities" do
-      expect(subject.for_schema_new).to match_array([activity])
+      expect(subject.for_schema_new).to contain_exactly(activity)
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity) { create(:activity, activity_log: subject, user:, resource_class: 'Business', resource_id: user.business.id) }
 
     it "should return all activities for a given business" do
-      expect(subject.for_business(business: user.business)).to match_array([activity])
+      expect(subject.for_business(business: user.business)).to contain_exactly(activity)
     end
   end
 
@@ -95,7 +95,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity) { create(:activity, activity_log: subject, title: "Invited Teammate", user:, resource_class: 'User', resource_id: teammate.id) }
 
     it "should return all activities for invitations" do
-      expect(subject.for_invitations).to match_array([activity])
+      expect(subject.for_invitations).to contain_exactly(activity)
     end
   end
 
@@ -105,7 +105,7 @@ RSpec.describe ActivityLog, type: :model do
     let!(:activity) { create(:activity, activity_log: subject, user_id: user.id, title: "Service Created", resource_class: Service, resource_id: service.id) }
 
     it "should return all activities for services related to the team" do
-      expect(subject.for_service_team(team: user.team)).to match_array([activity])
+      expect(subject.for_service_team(team: user.team)).to contain_exactly(activity)
     end
   end
 end

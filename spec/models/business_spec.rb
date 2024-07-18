@@ -14,7 +14,7 @@ RSpec.describe Business, type: :model do
       schema1 = create(:schema, :with_team, :with_format)
       schema2 = create(:schema, :with_format, team: schema1.team)
 
-      expect(schema1.team.business.schemas).to match_array([schema1, schema2])
+      expect(schema1.team.business.schemas).to contain_exactly(schema1, schema2)
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Business, type: :model do
       service1 = create(:service, :with_team, created_by: user.id)
       service2 = create(:service, team: service1.team, created_by: user.id)
 
-      expect(service1.team.business.services).to match_array([service1, service2])
+      expect(service1.team.business.services).to contain_exactly(service1, service2)
     end
   end
 end
