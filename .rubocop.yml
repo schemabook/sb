@@ -30,13 +30,13 @@ Lint/AmbiguousBlockAssociation:
 
 Metrics/BlockLength:
   Enabled: false
-  IgnoredMethods:
+  AllowedMethods:
     - change
 
 Metrics/MethodLength:
   Enabled: true
   Max: 12
-  IgnoredMethods:
+  AllowedMethods:
     - change
 
 Style/NumericLiterals:
@@ -186,3 +186,6 @@ Layout/SpaceInsideHashLiteralBraces:
 
 Metrics/ClassLength:
   Enabled: false
+
+RSpec/IndexedLet:
+    Enabled: false

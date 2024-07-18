@@ -16,7 +16,7 @@ RSpec.describe Activity, type: :model do
       let(:activity2) { create(:activity, :with_activity_log, user_id: user.id) }
 
       it "returns the activities" do
-        expect(described_class.for_user(user.id)).to match_array([activity1, activity2])
+        expect(described_class.for_user(user.id)).to contain_exactly(activity1, activity2)
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe Activity, type: :model do
       let(:user) { create(:user) }
 
       it "returns an empty array" do
-        expect(described_class.for_user(user.id)).to match_array([])
+        expect(described_class.for_user(user.id)).to be_empty
       end
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe Activity, type: :model do
       let(:activity2) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
 
       it "returns the activities" do
-        expect(described_class.for_service(service.id)).to match_array([activity1, activity2])
+        expect(described_class.for_service(service.id)).to contain_exactly(activity1, activity2)
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe Activity, type: :model do
       let(:service) { create(:service, team: user.team, name: "foo", created_by: user.id) }
 
       it "returns an empty array" do
-        expect(described_class.for_service(service.id)).to match_array([])
+        expect(described_class.for_service(service.id)).to be_empty
       end
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe Activity, type: :model do
       let(:activity2) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Service, resource_id: service.id) }
 
       it "returns the activities" do
-        expect(described_class.for_team(user.team)).to match_array([activity1, activity2])
+        expect(described_class.for_team(user.team)).to contain_exactly(activity1, activity2)
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe Activity, type: :model do
       let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do
-        expect(described_class.for_team(user.team)).to match_array([activity1])
+        expect(described_class.for_team(user.team)).to contain_exactly(activity1)
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe Activity, type: :model do
       let!(:service) { create(:service, team: user.team, name: "foo", created_by: user.id) }
 
       it "returns an empty array" do
-        expect(described_class.for_team(user.team)).to match_array([])
+        expect(described_class.for_team(user.team)).to be_empty
       end
     end
 
@@ -81,7 +81,7 @@ RSpec.describe Activity, type: :model do
       let!(:schema) { create(:schema, :with_format, team: user.team) }
 
       it "returns an empty array" do
-        expect(described_class.for_team(user.team)).to match_array([])
+        expect(described_class.for_team(user.team)).to be_empty
       end
     end
   end
@@ -91,13 +91,13 @@ RSpec.describe Activity, type: :model do
       let(:activity1) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Team, resource_id: user.team.id) }
 
       it "returns the activities" do
-        expect(described_class.for_teams).to match_array([activity1])
+        expect(described_class.for_teams).to contain_exactly(activity1)
       end
     end
 
     context "without activities for teams" do
       it "returns an empty array" do
-        expect(described_class.for_teams).to match_array([])
+        expect(described_class.for_teams).to be_empty
       end
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe Activity, type: :model do
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do
-        expect(described_class.for_schema(schema)).to match_array([activity])
+        expect(described_class.for_schema(schema)).to contain_exactly(activity)
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe Activity, type: :model do
       let(:schema) { create(:schema, :with_format, team: user.team) }
 
       it "returns an empty array" do
-        expect(described_class.for_schema(schema)).to match_array([])
+        expect(described_class.for_schema(schema)).to be_empty
       end
     end
 
@@ -130,7 +130,7 @@ RSpec.describe Activity, type: :model do
       end
 
       it "returns the activities" do
-        expect(described_class.for_schema(schema)).to match_array([activity])
+        expect(described_class.for_schema(schema)).to contain_exactly(activity)
       end
     end
   end
@@ -141,13 +141,13 @@ RSpec.describe Activity, type: :model do
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Schema, resource_id: schema.id) }
 
       it "returns the activities" do
-        expect(described_class.for_schema_new).to match_array([activity])
+        expect(described_class.for_schema_new).to contain_exactly(activity)
       end
     end
 
     context "without activities for schema" do
       it "returns an empty array" do
-        expect(described_class.for_schema_new).to match_array([])
+        expect(described_class.for_schema_new).to be_empty
       end
     end
   end
@@ -158,7 +158,7 @@ RSpec.describe Activity, type: :model do
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, resource_class: Business, resource_id: business.id) }
 
       it "returns the activities" do
-        expect(described_class.for_business(business)).to match_array([activity])
+        expect(described_class.for_business(business)).to contain_exactly(activity)
       end
     end
 
@@ -166,7 +166,7 @@ RSpec.describe Activity, type: :model do
       let(:business) { create(:business) }
 
       it "returns an empty array" do
-        expect(described_class.for_business(business)).to match_array([])
+        expect(described_class.for_business(business)).to be_empty
       end
     end
   end
@@ -178,7 +178,7 @@ RSpec.describe Activity, type: :model do
       let(:activity) { create(:activity, :with_activity_log, user_id: user.id, title: "Invited Teammate", resource_class: User, resource_id: teammate.id) }
 
       it "returns the activities" do
-        expect(described_class.for_invitations).to match_array([activity])
+        expect(described_class.for_invitations).to contain_exactly(activity)
       end
     end
 
@@ -186,7 +186,7 @@ RSpec.describe Activity, type: :model do
       let(:business) { create(:business) }
 
       it "returns an empty array" do
-        expect(described_class.for_business(business)).to match_array([])
+        expect(described_class.for_business(business)).to be_empty
       end
     end
   end
@@ -198,13 +198,13 @@ RSpec.describe Activity, type: :model do
       let!(:activity) { create(:activity, :with_activity_log, user_id: user.id, title: "Service Created", resource_class: Service, resource_id: service.id) }
 
       it "returns the activities" do
-        expect(described_class.for_service_team(user.team)).to match_array([activity])
+        expect(described_class.for_service_team(user.team)).to contain_exactly(activity)
       end
     end
 
     context "without activities" do
       it "returns an empty array" do
-        expect(described_class.for_service_team(user.team)).to match_array([])
+        expect(described_class.for_service_team(user.team)).to be_empty
       end
     end
   end

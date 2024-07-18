@@ -62,7 +62,7 @@ RSpec.describe Events::Event do
       end
 
       it "calls ActiveSupport::Notifications.instrument with the event name and payload" do
-        allow(ActiveSupport::Notifications).to receive(:instrument).with(subject.class::EVENT_NAME, subject.payload)
+        expect(ActiveSupport::Notifications).to receive(:instrument).with(subject.class::EVENT_NAME, subject.payload)
 
         subject.publish
       end
