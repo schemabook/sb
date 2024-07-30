@@ -9,7 +9,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   include Redcarpet::Render::SmartyPants
 
   FORMATTER = Rouge::Formatters::HTML.new("github")
-  
+
   # If you need access to ActionController::Base.helpers, you can delegate by uncommenting
   # and adding to the list below. Several are already included for you in the `MarkdownRails::Renderer::Rails`,
   # but you can add more here.
@@ -43,10 +43,10 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # table(header, body)
   # table_row(content)
   # table_cell(content, alignment, header)
-  # 
+  #
   # Span-level calls
   # A return value of nil will not output any data. If the method for a document element is not implemented, the contents of the span will be copied verbatim:
-  # 
+  #
   # autolink(link, link_type)
   # codespan(code)
   # double_emphasis(text)
@@ -62,16 +62,14 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # highlight(text)
   # quote(text)
   # footnote_ref(number)
-  # 
+  #
   # Note: When overriding a renderer's method, be sure to return a HTML element with a level that matches the level of that method (e.g. return a block element when overriding a block-level callback). Otherwise, the output may be unexpected.
   # entity(text)
   # normal_text(text)
 
   def block_code(code, language)
     lexer = Rouge::Lexer.find(language)
-    if lexer.nil?
-      lexer = Rouge::Lexer.find("json")
-    end
+    lexer = Rouge::Lexer.find("json") if lexer.nil?
 
     content_tag :pre, class: "#{language} mb-6 border", style: "background-color: #f6f8fa;" do
       raw FORMATTER.format(lexer.lex(code))
@@ -86,15 +84,15 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     %(<h#{level} class="mb-6 flex-none font-medium text-gray-1000 group-hover:text-teal-600 group-hover:underline">#{headline}</h#{level}>)
   end
 
-  def link(link, title, content)
+  def link(link, _title, content)
     %(<a href="#{link}" class="space-x-4 group"><span class="flex-none font-medium underline text-slate-300 group-hover:text-teal-600 group-hover:underline">#{content}</span></a>)
   end
 
-  def list(contents, list_type)
+  def list(contents, _list_type)
     %(<ul class="list-disc px-8 mb-6" style="list-style-type: disc;">#{contents}</ul>)
   end
 
-  def list_item(text, list_type)
+  def list_item(text, _list_type)
     %(<li>#{text}</li>)
   end
 
@@ -114,15 +112,19 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # end
 
   private
-    # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
-    def youtube_tag(url, alt)
-      embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
-      content_tag :iframe,
-        src: embed_url,
-        width: 560,
-        height: 325,
-        allow: "encrypted-media; picture-in-picture",
-        allowfullscreen: true \
-          do alt end
-    end
+
+  # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
+  def youtube_tag(url, alt)
+    embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch('v').first}"
+
+    content_tag :iframe,
+                src: embed_url,
+                width: 560,
+                height: 325,
+                allow: "encrypted-media; picture-in-picture",
+                allowfullscreen: true \
+                do
+                  alt
+                end
+  end
 end
