@@ -19,5 +19,7 @@ class BlogController < ApplicationController
 
   def show
     @post = POSTS.find { |post| post[:slug] == params[:id] }
+
+    redirect_to action: "index" if @post.nil?
   end
 end
