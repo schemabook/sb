@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   get "docs", to: "public#docs"
   get "status", to: "public#status"
 
-  get "blog" => redirect("http://medium.com/schemabook")
+  get "blog", to: "blog#index"
+  get "blog/:id", to: "blog#show"
+  # get "blog" => redirect("http://medium.com/schemabook")
 
   get "privacy", to: "public#privacy"
   get "terms", to: "public#terms"

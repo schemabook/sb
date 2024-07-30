@@ -1,0 +1,33 @@
+<div class="bg-gray-50">
+  <div class="relative">
+
+    <!-- Header section -->
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-base font-semibold text-cyan-600 uppercase tracking-wide">Schemabook Blog</h1>
+        <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Our inside story</p>
+        <p class="max-w-xl mx-auto mt-5 text-xl text-gray-500">On our blog we'll start with a definition of why we created Schemabook and then go deeper into the features we develop over time.</p>
+      </div>
+    </div>
+
+    <div class="bg-white py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <a id="top"></a>
+
+        <div class="space-y-10 sm:mt-8 sm:pt-16">
+            <%= render "blog/posts/#{@post[:slug]}" %> 
+        </div>
+
+        <div class="mt-9 pt-10 mb-9 pb-10">
+          <p class="mb-9">
+          <a href="/blog">Back to posts</a>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

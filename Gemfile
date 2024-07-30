@@ -18,7 +18,7 @@ gem "psych", "> 4"
 # js build pipeline (uses webpack)
 gem 'jsbundling-rails'
 # Use tailwind CSS framework
-gem "tailwindcss-rails", "~> 2.0.10"
+gem "tailwindcss-rails", "~> 2.6.4"
 # turbo
 gem "turbo-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -114,3 +114,7 @@ group :test do
   # test coverage
   gem "simplecov", require: false
 end
+
+gem "markdown-rails", "~> 2.1"
+
+gem "rouge", "~> 4.3"

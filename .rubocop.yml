@@ -189,3 +189,6 @@ Metrics/ClassLength:
 
 RSpec/IndexedLet:
     Enabled: false
+
+Rails/RenderInline:
+    Enabled: false
