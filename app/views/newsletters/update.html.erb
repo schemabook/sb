@@ -1,0 +1,65 @@
+<div class="bg-gray-50">
+  <div class="relative">
+
+    <!-- Header section -->
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-base font-semibold text-cyan-600 uppercase tracking-wide">Newsletter</h1>
+        <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">You've successfully subscribed</p>
+        <p class="max-w-xl mx-auto mt-5 text-xl text-gray-500">While waiting to receive your first issue, we welcome you to read some of our blog posts starting with a definition of why we created Schemabook.</p>
+      </div>
+    </div>
+
+    <div class="bg-white py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <a id="top"></a>
+
+        <div class="space-y-10 sm:mt-8 sm:pt-16">
+
+          <% @posts.each do |post| %>
+          <article class="flex max-w-xl flex-col items-start">
+            <div class="flex items-center gap-x-4 text-xs">
+              <time datetime="2020-03-16" class="text-gray-500"><%= post[:date].strftime("%B %e %Y") %></time>
+            </div>
+            <div class="group relative">
+              <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                <a href="/blog/<%= post[:slug] %>">
+                  <span class="absolute inset-0"></span>
+                  <%= post[:title] %>
+                </a>
+              </h3>
+              <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"><%= post[:intro] %></p>
+            </div>
+            <div class="relative mt-8 flex items-center gap-x-4">
+              <img src="<%= image_url('p_mkrisher.png') %>" alt="Mike Krisher" class="h-10 w-10 rounded-full bg-gray-50">
+              <div class="text-sm leading-6">
+                <p class="font-semibold text-gray-900">
+                  <a href="https://www.mikekrisher.com">
+                    <span class="absolute inset-0"></span>
+                    Michael Krisher
+                  </a>
+                </p>
+                <p class="text-gray-600">Founder</p>
+              </div>
+            </div>
+          </article>
+        <% end %>
+    
+        </div>
+        <div class="mt-9 pt-10 mb-9 pb-10">
+          <p class="mb-9">
+          <a href="#top">Back to top</a>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
