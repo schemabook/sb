@@ -2,7 +2,7 @@ class NewsletterConfirmationMailer < ApplicationMailer
   def confirmation_email
     @newsletter = params[:newsletter_instance]
     @generated_hash = opt_in_hash(@newsletter)
-    @url = "http://localhost:3000/newsletters?hash=#{@generated_hash}"
+    @url = "http://schemabook.com/newsletters?hash=#{@generated_hash}"
 
     mail(to: @newsletter.email, from: "newsletter@schemabook.com", subject: "Please confirm your Schemabook newsletter subscription")
   end
