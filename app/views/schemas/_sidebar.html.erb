@@ -27,6 +27,9 @@
               <%= render partial: 'versions' %>
             </li>
             <li class="py-4">
+              <%= render partial: 'webhooks' %>
+            </li>
+            <li class="py-4">
               <span class="text-gray-400">Production data:</span> <%= @schema.production.to_s.capitalize %>
             </li>
             <% if @schema.description.present? %>
