@@ -6,6 +6,7 @@ class Schema < ApplicationRecord
   has_many :stakeholders
   has_many :favorites
   has_many :versions
+  has_many :webhooks
 
   belongs_to :team
   belongs_to :service, optional: true
