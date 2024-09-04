@@ -17,7 +17,7 @@ class WebhooksController < ApplicationController
 
     @webhook = Webhook.new(schema: @schema, user: current_user, url: params[:webhook][:url])
     if @webhook.save
-      # Events::Webhooks::Created.new(record: @webhook, user: current_user).publish
+      Events::Webhooks::Created.new(record: @webhook, user: current_user).publish
 
       flash[:notice] = "Webhook #{@schema.webhooks.count} was created"
       redirect_to schema_path(@schema)

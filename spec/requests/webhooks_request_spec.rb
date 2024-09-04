@@ -61,8 +61,8 @@ RSpec.describe "Webhooks", type: :request do
         }.to change(Webhook, :count)
       end
 
-      xit "should broadcast an event" do
-        expect_any_instance_of(Events::Versions::Created).to receive(:publish)
+      it "should broadcast an event" do
+        expect_any_instance_of(Events::Webhooks::Created).to receive(:publish)
 
         subject
       end
