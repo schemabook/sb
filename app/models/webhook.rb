@@ -5,5 +5,5 @@ class Webhook < ApplicationRecord
   belongs_to :user
   belongs_to :schema
 
-  validates :url, presence: true
+  validates :url, presence: true, uniqueness: {scope: :schema_id}
 end

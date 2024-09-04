@@ -7,11 +7,12 @@ RSpec.describe Webhook, type: :model do
   let(:json) { '{"foo": {"bar": 1}}' }
   let(:schema) { create(:schema, name: "foo", team:, format:) }
 
-  subject { described_class.new(user:, schema:) }
+  subject { create(:webhook, user:, schema:) }
 
   it { should belong_to :schema }
   it { should belong_to :user }
   it { should validate_presence_of :url }
+  it { should validate_uniqueness_of(:url).scoped_to(:schema_id) }
 
   describe "validates urls" do
     it "denies invalid urls" do
