@@ -3,9 +3,7 @@ module DashboardsHelper
     resource = activity.resource
 
     case resource.class.to_s
-    when "Version"
-      "#{activity.title} on #{resource_link(activity)}".html_safe
-    when "Webhook"
+    when "Version" || "Webhook"
       "#{activity.title} on #{resource_link(activity)}".html_safe
     else
       "#{activity.title} #{resource_link(activity)}".html_safe
