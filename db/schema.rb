@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_18_182359) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_013254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -205,6 +205,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_18_182359) do
 
   create_table "versions", force: :cascade do |t|
     t.integer "schema_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "index"
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.bigint "schema_id", null: false
+    t.bigint "user_id", null: false
+    t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "index"

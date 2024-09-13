@@ -1,8 +1,6 @@
 FactoryBot.define do
   factory :business do
-    sequence :name do |n|
-      "business-#{n}"
-    end
+    sequence(:name) { |n| "business-#{n}" }
 
     trait :with_activity_log do
       after(:create) do |business|

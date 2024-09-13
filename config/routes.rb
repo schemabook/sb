@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   resources :services
   resources :schemas, param: :public_id do
     resources :validations, only: :create
+    resources :webhooks
     resources :versions do
       resources :comments
     end

@@ -33,4 +33,7 @@ Rails.application.reloader.to_prepare do
   # Version created
   Subscribers::Versions::Created::Activity.new
   Subscribers::Versions::Created::EmailStakeholders.new
+
+  # Webhook created
+  Subscribers::Webhooks::Created::Activity.new
 end

@@ -3,7 +3,7 @@ module DashboardsHelper
     resource = activity.resource
 
     case resource.class.to_s
-    when "Version"
+    when "Version" || "Webhook"
       "#{activity.title} on #{resource_link(activity)}".html_safe
     else
       "#{activity.title} #{resource_link(activity)}".html_safe
@@ -16,6 +16,8 @@ module DashboardsHelper
     path = case resource.class.to_s
            when "Version"
              schema_path(resource.schema, { version: resource.index })
+           when "Webhook"
+             schema_path(resource.schema, { webhook: resource.index })
            when "User"
              user_profile_path(resource)
            else
