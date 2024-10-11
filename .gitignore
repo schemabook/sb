@@ -54,3 +54,5 @@ yarn-debug.log*
 
 # ignore csv dumps
 /runbooks/scripts/*.csv
+/dumps
+
