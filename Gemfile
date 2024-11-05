@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.3"
+ruby "3.3.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.1.4.1"
@@ -82,9 +82,6 @@ gem "markdown-rails", "~> 2.1"
 gem "rouge", "~> 4.3"
 
 gem "httparty"
-
-# net-pop was added to Ruby
-gem "net-pop", github: "ruby/net-pop"
 
 group :development, :test do
   # Use rspec  instead of test-unit
