@@ -33,8 +33,7 @@ module Subscribers
           Rails.logger.info "webhook #{webhook.id} response code: #{response.code}"
 
           # Log the response, on the webhook so it can be displayed as success or failure
-          # webhook.last_response_code & webhook.last_response_body
-          # puts response.body, response.code, response.message, response.headers.inspect
+          webhook.update(response_code: response.code, response_body: response.body)
         end
       end
     end

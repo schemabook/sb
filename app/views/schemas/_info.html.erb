@@ -82,7 +82,7 @@
   <div class="flex text-sm font-medium text-cyan-600 truncate">
     <ul id="webhooks">
     <% @schema.webhooks.each do |webhook| %>
-      <li class="text-black"><%= webhook.url %></li>
+      <li class="text-black"><%= webhook.url %> - Last response: <%= webhook.response_code %> : <%= webhook.response_body.truncate(100) %></li>
     <% end %>
   </div>
 </div>
