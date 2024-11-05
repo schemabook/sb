@@ -77,6 +77,12 @@ gem "stripe", "~> 10.2"
 # for pagination
 gem 'kaminari'
 
+gem "markdown-rails", "~> 2.1"
+
+gem "rouge", "~> 4.3"
+
+gem "httparty"
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem "rspec-rails", "~> 6.1.1"
@@ -114,9 +120,3 @@ group :test do
   # test coverage
   gem "simplecov", require: false
 end
-
-gem "markdown-rails", "~> 2.1"
-
-gem "rouge", "~> 4.3"
-
-gem "httparty"
