@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   before_action :enable_search
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_business
+  before_action :set_request
+
+  def set_request
+    $request = request
+  end
 
   def enable_search
     @search_enabled = false

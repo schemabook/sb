@@ -17,4 +17,13 @@ RSpec.describe Schema, type: :model do
 
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of(:name).scoped_to(:service_id) }
+
+  describe "url" do
+    it "should return a string representing the url of the schema" do
+      base_url = $request.try(:base_url)
+      base_url = base_url.nil? ? "" : base_url
+
+      expect(subject.url).to eq(base_url + "/schemas/" + subject.public_id)
+    end
+  end
 end
