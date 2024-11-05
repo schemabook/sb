@@ -192,3 +192,6 @@ RSpec/IndexedLet:
 
 Rails/RenderInline:
     Enabled: false
+
+Style/GlobalVars:
+    Enabled: false
