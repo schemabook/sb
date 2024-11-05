@@ -21,9 +21,9 @@ RSpec.describe Schema, type: :model do
   describe "url" do
     it "should return a string representing the url of the schema" do
       base_url = $request.try(:base_url)
-      base_url = base_url.nil? ? "" : base_url
+      base_url = "" if base_url.nil?
 
-      expect(subject.url).to eq(base_url + "/schemas/" + subject.public_id)
+      expect(subject.url).to eq("#{base_url}/schemas/#{subject.public_id}")
     end
   end
 end

@@ -32,7 +32,7 @@ RSpec.describe Subscribers::Versions::Created::Webhooks do
       )
 
       expect(subject).to receive(:request_webhook).once
-      subject.process(event: event)
+      subject.process(event:)
     end
   end
 end

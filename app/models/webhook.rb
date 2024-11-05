@@ -9,15 +9,17 @@ class Webhook < ApplicationRecord
 
   delegate :name, to: :schema, allow_nil: true
 
+  # rubocop:disable Lint/UselessAssignment
   before_create do
-    self.index = schema.webhooks.count + 1
+    index = schema.webhooks.count + 1
   end
+  # rubocop:enable Lint/UselessAssignment
 
   # TODO: decide if the version should be passed in
-  def payload()
+  def payload
     {
-      url: self.schema.url,
-      definition: JsonPresenter.new(self.schema, self.schema.versions.last).content,
+      url: schema.url,
+      definition: JsonPresenter.new(schema, schema.versions.last).content
     }
   end
 end

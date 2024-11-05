@@ -17,6 +17,6 @@ class Schema < ApplicationRecord
   def url
     domain = $request.try(:base_url).nil? ? "" : $request.try(:base_url)
 
-    domain + "/schemas/" + self.public_id
+    "#{domain}/schemas/#{public_id}"
   end
 end

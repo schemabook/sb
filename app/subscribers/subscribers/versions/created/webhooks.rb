@@ -16,7 +16,7 @@ module Subscribers
           webhooks = version.schema.webhooks
 
           webhooks.each do |webhook|
-            request_webhook(webhook:, version:)
+            request_webhook(webhook:)
           end
 
           return true
@@ -25,7 +25,7 @@ module Subscribers
         private
 
         # TODO: determine if the version is always latest of not
-        def request_webhook(webhook:, version:)
+        def request_webhook(webhook:)
           url = webhook.url
           payload = webhook.payload
 
