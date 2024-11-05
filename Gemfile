@@ -83,6 +83,9 @@ gem "rouge", "~> 4.3"
 
 gem "httparty"
 
+# net-pop was added to Ruby
+gem "net-pop", github: "ruby/net-pop"
+
 group :development, :test do
   # Use rspec  instead of test-unit
   gem "rspec-rails", "~> 6.1.1"
