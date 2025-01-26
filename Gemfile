@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.3.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.1.4.1"
+gem "rails", "~> 7.1.5.1"
 # Use postgres
 gem "pg"
 # Use pg_query for SQL validation
@@ -16,7 +16,7 @@ gem "sprockets-rails"
 # Ruby 3.1 uses Psych 4 which changes how YAML is loaded
 gem "psych", "> 4"
 # js build pipeline (uses webpack)
-gem 'jsbundling-rails'
+gem "jsbundling-rails"
 # Use tailwind CSS framework
 gem "tailwindcss-rails", "~> 2.6.4"
 # turbo
@@ -58,8 +58,8 @@ gem "image_processing"
 gem "nanoid"
 
 # rswag gems for API docs
-gem 'rswag-api'
-gem 'rswag-ui'
+gem "rswag-api"
+gem "rswag-ui"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -75,7 +75,7 @@ gem "logtail-rails", "~> 0.2.6"
 gem "stripe", "~> 10.2"
 
 # for pagination
-gem 'kaminari'
+gem "kaminari"
 
 gem "markdown-rails", "~> 2.1"
 
@@ -86,7 +86,7 @@ gem "httparty"
 group :development, :test do
   # Use rspec  instead of test-unit
   gem "rspec-rails", "~> 6.1.1"
-  gem 'rswag-specs'
+  gem "rswag-specs"
   # Use Pry bindings
   gem "pry"
   gem "pry-rails"
