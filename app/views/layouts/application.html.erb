@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' 'unsafe-inline'; img-src 'self' https://*; child-src 'none'; style-src 'self' 'unsafe-inline' https://rsms.me/inter/; font-src 'self' https://rsms.me/inter/font-files/ data:; script-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com; frame-src 'self' https://js.stripe.com;" />
+      content="default-src 'self' 'unsafe-inline'; img-src 'self' https://*; child-src 'none'; style-src 'self' 'unsafe-inline' https://rsms.me/inter/; font-src 'self' https://rsms.me/inter/font-files/ data:; script-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com; frame-src 'self' https://js.stripe.com;"
+    />
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
@@ -14,14 +15,16 @@
 
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <script src="https://js.stripe.com/v3/"></script>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_include_tag "application",
+    "data-turbo-track": "reload",
+    type: "module" %>
+    <%= cloudflare_turnstile_script_tag %>
   </head>
 
   <body id="app" class="h-full">
     <!-- Background color split screen for large screens -->
     <div class="relative min-h-screen flex flex-col">
-      <%= render 'layouts/application_header' %>
-
+      <%= render "layouts/application_header" %>
       <!-- 3 column wrapper -->
       <div class="flex-grow w-full h-max lg:flex">
         <%= yield %>
