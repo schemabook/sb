@@ -60,6 +60,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: schemabook_test
           POSTGRES_PASSWORD: postgres
+          CLOUDFLARE_SITE_KEY: some_key
+          CLOUDFLARE_SITE_SECRET: some_secret
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -124,4 +126,3 @@ jobs:
     steps:
       - name: Trigger deploy hook
         run: curl "https://api.render.com/deploy/srv-c228fvm1aaad4odpg11g?key=xt0CcAFh3E8"
-
