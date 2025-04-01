@@ -4,7 +4,11 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
-    before_action :validate_cloudflare_turnstile unless Rails.env.local?
+    before_action :validate_cloudflare_turnstile if Rails.env.production?
+
+    rescue_from "RailsCloudflareTurnstile::Forbidden" do |_exception|
+      redirect_to root_url
+    end
 
     # GET /resource/sign_up
     # def new
