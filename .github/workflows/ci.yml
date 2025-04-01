@@ -60,8 +60,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: schemabook_test
           POSTGRES_PASSWORD: postgres
-          CLOUDFLARE_SITE_KEY: some_key
-          CLOUDFLARE_SITE_SECRET: some_secret
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -116,6 +114,9 @@ jobs:
       - name: Run tests
         env:
           STRIPE_API_KEY: test
+          CLOUDFLARE_SITE_KEY: some_key
+          CLOUDFLARE_SITE_SECRET: some_secret
+
         run: bundle exec rspec --format documentation
 
   deploy:
