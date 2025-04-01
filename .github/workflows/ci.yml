@@ -103,6 +103,8 @@ jobs:
           PGHOST: localhost
           PGUSER: schemabook
           STRIPE_API_KEY: test
+          CLOUDFLARE_SITE_KEY: some_key
+          CLOUDFLARE_SITE_SECRET: some_secret
         run: |
           sudo apt-get -yqq install libpq-dev
           bundle install
