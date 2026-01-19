@@ -10,7 +10,7 @@ Schemabook’s philosophy is simple. When stakeholders collaborate on the defini
 
 Schemabook promises to make all of your organization’s stakeholders feel confident that the data is usable.
 
-![Screenshot](./public/schemabook_screenshot.png "Schemabook Screenshot")
+![Screenshot](./public/schemabook_screenshot.png)
 
 ## Introducing Schemabook
 
