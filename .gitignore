@@ -56,3 +56,5 @@ yarn-debug.log*
 /runbooks/scripts/*.csv
 /dumps
 
+# ignore db dumps
+prod_dump_01192026.sql
